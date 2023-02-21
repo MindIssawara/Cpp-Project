@@ -32,6 +32,7 @@ void getstartM(int x, int y, int& mx, int& my) {
 }
 
 void getstart(int xc, int yc) {
+	if (xc >= 450 && xc <= 500 && yc >= 175 && yc <= 225) getstartM(xc ,yc, green[0][0], green[0][1]);
     if (xc >= 550 && xc <= 600 && yc >= 175 && yc <= 225)   getstartM(xc, yc, green[1][0], green[1][1]);
     if (xc >= 450 && xc <= 500 && yc >= 275 && yc <= 325)   getstartM(xc, yc, green[2][0], green[2][1]);
     if (xc >= 550 && xc <= 600 && yc >= 275 && yc <= 325)   getstartM(xc, yc, green[3][0], green[3][1]);
@@ -42,7 +43,7 @@ void getstart(int xc, int yc) {
     if (xc >= 900 && xc <= 950 && yc >= 625 && yc <= 675)   getstartM(xc, yc, blue[0][0], blue[0][1]);
     if (xc >= 1000 && xc <= 1050 && yc >= 625 && yc <= 675) getstartM(xc, yc, blue[1][0], blue[1][1]);
     if (xc >= 900 && xc <= 950 && yc >= 725 && yc <= 775)   getstartM(xc, yc, blue[2][0], blue[2][1]);
-    if (xc >= 900 && xc <= 1050 && yc >= 725 && yc <= 775)  getstartM(xc, yc, blue[3][0], blue[3][1]);
+    if (xc >= 1000 && xc <= 1050 && yc >= 725 && yc <= 775)  getstartM(xc, yc, blue[3][0], blue[3][1]);
     if (xc >= 450 && xc <= 500 && yc >= 625 && yc <= 675)   getstartM(xc, yc, red[0][0], red[0][1]);
     if (xc >= 550 && xc <= 600 && yc >= 625 && yc <= 675)   getstartM(xc, yc, red[1][0], red[1][1]);
     if (xc >= 450 && xc <= 500 && yc >= 725 && yc <= 775)   getstartM(xc, yc, red[2][0], red[2][1]);
