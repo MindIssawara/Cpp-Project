@@ -2,10 +2,14 @@
 #include<iostream>
 #include<time.h>
 #include<cstdlib>
+#include<chrono>
+#include<thread>
 #include"function_random.h"
 #include "add.h"
 using namespace std;
 using namespace sf;
+using namespace std::this_thread;
+using namespace std::chrono;
 
 
 
@@ -16,6 +20,7 @@ int main()
     Texture g, r, y, b;
     srand(time(0));
     RenderWindow window(VideoMode(1500, 900), "LUDO!");
+    window.setKeyRepeatEnabled(false);
     d.loadFromFile("image/dice.png");
     g.loadFromFile("image/g.png");
     r.loadFromFile("image/r.png");
@@ -24,8 +29,8 @@ int main()
     bg.loadFromFile("image/background.png");
     Sprite background(bg),dice(d);
     Sprite r1(r), r2(r), r3(r), r4(r), b1(b), b2(b), b3(b), b4(b), g1(g), g2(g), g3(g), g4(g), y1(y), y2(y), y3(y), y4(y);
-    
     int xc=0,yc=0;
+    bool timeToRoll = 1;//unused for now
     while (window.isOpen())
     {
         
@@ -35,20 +40,31 @@ int main()
         {
             if (event.type == sf::Event::Closed)
                 window.close();
+            
+        }
+        if (Mouse::isButtonPressed(Mouse::Button::Left) ) {
+            if (pos.x >= 125 && pos.x <= 283 && pos.y <= 850 && pos.y >= 692) {
+                cout << "click";
+                timeToRoll = 0;//unused for now
+                Roll = roll_dice();
+            }
         }
         window.clear(Color::White);
 
+
         if (event.key.code == Keyboard::Up) {
-            Roll = roll_dice();
-        }
+            timeToRoll = 1;
+        }//unused for now
 
         if (Roll == 6) {
             if (event.key.code == Mouse::Left) {
                 xc = pos.x;
                 yc = pos.y;
                 getstart(xc, yc);
+                timeToRoll = 1;//unused for now
             }
         }
+      
         
         window.draw(background);
         r1.setPosition(red[0][0], red[0][1]);
@@ -87,6 +103,7 @@ int main()
         dice.setPosition(125, 692);
         window.draw(dice);
         window.display();
+        sleep_for(nanoseconds(100000000));//delay
     }
 
     return 0;
