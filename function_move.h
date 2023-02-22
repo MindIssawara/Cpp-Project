@@ -3,15 +3,15 @@
 // - ระยะเดิน
 const int w =50;
 
-// red ==1 / blue ==2 / greem ==3 / yellow ==4
+// red ==1 /  yellow ==2 / blue ==3 / green ==4
 
 //prototype
 void move_red(int &,int &,int);
 void move_yellow(int &,int &,int);
 
-
-void move_green(int &,int &,int);
 void move_blue(int &,int &,int);
+void move_green(int &,int &,int);
+
 
 
 //function
