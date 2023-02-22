@@ -49,13 +49,15 @@ int main()
                 Roll = roll_dice();
                 Round++;
                 if (Round == 5) Round = 1;
+                Finished = 0; 
+                timeToRoll = 0;
             }
-            timeToRoll = 0;
+            
         }
         window.clear(Color::White);
        
         if (event.key.code == Keyboard::Up) {
-            
+            Finished = 1;
             timeToRoll = 1;
         }//unused for now
 
@@ -63,7 +65,6 @@ int main()
             if (event.key.code == Mouse::Left) {
                 xc = pos.x;
                 yc = pos.y;
-                Finished = 0; //position not true
                 getstart(xc, yc , Round);
             }
         }
