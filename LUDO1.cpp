@@ -6,6 +6,7 @@
 #include<thread>
 #include"function_random.h"
 #include "add.h"
+#include "return_position.h"
 using namespace std;
 using namespace sf;
 using namespace std::this_thread;
