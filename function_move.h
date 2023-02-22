@@ -3,19 +3,19 @@
 // - ระยะเดิน
 const int w =50;
 
-// red ==1 /  yellow ==2 / blue ==3 / green ==4
+// red ==1 / yellow ==2 / blue ==3 / green ==4
 
 //prototype
-void move_red(int &,int &,int);
-void move_yellow(int &,int &,int);
+int move_red(int &,int &,int);
+int move_yellow(int &,int &,int);
 
-void move_blue(int &,int &,int);
-void move_green(int &,int &,int);
-
+int move_blue(int &,int &,int);
+int move_green(int &,int &,int);
+//ฟังชั่นจะpass by refค่าx,yปัจจุบันของหมากสีใครสีมันและค่าลูกเต๋าที่ทอยได้แล้วก็เอามาเดิน ถ้าปรากฏว่าถึงเส้นชัยจะreturnค่าint = 1 แต่ถ้ายังไม่ถึงเส้นชัยจะreturnค่าเป็น0
 
 
 //function
-void move_red (int &x,int &y,int d){
+int move_red (int &x,int &y,int d){
     for (int i=0; i<d; i++){
         if(x == 675 && y>=600 && y<=800) y-=w;
         if(x == 675 && y==550) {
@@ -50,12 +50,14 @@ void move_red (int &x,int &y,int d){
                 else {
                     x = 725;
                     y = 500;
+                    return 1;
                 }
-        };
+        }
     }
+    return 0;
 }
 
-void move_yellow (int &x,int &y,int d){
+int move_yellow (int &x,int &y,int d){
     for (int i=0; i<d; i++){
         if(x == 775 && y>=100 && y<=300) y+=w;
         if(x == 775 && y==350) {
@@ -91,13 +93,15 @@ void move_yellow (int &x,int &y,int d){
                 else {
                     x = 725;
                     y = 400;
+                    return 1;
                 }
         } 
 
     }
+    return 0;
 }
 
-void move_blue(int &x,int &y,int dice)
+int move_blue(int &x,int &y,int dice)
 {
     for(int i = 0; i < dice ; i++)
     {
@@ -175,12 +179,14 @@ void move_blue(int &x,int &y,int dice)
                 else {
                     x = 775;
                     y = 450;
+                    return 1;
                 }
         }
     }
+    return 0;
 }
 
-void move_green(int &x,int &y,int dice){
+int move_green(int &x,int &y,int dice){
     for(int i = 0; i < dice ; i++)
     {
         //formatทางตรงแกน x ทิศขวา --> if(x >= ต้น && x < ปลาย && y == คงที่)
@@ -266,10 +272,12 @@ void move_green(int &x,int &y,int dice){
                 else {
                     x = 675;
                     y = 450;
+                    return 1;
                 }
                 
             }
         
     }
+    return 0;
 }
 
