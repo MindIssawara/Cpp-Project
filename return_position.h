@@ -1,11 +1,3 @@
-#include <SFML/Graphics.hpp>
-#include<iostream>
-#include<time.h>
-#include<cstdlib>
-using namespace std;
-using namespace sf;
-
-
 void return_position(int& x, int& y) {
 	if (x >= 375 && x <= 425 && y >= 400 && y <= 450) {
 		x = 375;
