@@ -13,11 +13,6 @@ void move_yellow(int &,int &,int);
 void move_green(int &,int &,int);
 void move_blue(int &,int &,int);
 
-void checkenemy(int [],int []);
-
-
-void win_green(int,int,int);
-
 
 //function
 void move_red (int &x,int &y,int d){
