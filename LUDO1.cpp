@@ -16,21 +16,22 @@ using namespace std::chrono;
 int main()
 {
     int Roll = 1;
-    Texture bg,d;
+    Texture bg,d,fd;
     Texture g, r, y, b;
     srand(time(0));
     RenderWindow window(VideoMode(1500, 900), "LUDO!");
     window.setKeyRepeatEnabled(false);
+    fd.loadFromFile("image/frame_dice.png");
     d.loadFromFile("image/dice.png");
     g.loadFromFile("image/g.png");
     r.loadFromFile("image/r.png");
     b.loadFromFile("image/b.png");
     y.loadFromFile("image/y.png");
     bg.loadFromFile("image/background.png");
-    Sprite background(bg),dice(d);
+    Sprite background(bg),dice(d),frame(fd);
     Sprite r1(r), r2(r), r3(r), r4(r), b1(b), b2(b), b3(b), b4(b), g1(g), g2(g), g3(g), g4(g), y1(y), y2(y), y3(y), y4(y);
     int xc=0,yc=0;
-    bool timeToRoll = 1;//unused for now
+    
     while (window.isOpen())
     {
         
@@ -42,17 +43,19 @@ int main()
                 window.close();
             
         }
-        if (Mouse::isButtonPressed(Mouse::Button::Left) ) {
+        if (Mouse::isButtonPressed(Mouse::Button::Left) && timeToRoll) {
             if (pos.x >= 125 && pos.x <= 283 && pos.y <= 850 && pos.y >= 692) {
                 cout << "click";
-                timeToRoll = 0;//unused for now
                 Roll = roll_dice();
+                Round++;
+                if (Round == 5) Round = 1;
             }
+            timeToRoll = 0;
         }
         window.clear(Color::White);
-
-
+       
         if (event.key.code == Keyboard::Up) {
+            
             timeToRoll = 1;
         }//unused for now
 
@@ -60,12 +63,11 @@ int main()
             if (event.key.code == Mouse::Left) {
                 xc = pos.x;
                 yc = pos.y;
-                getstart(xc, yc);
-                timeToRoll = 1;//unused for now
+                Finished = 0; //position not true
+                getstart(xc, yc , Round);
             }
         }
-      
-        
+             
         window.draw(background);
         r1.setPosition(red[0][0], red[0][1]);
         r2.setPosition(red[1][0], red[1][1]);
@@ -99,11 +101,15 @@ int main()
         window.draw(y2);
         window.draw(y3);
         window.draw(y4);
+        frame.setTextureRect(IntRect(Round * 204, 0, 204, 216));
+        frame.setPosition(103,645 );
+        window.draw(frame);
         dice.setTextureRect(IntRect((Roll-1) * 158, 0, 158, 158));
         dice.setPosition(125, 692);
         window.draw(dice);
         window.display();
         sleep_for(nanoseconds(100000000));//delay
+       
     }
 
     return 0;
