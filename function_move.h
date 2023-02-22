@@ -16,7 +16,7 @@ void move_blue(int &,int &,int);
 void checkenemy(int [],int []);
 
 
-void win(int,int,int);
+void win_green(int,int,int);
 
 
 //function
@@ -247,10 +247,17 @@ void move_green(int &x,int &y,int dice){
         {
             y = y - w;
         }
-        if(x >= 375 && x < 675 && y == 450) 
-        {
-            x = x + w;
-        }
+            //เลนที่กำลังจะถึงเส้นชัย
+            if(x >= 375 && x < 675 && y == 450) 
+            {
+                if(dice != (675 - x)/w) break;
+                else {
+                    x = 675;
+                    y = 450;
+                }
+                
+            }
+        
     }
 }
 
