@@ -5,8 +5,8 @@
 #include<chrono>
 #include<thread>
 #include"function_random.h"
-#include "add.h"
 #include "return_position.h"
+#include "add.h"
 using namespace std;
 using namespace sf;
 using namespace std::this_thread;
@@ -17,7 +17,7 @@ using namespace std::chrono;
 int main()
 {
     int Roll = 1;
-    Texture bg,d,fd;
+    Texture bg, d, fd;
     Texture g, r, y, b;
     srand(time(0));
     RenderWindow window(VideoMode(1500, 900), "LUDO!");
@@ -29,20 +29,21 @@ int main()
     b.loadFromFile("image/b.png");
     y.loadFromFile("image/y.png");
     bg.loadFromFile("image/background.png");
-    Sprite background(bg),dice(d),frame(fd);
+    Sprite background(bg), dice(d), frame(fd);
     Sprite r1(r), r2(r), r3(r), r4(r), b1(b), b2(b), b3(b), b4(b), g1(g), g2(g), g3(g), g4(g), y1(y), y2(y), y3(y), y4(y);
-    int xc=0,yc=0;
-    
+    int xc = 0, yc = 0;
+    int win=0;
+
     while (window.isOpen())
     {
-        
+
         Vector2i pos = Mouse::getPosition(window);
-        Event event;     
+        Event event;
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
                 window.close();
-            
+
         }
         if (Mouse::isButtonPressed(Mouse::Button::Left) && timeToRoll) {
             if (pos.x >= 125 && pos.x <= 283 && pos.y <= 850 && pos.y >= 692) {
@@ -50,13 +51,13 @@ int main()
                 Roll = roll_dice();
                 Round++;
                 if (Round == 5) Round = 1;
-                Finished = 0; 
+                Finished = 0;
                 timeToRoll = 0;
             }
-            
+
         }
         window.clear(Color::White);
-       
+
         if (event.key.code == Keyboard::Up) {
             Finished = 1;
             timeToRoll = 1;
@@ -66,10 +67,30 @@ int main()
             if (event.key.code == Mouse::Left) {
                 xc = pos.x;
                 yc = pos.y;
-                getstart(xc, yc , Round);
+                getstart(xc, yc, Round);
             }
         }
-             
+        else if(Roll == 1 || Roll == 2 || Roll == 3|| Roll == 4|| Roll == 5){
+            if (event.key.code == Mouse::Left && pos.x >= 375 && pos.x <= 1125 && pos.y <= 850 && pos.y >= 100) {
+                xc = pos.x;
+                yc = pos.y;
+                return_position(xc, yc);
+                int* px = serchx(xc, yc), *py = serchy(xc, yc);
+                if (Round == 1 && !Finished) {
+                    win = win + move_green(*px, *py, Roll);
+                }
+                if (Round == 2 && !Finished) {
+                    win = win + move_yellow(*px, *py, Roll);
+                }
+                if (Round == 3 && !Finished) {
+                    win = win + move_blue(*px, *py, Roll);
+                }
+                if (Round == 4 && !Finished) {
+                    win = win + move_red(*px, *py, Roll);
+                }
+            }
+        }
+
         window.draw(background);
         r1.setPosition(red[0][0], red[0][1]);
         r2.setPosition(red[1][0], red[1][1]);
@@ -104,16 +125,15 @@ int main()
         window.draw(y3);
         window.draw(y4);
         frame.setTextureRect(IntRect(Round * 204, 0, 204, 216));
-        frame.setPosition(103,645 );
+        frame.setPosition(103, 645);
         window.draw(frame);
-        dice.setTextureRect(IntRect((Roll-1) * 158, 0, 158, 158));
+        dice.setTextureRect(IntRect((Roll - 1) * 158, 0, 158, 158));
         dice.setPosition(125, 692);
         window.draw(dice);
         window.display();
         sleep_for(nanoseconds(100000000));//delay
-       
+
     }
 
     return 0;
 }
-
