@@ -195,7 +195,7 @@ void return_position(int& x, int& y) {
 		x = 1075;
 		y = 450;
 	}
-	else (x >= 875 && x <= 925 && y >= 500 && y <= 550) {
+	else if(x >= 875 && x <= 925 && y >= 500 && y <= 550) {
 		x = 875;
 		y = 500;
 	}
