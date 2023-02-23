@@ -32,7 +32,7 @@ int main()
     Sprite background(bg), dice(d), frame(fd);
     Sprite r1(r), r2(r), r3(r), r4(r), b1(b), b2(b), b3(b), b4(b), g1(g), g2(g), g3(g), g4(g), y1(y), y2(y), y3(y), y4(y);
     int xc = 0, yc = 0;
-    int win=0;
+    int win = 0;
 
     while (window.isOpen())
     {
@@ -65,29 +65,58 @@ int main()
 
         if (Roll == 6) {
             if (event.key.code == Mouse::Left) {
-                xc = pos.x;
-                yc = pos.y;
-                getstart(xc, yc, Round);
+                if(pos.x >= 375 && pos.x <= 675 && pos.y >= 100 && pos.y <= 400 || pos.x >= 375 && pos.x <= 675 && pos.y >= 550 && pos.y <= 850 || pos.x >= 825 && pos.x <= 1125 && pos.y >= 100 && pos.y <= 400 || pos.x >= 825 && pos.x <= 1125 && pos.y >= 550 && pos.y <= 850){
+                    xc = pos.x;
+                    yc = pos.y;
+                    getstart(xc, yc, Round);
+                }
+                else {
+                    if (event.key.code == Mouse::Left && pos.x >= 375 && pos.x <= 1125 && pos.y <= 850 && pos.y >= 100) {
+                        if (pos.x >= 375 && pos.x <= 675 && pos.y >= 400 && pos.y <= 550 || pos.x >= 825 && pos.x <= 1125 && pos.y >= 400 && pos.y <= 550 || pos.x >= 675 && pos.x <= 825 && pos.y >= 100 && pos.y <= 400 || pos.x >= 675 && pos.x <= 825 && pos.y >= 550 && pos.y <= 850) {
+                            xc = pos.x;
+                            yc = pos.y;
+                            return_position(xc, yc);
+                            int* px = serchx(xc, yc), * py = serchy(xc, yc);
+                            if (Round == 1 && !Finished) {
+                                win = win + move_green(*px, *py, Roll);
+                            }
+                            if (Round == 2 && !Finished) {
+                                win = win + move_yellow(*px, *py, Roll);
+                            }
+                            if (Round == 3 && !Finished) {
+                                win = win + move_blue(*px, *py, Roll);
+                            }
+                            if (Round == 4 && !Finished) {
+                                win = win + move_red(*px, *py, Roll);
+                            }
+                        }
+
+                    }
+                }
+                
             }
         }
-        else if(Roll == 1 || Roll == 2 || Roll == 3|| Roll == 4|| Roll == 5){
+        else if (Roll == 1 || Roll == 2 || Roll == 3 || Roll == 4 || Roll == 5) {
             if (event.key.code == Mouse::Left && pos.x >= 375 && pos.x <= 1125 && pos.y <= 850 && pos.y >= 100) {
-                xc = pos.x;
-                yc = pos.y;
-                return_position(xc, yc);
-                int* px = serchx(xc, yc), *py = serchy(xc, yc);
-                if (Round == 1 && !Finished) {
-                    win = win + move_green(*px, *py, Roll);
+                if (pos.x >= 375 && pos.x <= 675 && pos.y >= 400 && pos.y <= 550 || pos.x >= 825 && pos.x <= 1125 && pos.y >= 400 && pos.y <= 550 || pos.x >= 675 && pos.x <= 825 && pos.y >= 100 && pos.y <= 400 || pos.x >= 675 && pos.x <= 825 && pos.y >= 550 && pos.y <= 850) {
+                    xc = pos.x;
+                    yc = pos.y;
+                    return_position(xc, yc);
+                    int* px = serchx(xc, yc), * py = serchy(xc, yc);
+                    if (Round == 1 && !Finished) {
+                        win = win + move_green(*px, *py, Roll);
+                    }
+                    if (Round == 2 && !Finished) {
+                        win = win + move_yellow(*px, *py, Roll);
+                    }
+                    if (Round == 3 && !Finished) {
+                        win = win + move_blue(*px, *py, Roll);
+                    }
+                    if (Round == 4 && !Finished) {
+                        win = win + move_red(*px, *py, Roll);
+                    }
                 }
-                if (Round == 2 && !Finished) {
-                    win = win + move_yellow(*px, *py, Roll);
-                }
-                if (Round == 3 && !Finished) {
-                    win = win + move_blue(*px, *py, Roll);
-                }
-                if (Round == 4 && !Finished) {
-                    win = win + move_red(*px, *py, Roll);
-                }
+             
             }
         }
 
@@ -131,7 +160,7 @@ int main()
         dice.setPosition(125, 692);
         window.draw(dice);
         window.display();
-        sleep_for(nanoseconds(100000000));//delay
+        //sleep_for(nanoseconds(100000000));//delay
 
     }
 
