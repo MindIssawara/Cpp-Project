@@ -170,10 +170,9 @@ int move_red(int& x, int& y, int d) {
         else if (x == 775 && y >= 550 && y <= 750) y += w;
         else if (y == 800 && x == 775) x -= w;
         else if (x == 725 && y >= 550 && y <= 750) {
-            if (d != (y - 500) / w) break;
-            else {
-                x = 725;
-                y = 500;
+             if (i<=d) y-=w;
+            else if (d>i) {
+                break;
                 Finished = 1;
                 timeToRoll = 1;
                 return 1;
