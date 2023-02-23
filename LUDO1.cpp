@@ -77,18 +77,21 @@ int main()
                             yc = pos.y;
                             return_position(xc, yc);
                             int* px = serchx(xc, yc), * py = serchy(xc, yc);
-                            if (Round == 1 && !Finished) {
-                                win = win + move_green(*px, *py, Roll);
+                            if (*px != 0 && *py != 0) {
+                                if (Round == 1 && !Finished) {
+                                    win = win + move_green(*px, *py, Roll);
+                                }
+                                if (Round == 2 && !Finished) {
+                                    win = win + move_yellow(*px, *py, Roll);
+                                }
+                                if (Round == 3 && !Finished) {
+                                    win = win + move_blue(*px, *py, Roll);
+                                }
+                                if (Round == 4 && !Finished) {
+                                    win = win + move_red(*px, *py, Roll);
+                                }
                             }
-                            if (Round == 2 && !Finished) {
-                                win = win + move_yellow(*px, *py, Roll);
-                            }
-                            if (Round == 3 && !Finished) {
-                                win = win + move_blue(*px, *py, Roll);
-                            }
-                            if (Round == 4 && !Finished) {
-                                win = win + move_red(*px, *py, Roll);
-                            }
+                           
                         }
 
                     }
@@ -103,17 +106,19 @@ int main()
                     yc = pos.y;
                     return_position(xc, yc);
                     int* px = serchx(xc, yc), * py = serchy(xc, yc);
-                    if (Round == 1 && !Finished) {
-                        win = win + move_green(*px, *py, Roll);
-                    }
-                    if (Round == 2 && !Finished) {
-                        win = win + move_yellow(*px, *py, Roll);
-                    }
-                    if (Round == 3 && !Finished) {
-                        win = win + move_blue(*px, *py, Roll);
-                    }
-                    if (Round == 4 && !Finished) {
-                        win = win + move_red(*px, *py, Roll);
+                    if (*px != 0 && *py != 0) {
+                        if (Round == 1 && !Finished) {
+                            win = win + move_green(*px, *py, Roll);
+                        }
+                        if (Round == 2 && !Finished) {
+                            win = win + move_yellow(*px, *py, Roll);
+                        }
+                        if (Round == 3 && !Finished) {
+                            win = win + move_blue(*px, *py, Roll);
+                        }
+                        if (Round == 4 && !Finished) {
+                            win = win + move_red(*px, *py, Roll);
+                        }
                     }
                 }
              
@@ -160,7 +165,7 @@ int main()
         dice.setPosition(125, 692);
         window.draw(dice);
         window.display();
-        //sleep_for(nanoseconds(100000000));//delay
+        sleep_for(nanoseconds(100000000));//delay
 
     }
 
