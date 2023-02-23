@@ -206,7 +206,7 @@ int move_yellow(int& x, int& y, int d) {
         }
         else if (y == 500 && x >= 425 && x <= 625) x -= w;
         else if (x == 375 && y >= 450 && y <= 500) y -= w;
-        else if (y == 400 && x >= 375 && x <= 515) x += w;
+        else if (y == 400 && x >= 375 && x <= 575) x += w;
         else if (x == 625 && y == 400) {
             x = 675;
             y = 350;
