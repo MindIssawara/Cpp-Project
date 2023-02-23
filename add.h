@@ -160,7 +160,7 @@ int move_red(int& x, int& y, int d) {
         }
         else if (y == 400 && x >= 825 && x <= 1025) x += w;
         else if (x == 1075 && y >= 400 && y <= 450) y += w;
-        else if (y == 500 && y >= 875 && y <= 1075) x -= w;
+        else if (y == 500 && x >= 875 && x <= 1075) x -= w;
         else if (x == 825 && y == 500) {
             x = 775;
             y = 550;
@@ -190,15 +190,15 @@ int move_yellow(int& x, int& y, int d) {
             x = 825;
             y = 400;
         }
-        else if (y == 400 && x >= 825 && y <= 1025) x += w;
+        else if (y == 400 && x >= 825 && x <= 1025) x += w;
         else if (x == 1075 && y >= 400 && y <= 450) y += w;
-        else if (y == 500 && y >= 875 && y <= 1075) x -= w;
+        else if (y == 500 && x >= 875 && x <= 1075) x -= w;
         else if (x == 825 && y == 500) {
             x = 775;
             y = 550;
         }
         else if (x == 775 && y >= 550 && y <= 750) y += w;
-        else if (y == 800 && x >= 725 && y <= 775) x -= w;
+        else if (y == 800 && x >= 725 && x <= 775) x -= w;
         else if (x == 675 && y >= 600 && y <= 800) y -= w;
         else if (x == 675 && y == 550) {
             x = 625;
