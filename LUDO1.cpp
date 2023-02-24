@@ -78,18 +78,35 @@ int main()
                             return_position(xc, yc);
                             int* px = serchx(xc, yc), * py = serchy(xc, yc);
                             if (*px != 0 && *py != 0) {
-                                if (Round == 1 && !Finished) {
-                                    win = win + move_green(*px, *py, Roll);
+                                if (px == &green[0][0] || px == &green[1][0] || px == &green[2][0] || px == &green[3][0]) {
+                                    if (py == &green[0][1] || py == &green[1][1] || py == &green[2][1] || py == &green[3][1]) {
+                                        if (Round == 1 && !Finished) {
+                                            win = win + move_green(*px, *py, Roll);
+                                        }
+                                    }
                                 }
-                                if (Round == 2 && !Finished) {
-                                    win = win + move_yellow(*px, *py, Roll);
+                                if (px == &yellow[0][0] || px == &yellow[1][0] || px == &yellow[2][0] || px == &yellow[3][0]) {
+                                    if (py == &yellow[0][1] || py == &yellow[1][1] || py == &yellow[2][1] || py == &yellow[3][1]) {
+                                        if (Round == 2 && !Finished) {
+                                            win = win + move_yellow(*px, *py, Roll);
+                                        }
+                                    }
                                 }
-                                if (Round == 3 && !Finished) {
-                                    win = win + move_blue(*px, *py, Roll);
+                                if (px == &blue[0][0] || px == &blue[1][0] || px == &blue[2][0] || px == &blue[3][0]) {
+                                    if (py == &blue[0][1] || py == &blue[1][1] || py == &blue[2][1] || py == &blue[3][1]) {
+                                        if (Round == 3 && !Finished) {
+                                            win = win + move_blue(*px, *py, Roll);
+                                        }
+                                    }
                                 }
-                                if (Round == 4 && !Finished) {
-                                    win = win + move_red(*px, *py, Roll);
+                                if (px == &red[0][0] || px == &red[1][0] || px == &red[2][0] || px == &red[3][0]) {
+                                    if (py == &red[0][1] || py == &red[1][1] || py == &red[2][1] || py == &red[3][1]) {
+                                        if (Round == 4 && !Finished) {
+                                            win = win + move_red(*px, *py, Roll);
+                                        }
+                                    }
                                 }
+
                             }
                            
                         }
@@ -107,18 +124,35 @@ int main()
                     return_position(xc, yc);
                     int* px = serchx(xc, yc), * py = serchy(xc, yc);
                     if (*px != 0 && *py != 0) {
-                        if (Round == 1 && !Finished) {
-                            win = win + move_green(*px, *py, Roll);
+                        if (px == &green[0][0] || px == &green[1][0] || px == &green[2][0] || px == &green[3][0]) {
+                            if (py == &green[0][1] || py == &green[1][1] || py == &green[2][1] || py == &green[3][1]) {
+                                if (Round == 1 && !Finished) {
+                                    win = win + move_green(*px, *py, Roll);
+                                }
+                            }
                         }
-                        if (Round == 2 && !Finished) {
-                            win = win + move_yellow(*px, *py, Roll);
+                        if (px == &yellow[0][0] || px == &yellow[1][0] || px == &yellow[2][0] || px == &yellow[3][0]) {
+                            if (py == &yellow[0][1] || py == &yellow[1][1] || py == &yellow[2][1] || py == &yellow[3][1]) {
+                                if (Round == 2 && !Finished) {
+                                    win = win + move_yellow(*px, *py, Roll);
+                                }
+                            }
                         }
-                        if (Round == 3 && !Finished) {
-                            win = win + move_blue(*px, *py, Roll);
+                        if (px == &blue[0][0] || px == &blue[1][0] || px == &blue[2][0] || px == &blue[3][0]) {
+                            if (py == &blue[0][1] || py == &blue[1][1] || py == &blue[2][1] || py == &blue[3][1]) {
+                                if (Round == 3 && !Finished) {
+                                    win = win + move_blue(*px, *py, Roll);
+                                }
+                            }
                         }
-                        if (Round == 4 && !Finished) {
-                            win = win + move_red(*px, *py, Roll);
+                        if (px == &red[0][0] || px == &red[1][0] || px == &red[2][0] || px == &red[3][0]) {
+                            if (py == &red[0][1] || py == &red[1][1] || py == &red[2][1] || py == &red[3][1]) {
+                                if (Round == 4 && !Finished) {
+                                    win = win + move_red(*px, *py, Roll);
+                                }
+                            }
                         }
+                       
                     }
                 }
              
