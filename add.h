@@ -121,6 +121,13 @@ void getstart(int xc, int yc, int P) {
     }
 }
 
+void return_position(int& x, int& y) {
+	int modx = (x % 50) + 25;
+	x = x - modx;
+	int mody = (y % 50);
+	y = y - mody;
+}
+
 int* serchx(int x, int y) {
     for (int i = 0; i < 4; i++) {
         if (red[i][0] == x && red[i][1] == y) return &red[i][0];
