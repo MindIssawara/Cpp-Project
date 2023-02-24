@@ -5,7 +5,6 @@
 #include<chrono>
 #include<thread>
 #include"function_random.h"
-#include "return_position.h"
 #include "add.h"
 using namespace std;
 using namespace sf;
