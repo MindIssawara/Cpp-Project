@@ -116,6 +116,10 @@ int main()
             }
         }
         else if (Roll == 1 || Roll == 2 || Roll == 3 || Roll == 4 || Roll == 5) {
+            if (Round == 1 && !gstart || Round == 2 && !ystart || Round == 3 && !bstart || Round == 4 && !rstart) {
+                Finished = 1;
+                timeToRoll = 1;
+            }
             if (event.key.code == Mouse::Left && pos.x >= 375 && pos.x <= 1125 && pos.y <= 850 && pos.y >= 100) {
                 if (pos.x >= 375 && pos.x <= 675 && pos.y >= 400 && pos.y <= 550 || pos.x >= 825 && pos.x <= 1125 && pos.y >= 400 && pos.y <= 550 || pos.x >= 675 && pos.x <= 825 && pos.y >= 100 && pos.y <= 400 || pos.x >= 675 && pos.x <= 825 && pos.y >= 550 && pos.y <= 850) {
                     xc = pos.x;
