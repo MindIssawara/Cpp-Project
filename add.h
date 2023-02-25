@@ -11,6 +11,7 @@ using namespace std::chrono;
 
 
 bool timeToRoll = 1, Finished = 1;
+bool gstart = 0, ystart = 0, rstart = 0, bstart = 0;
 int w = 50;
 int nobody = 0;
 int Round = 0;
@@ -23,18 +24,22 @@ void getstartM(int x, int y, int& mx, int& my) {
     if (x >= 450 && x <= 600 && y >= 175 && y <= 325) {
         mx = 425;
         my = 400;
+        gstart = 1;
     }
     if (x >= 900 && x <= 1050 && y >= 175 && y <= 325) {
         mx = 775;
         my = 150;
+        ystart = 1;
     }
     if (x >= 450 && x <= 600 && y >= 625 && y <= 775) {
         mx = 675;
         my = 750;
+        rstart = 1;
     }
     if (x >= 900 && x <= 1050 && y >= 625 && y <= 775) {
         mx = 1025;
         my = 500;
+        bstart = 1;
     }
 }
 
@@ -122,10 +127,13 @@ void getstart(int xc, int yc, int P) {
 }
 
 void return_position(int& x, int& y) {
-	int modx = (x % 50) + 25;
-	x = x - modx;
-	int mody = (y % 50);
-	y = y - mody;
+    int modx = (x % 50) + 25;
+    cout << x << "   " << y << endl;
+    x = x - modx;
+    int mody = (y % 50);
+    y = y - mody;
+    cout << x << "   " << y << endl;
+
 }
 
 int* serchx(int x, int y) {
@@ -177,9 +185,10 @@ int move_red(int& x, int& y, int d) {
         else if (x == 775 && y >= 550 && y <= 750) y += w;
         else if (y == 800 && x == 775) x -= w;
         else if (x == 725 && y >= 550 && y <= 750) {
-             if (i<=d) y-=w;
-            else if (d>i) {
-                break;
+            if (d != (y - 500) / w) break;
+            else {
+                x = 725;
+                y = 500;
                 Finished = 1;
                 timeToRoll = 1;
                 return 1;
