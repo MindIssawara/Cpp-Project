@@ -4,7 +4,6 @@
 #include<cstdlib>
 #include<chrono>
 #include<thread>
-#include"function_random.h"
 #include "add.h"
 using namespace std;
 using namespace sf;
@@ -33,6 +32,7 @@ int main()
     int xc = 0, yc = 0;
     int win = 0;
 
+
     while (window.isOpen())
     {
 
@@ -45,7 +45,28 @@ int main()
 
         }
         if (Mouse::isButtonPressed(Mouse::Button::Left) && timeToRoll) {
-            if (pos.x >= 125 && pos.x <= 283 && pos.y <= 850 && pos.y >= 692) {
+            if (pos.x >= 125 && pos.x <= 283 && pos.y <= 258 && pos.y >= 100 && Round == 1) {
+                cout << "click";
+                Roll = roll_dice();
+                Round++;
+                Finished = 0;
+                timeToRoll = 0;
+            }
+            if (pos.x >= 1217 && pos.x <= 1285 && pos.y <= 258 && pos.y >= 100 && Round == 2) {
+                cout << "click";
+                Roll = roll_dice();
+                Round++;
+                Finished = 0;
+                timeToRoll = 0;
+            }
+            if (pos.x >= 1217 && pos.x <= 1285 && pos.y <= 850 && pos.y >= 692 && Round == 3) {
+                cout << "click";
+                Roll = roll_dice();
+                Round++;
+                Finished = 0;
+                timeToRoll = 0;
+            }
+            if (pos.x >= 125 && pos.x <= 283 && pos.y <= 850 && pos.y >= 692 && (Round == 4 || Round == 0)) {
                 cout << "click";
                 Roll = roll_dice();
                 Round++;
@@ -53,6 +74,7 @@ int main()
                 Finished = 0;
                 timeToRoll = 0;
             }
+            
 
         }
         window.clear(Color::White);
@@ -61,7 +83,22 @@ int main()
             Finished = 1;
             timeToRoll = 1;
         }//unused for now
-
+        if (Round == 1) {
+            dice.setPosition(125, 100);
+            frame.setPosition(103, 53);
+        }
+        if (Round == 2) {
+            dice.setPosition(1217, 100);
+            frame.setPosition(1195, 53);
+        }
+        if (Round == 3) {
+            dice.setPosition(1217, 692);
+            frame.setPosition(1195, 645);
+        }
+        if (Round == 4 || Round ==0) {
+            dice.setPosition(125, 692);
+            frame.setPosition(103, 645);
+        }
         if (Roll == 6) {
             if (event.key.code == Mouse::Left) {
                 if(pos.x >= 375 && pos.x <= 675 && pos.y >= 100 && pos.y <= 400 || pos.x >= 375 && pos.x <= 675 && pos.y >= 550 && pos.y <= 850 || pos.x >= 825 && pos.x <= 1125 && pos.y >= 100 && pos.y <= 400 || pos.x >= 825 && pos.x <= 1125 && pos.y >= 550 && pos.y <= 850){
@@ -81,6 +118,7 @@ int main()
                                     if (py == &green[0][1] || py == &green[1][1] || py == &green[2][1] || py == &green[3][1]) {
                                         if (Round == 1 && !Finished) {
                                             win = win + move_green(*px, *py, Roll);
+                                            
                                         }
                                     }
                                 }
@@ -196,13 +234,11 @@ int main()
         window.draw(y3);
         window.draw(y4);
         frame.setTextureRect(IntRect(Round * 204, 0, 204, 216));
-        frame.setPosition(103, 645);
         window.draw(frame);
         dice.setTextureRect(IntRect((Roll - 1) * 158, 0, 158, 158));
-        dice.setPosition(125, 692);
         window.draw(dice);
         window.display();
-        sleep_for(nanoseconds(100000000));//delay
+        //sleep_for(nanoseconds(100000000));//delay
 
     }
 
