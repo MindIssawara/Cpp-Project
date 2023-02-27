@@ -2,13 +2,9 @@
 #include<iostream>
 #include<time.h>
 #include<cstdlib>
-#include<chrono>
-#include<thread>
 #include "add.h"
 using namespace std;
 using namespace sf;
-using namespace std::this_thread;
-using namespace std::chrono;
 
 
 
