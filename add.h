@@ -127,10 +127,8 @@ void getstart(int xc, int yc, int P) {
 }
 
 void return_position(int& x, int& y) {
-    int modx = (x+25) % 50;
-    x = x - modx;
-    int mody = (y % 50);
-    y = y - mody;
+    x = x - ((x+25) % 50);
+    y = y - (y % 50);
 }
 
 int* serchx(int x, int y) {
