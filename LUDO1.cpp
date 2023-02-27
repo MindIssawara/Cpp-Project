@@ -52,14 +52,14 @@ int main()
                 Finished = 0;
                 timeToRoll = 0;
             }
-            if (pos.x >= 1217 && pos.x <= 1285 && pos.y <= 258 && pos.y >= 100 && Round == 2) {
+            if (pos.x >= 1217 && pos.x <= 1385 && pos.y <= 258 && pos.y >= 100 && Round == 2) {
                 cout << "click";
                 Roll = roll_dice();
                 Round++;
                 Finished = 0;
                 timeToRoll = 0;
             }
-            if (pos.x >= 1217 && pos.x <= 1285 && pos.y <= 850 && pos.y >= 692 && Round == 3) {
+            if (pos.x >= 1217 && pos.x <= 1385 && pos.y <= 850 && pos.y >= 692 && Round == 3) {
                 cout << "click";
                 Roll = roll_dice();
                 Round++;
@@ -74,7 +74,7 @@ int main()
                 Finished = 0;
                 timeToRoll = 0;
             }
-            
+
 
         }
         window.clear(Color::White);
@@ -83,25 +83,10 @@ int main()
             Finished = 1;
             timeToRoll = 1;
         }//unused for now
-        if (Round == 1) {
-            dice.setPosition(125, 100);
-            frame.setPosition(103, 53);
-        }
-        if (Round == 2) {
-            dice.setPosition(1217, 100);
-            frame.setPosition(1195, 53);
-        }
-        if (Round == 3) {
-            dice.setPosition(1217, 692);
-            frame.setPosition(1195, 645);
-        }
-        if (Round == 4 || Round ==0) {
-            dice.setPosition(125, 692);
-            frame.setPosition(103, 645);
-        }
+        
         if (Roll == 6) {
             if (event.key.code == Mouse::Left) {
-                if(pos.x >= 375 && pos.x <= 675 && pos.y >= 100 && pos.y <= 400 || pos.x >= 375 && pos.x <= 675 && pos.y >= 550 && pos.y <= 850 || pos.x >= 825 && pos.x <= 1125 && pos.y >= 100 && pos.y <= 400 || pos.x >= 825 && pos.x <= 1125 && pos.y >= 550 && pos.y <= 850){
+                if (pos.x >= 375 && pos.x <= 675 && pos.y >= 100 && pos.y <= 400 || pos.x >= 375 && pos.x <= 675 && pos.y >= 550 && pos.y <= 850 || pos.x >= 825 && pos.x <= 1125 && pos.y >= 100 && pos.y <= 400 || pos.x >= 825 && pos.x <= 1125 && pos.y >= 550 && pos.y <= 850) {
                     xc = pos.x;
                     yc = pos.y;
                     getstart(xc, yc, Round);
@@ -118,7 +103,7 @@ int main()
                                     if (py == &green[0][1] || py == &green[1][1] || py == &green[2][1] || py == &green[3][1]) {
                                         if (Round == 1 && !Finished) {
                                             win = win + move_green(*px, *py, Roll);
-                                            
+
                                         }
                                     }
                                 }
@@ -145,12 +130,12 @@ int main()
                                 }
 
                             }
-                           
+
                         }
 
                     }
                 }
-                
+
             }
         }
         else if (Roll == 1 || Roll == 2 || Roll == 3 || Roll == 4 || Roll == 5) {
@@ -193,10 +178,10 @@ int main()
                                 }
                             }
                         }
-                       
+
                     }
                 }
-             
+
             }
         }
 
@@ -236,6 +221,22 @@ int main()
         frame.setTextureRect(IntRect(Round * 204, 0, 204, 216));
         window.draw(frame);
         dice.setTextureRect(IntRect((Roll - 1) * 158, 0, 158, 158));
+        if (Round == 1) {
+            dice.setPosition(125, 100);
+            frame.setPosition(103, 53);
+        }
+        if (Round == 2) {
+            dice.setPosition(1217, 100);
+            frame.setPosition(1195, 53);
+        }
+        if (Round == 3) {
+            dice.setPosition(1217, 692);
+            frame.setPosition(1195, 645);
+        }
+        if (Round == 4 || Round == 0) {
+            dice.setPosition(125, 692);
+            frame.setPosition(103, 645);
+        }
         window.draw(dice);
         window.display();
         //sleep_for(nanoseconds(100000000));//delay
