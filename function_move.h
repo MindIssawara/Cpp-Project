@@ -123,7 +123,18 @@ int move_yellow(int& x, int& y, int d) {
 
 int move_blue(int& x, int& y, int dice)
 {
-    for (int i = 0; i < dice; i++)
+    if (x <= 1075 && x > 775 && y == 450) {
+        if (dice <= (x-775) / w) {
+            x -= (dice * w);
+        }
+        if (x == 775 && y == 450) {
+            Finished = 1;
+            timeToRoll = 1;
+            return 1;
+        }
+
+    }
+    else for (int i = 0; i < dice; i++)
     {
         if (x <= 1025 && x > 825 && y == 500)
         {
@@ -195,14 +206,7 @@ int move_blue(int& x, int& y, int dice)
         }
         else if (x <= 1075 && x > 775 && y == 450)
         {
-            if (dice == (x - 775) / w) break;
-            else {
-                x = 775;
-                y = 450;
-                Finished = 1;
-                timeToRoll = 1;
-                return 1;
-            }
+            if (dice == (x - 775) / w) x -= w;
         }
     }
     Finished = 1;
@@ -211,7 +215,18 @@ int move_blue(int& x, int& y, int dice)
 }
 
 int move_green(int& x, int& y, int dice) {
-    for (int i = 0; i < dice; i++)
+    if (x >= 375 && x < 675 && y == 450) {
+        if (dice <= (675-x) / w) {
+            x += (dice * w);
+        }
+        if (x == 775 && y == 450) {
+            Finished = 1;
+            timeToRoll = 1;
+            return 1;
+        }
+
+    }
+    else for (int i = 0; i < dice; i++)
     {
         //formatทางตรงแกน x ทิศขวา --> if(x >= ต้น && x < ปลาย && y == คงที่)
         if (x >= 425 && x < 625 && y == 400)
@@ -292,14 +307,7 @@ int move_green(int& x, int& y, int dice) {
         //เลนที่กำลังจะถึงเส้นชัย
         else if (x >= 375 && x < 675 && y == 450)
         {
-            if (dice != (675 - x) / w) break;
-            else {
-                x = 675;
-                y = 450;
-                Finished = 1;
-                timeToRoll = 1;
-                return 1;
-            }
+            if (dice == (675 - x) / w) x+=w;
 
         }
 
