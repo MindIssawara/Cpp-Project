@@ -156,7 +156,18 @@ int* serchy(int x, int y) {
 }
 
 int move_red(int& x, int& y, int d) {
-    for (int i = 0; i < d; i++) {
+    if (x == 725 && y >= 500 && y <= 750) {
+        if (d <= (y-500) / w) {
+            y -= (d * w);
+        }
+        if (x == 725 && y == 500) {
+            Finished = 1;
+            timeToRoll = 1;
+            return 1;
+        }
+
+    }
+    else for (int i = 0; i < d; i++) {
         if (x == 675 && y >= 600 && y <= 800) y -= w;
         else if (x == 675 && y == 550) {
             x = 625;
@@ -185,14 +196,10 @@ int move_red(int& x, int& y, int d) {
         }
         else if (x == 775 && y >= 550 && y <= 750) y += w;
         else if (y == 800 && x == 775) x -= w;
-        else if (x == 725 && y >= 550 && y <= 750) {
-            if (d != (y - 500) / w) break;
-            else {
-                x = 725;
-                y = 500;
-                Finished = 1;
-                timeToRoll = 1;
-                return 1;
+        else if (y == 800 && x == 725) y -= w;
+        else if (x == 725 && y >= 500 && y <= 750) {
+            if (d <= (y-500) / w) {
+                y -= w;
             }
         }
     }
@@ -202,7 +209,18 @@ int move_red(int& x, int& y, int d) {
 }
 
 int move_yellow(int& x, int& y, int d) {
-    for (int i = 0; i < d; i++) {
+    if (x == 725 && y >= 150 && y <= 400) {
+            if (d <= (400 - y) / w) {
+                y += (d*w);
+            }
+            if (x == 725 && y == 400) {
+                Finished = 1;
+                timeToRoll = 1;
+                return 1;
+            }
+        
+    }
+    else for (int i = 0; i < d; i++) {
         if (x == 775 && y >= 100 && y <= 300) y += w;
         else if (x == 775 && y == 350) {
             x = 825;
@@ -231,18 +249,12 @@ int move_yellow(int& x, int& y, int d) {
         }
         else if (x == 675 && y >= 150 && y <= 350) y -= w;
         else if (y == 100 && x == 675) x += w;
-        else if (x == 725 && y >= 150 && y <= 350)
-        {
-            if (d != (400 - y) / w) break;
-            else {
-                x = 725;
-                y = 400;
-                Finished = 1;
-                timeToRoll = 1;
-                return 1;
+        else if (y == 100 && x == 725) y += w;
+        else if (x == 725 && y >= 150 && y <= 400) {
+            if (d <= (400 - y) / w) {
+                y += w;
             }
         }
-
     }
     Finished = 1;
     timeToRoll = 1;
