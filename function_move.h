@@ -16,7 +16,18 @@ int move_green(int &,int &,int);
 
 //function
 int move_red(int& x, int& y, int d) {
-    for (int i = 0; i < d; i++) {
+    if (x == 725 && y >= 500 && y <= 750) {
+        if (d <= (y-500) / w) {
+            y -= (d * w);
+        }
+        if (x == 725 && y == 500) {
+            Finished = 1;
+            timeToRoll = 1;
+            return 1;
+        }
+
+    }
+    else for (int i = 0; i < d; i++) {
         if (x == 675 && y >= 600 && y <= 800) y -= w;
         else if (x == 675 && y == 550) {
             x = 625;
@@ -38,21 +49,17 @@ int move_red(int& x, int& y, int d) {
         }
         else if (y == 400 && x >= 825 && x <= 1025) x += w;
         else if (x == 1075 && y >= 400 && y <= 450) y += w;
-        else if (y == 500 && y >= 875 && y <= 1075) x -= w;
+        else if (y == 500 && x >= 875 && x <= 1075) x -= w;
         else if (x == 825 && y == 500) {
             x = 775;
             y = 550;
         }
         else if (x == 775 && y >= 550 && y <= 750) y += w;
         else if (y == 800 && x == 775) x -= w;
-        else if (x == 725 && y >= 550 && y <= 800) {
-            if (i<=d) y-=w;
-            else {
-                x = 725;
-                y = 500;
-                Finished = 1;
-                timeToRoll = 1;
-                return 1;
+        else if (y == 800 && x == 725) y -= w;
+        else if (x == 725 && y >= 500 && y <= 750) {
+            if (d <= (y-500) / w) {
+                y -= w;
             }
         }
     }
@@ -62,21 +69,32 @@ int move_red(int& x, int& y, int d) {
 }
 
 int move_yellow(int& x, int& y, int d) {
-    for (int i = 0; i < d; i++) {
+    if (x == 725 && y >= 150 && y <= 400) {
+            if (d <= (400 - y) / w) {
+                y += (d*w);
+            }
+            if (x == 725 && y == 400) {
+                Finished = 1;
+                timeToRoll = 1;
+                return 1;
+            }
+        
+    }
+    else for (int i = 0; i < d; i++) {
         if (x == 775 && y >= 100 && y <= 300) y += w;
         else if (x == 775 && y == 350) {
             x = 825;
             y = 400;
         }
-        else if (y == 400 && x >= 825 && y <= 1025) x += w;
+        else if (y == 400 && x >= 825 && x <= 1025) x += w;
         else if (x == 1075 && y >= 400 && y <= 450) y += w;
-        else if (y == 500 && y >= 875 && y <= 1075) x -= w;
+        else if (y == 500 && x >= 875 && x <= 1075) x -= w;
         else if (x == 825 && y == 500) {
             x = 775;
             y = 550;
         }
         else if (x == 775 && y >= 550 && y <= 750) y += w;
-        else if (y == 800 && x >= 725 && y <= 775) x -= w;
+        else if (y == 800 && x >= 725 && x <= 775) x -= w;
         else if (x == 675 && y >= 600 && y <= 800) y -= w;
         else if (x == 675 && y == 550) {
             x = 625;
@@ -84,25 +102,19 @@ int move_yellow(int& x, int& y, int d) {
         }
         else if (y == 500 && x >= 425 && x <= 625) x -= w;
         else if (x == 375 && y >= 450 && y <= 500) y -= w;
-        else if (y == 400 && x >= 375 && x <= 515) x += w;
+        else if (y == 400 && x >= 375 && x <= 575) x += w;
         else if (x == 625 && y == 400) {
             x = 675;
             y = 350;
         }
         else if (x == 675 && y >= 150 && y <= 350) y -= w;
         else if (y == 100 && x == 675) x += w;
-        else if (x == 725 && y >= 100 && y <= 350)
-        {
-            if (i<=d) y+=w;.
-            else {
-                x = 725;
-                y = 400;
-                Finished = 1;
-                timeToRoll = 1;
-                return 1;
+        else if (y == 100 && x == 725) y += w;
+        else if (x == 725 && y >= 150 && y <= 400) {
+            if (d <= (400 - y) / w) {
+                y += w;
             }
         }
-
     }
     Finished = 1;
     timeToRoll = 1;
