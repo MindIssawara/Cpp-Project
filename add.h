@@ -137,7 +137,7 @@ void return_position(int& x, int& y) {
     y = y - (y % 50);
 }
 
-int* serchx(int x, int y) {
+int* searchx(int x, int y) {
     for (int i = 0; i < 4; i++) {
         if (red[i][0] == x && red[i][1] == y) return &red[i][0];
         if (blue[i][0] == x && blue[i][1] == y) return &blue[i][0];
@@ -145,7 +145,7 @@ int* serchx(int x, int y) {
         if (green[i][0] == x && green[i][1] == y) return &green[i][0];
     }return &nobody;
 }
-int* serchy(int x, int y) {
+int* searchy(int x, int y) {
     for (int i = 0; i < 4; i++) {
         if (red[i][0] == x && red[i][1] == y) return &red[i][1];
         if (blue[i][0] == x && blue[i][1] == y) return &blue[i][1];
