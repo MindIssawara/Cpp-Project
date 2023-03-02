@@ -93,7 +93,7 @@ int main()
                             xc = pos.x;
                             yc = pos.y;
                             return_position(xc, yc);
-                            int* px = serchx(xc, yc), * py = serchy(xc, yc);
+                            int* px = searchx(xc, yc), * py = searchy(xc, yc);
                             if (*px != 0 && *py != 0) {
                                 if (px == &green[0][0] || px == &green[1][0] || px == &green[2][0] || px == &green[3][0]) {
                                     if (py == &green[0][1] || py == &green[1][1] || py == &green[2][1] || py == &green[3][1]) {
@@ -144,7 +144,7 @@ int main()
                     xc = pos.x;
                     yc = pos.y;
                     return_position(xc, yc);
-                    int* px = serchx(xc, yc), * py = serchy(xc, yc);
+                    int* px = searchx(xc, yc), * py = searchy(xc, yc);
                     if (*px != 0 && *py != 0) {
                         if (px == &green[0][0] || px == &green[1][0] || px == &green[2][0] || px == &green[3][0]) {
                             if (py == &green[0][1] || py == &green[1][1] || py == &green[2][1] || py == &green[3][1]) {
