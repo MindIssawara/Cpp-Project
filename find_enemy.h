@@ -10,150 +10,139 @@ void find_enemy_green(int &,int &);
 //function
 void find_enemy_red(int &x,int &y) //function ตรวจสอบว่ามีศัตรูอญู่ ณ ตำแหน่งนั้นมั้ย โดยมีการรับค่า (xปัจจุบัน,yปัจจุบัน)
 {
-    //check red eat green?
-    for(int i=0;i<4;i++) //หาตำเเหน่งของgreenทั้งหมดว่าตอนนี้อยู่ตรงไหน(x,y)
+    //check red eat others?
+    for(int i=0;i<4;i++)
     {
-        int xr=*&green[i][0];
-        int yr=*&green[i][1];
+        int xg=green[i][0];
+        int yg=green[i][1];
         
-        if(x==xr and y==yr)
+        if(x==xg and y==yg)
         {
             if(i == 0){
-                x = 450;
-                y = 175;
+                green[i][0] = 450;
+                green[i][1] = 175;
             }else if(i == 1){
-                x = 550;
-                y = 175;
+                green[i][0] = 550;
+                green[i][1] = 175;
             }else if(i == 2){
-                x = 450;
-                y = 275;
+                green[i][0] = 450;
+                green[i][1] = 275;
             }else if(i == 3){
-                x = 550;
-                y = 275;
+                green[i][0] = 550;
+                green[i][1] = 275;
             }
             //ให้ green[i][j] กลับจุดเกิด
         }
-    } 
-    //check red eat yellow?
-    for(int i=0;i<4;i++) //หาตำเเหน่งของyellowทั้งหมดว่าตอนนี้อยู่ตรงไหน(x,y)
-    {
-        int xr=*&yellow[i][0];
-        int yr=*&yellow[i][1];
+
+        int xy=yellow[i][0];
+        int yy=yellow[i][1];
         
-        if(x==xr and y==yr)
+        if(x==xy and y==yy)
         {
             if(i == 0){
-                x = 900;
-                y = 175;
+                yellow[i][0] = 900;
+                yellow[i][1] = 175;
             }else if(i == 1){
-                x = 1000;
-                y = 175;
+                yellow[i][0] = 1000;
+                yellow[i][1] = 175;
             }else if(i == 2){
-                x = 900;
-                y = 275;
+                yellow[i][0] = 900;
+                yellow[i][1] = 275;
             }else if(i == 3){
-                x = 1000;
-                y = 275;
+                yellow[i][0] = 1000;
+                yellow[i][1] = 275;
             }
             //ให้ yellow[i][j] กลับจุดเกิด
         }
-    }
-    //check red eat blue?
-    for(int i=0;i<4;i++) //หาตำเเหน่งของ blueทั้งหมดว่าตอนนี้อยู่ตรงไหน(x,y)
-    {
-        int xr=*&blue[i][0];
-        int yr=*&blue[i][1];
+
+        int xb=blue[i][0];
+        int yb=blue[i][1];
         
-        if(x==xr and y==yr)
+        if(x==xb and y==yb)
         {
             if(i == 0){
-                x = 900;
-                y = 625;
+                blue[i][0] = 900;
+                blue[i][1] = 625;
             }else if(i == 1){
-                x = 1000;
-                y = 625;
+                blue[i][0] = 1000;
+                blue[i][1] = 625;
             }else if(i == 2){
-                x = 900;
-                y = 725;
+                blue[i][0] = 900;
+                blue[i][1] = 725;
             }else if(i == 3){
-                x = 1000;
-                y = 725;
+                blue[i][0] = 1000;
+                blue[i][1] = 725;
             }
             //ให้ blue[i][j] กลับจุดเกิด
         }
     } 
+    
 }
 
 void find_enemy_yellow(int &x,int &y)
 {
-    //check yellow eat green?
+    //check yellow eat others?
     for(int i=0;i<4;i++)
     {
-        int xy=*&green[i][0];
-        int yy=*&green[i][1];
+        int xg=green[i][0];
+        int yg=green[i][1];
         
-        if(x==xy and y==yy)
+        if(x==xg and y==yg)
         {
             if(i == 0){
-                x = 450;
-                y = 175;
+                green[i][0] = 450;
+                green[i][1] = 175;
             }else if(i == 1){
-                x = 550;
-                y = 175;
+                green[i][0] = 550;
+                green[i][1] = 175;
             }else if(i == 2){
-                x = 450;
-                y = 275;
+                green[i][0] = 450;
+                green[i][1] = 275;
             }else if(i == 3){
-                x = 550;
-                y = 275;
+                green[i][0] = 550;
+                green[i][1] = 275;
             }
             //ให้ green[i][j] กลับจุดเกิด
         }
-    } 
-    //check yellow eat red?
-    for(int i=0;i<4;i++)
-    {
-        int xy=*&red[i][0];
-        int yy=*&red[i][1];
+
+        int xr=red[i][0];
+        int yr=red[i][1];
         
-        if(x==xy and y==yy)
+        if(x==xr and y==yr)
         {
             if(i == 0){
-                x = 450;
-                y = 625;
+                red[i][0] = 450;
+                red[i][1] = 625;
             }else if(i == 1){
-                x = 550;
-                y = 625;
+                red[i][0] = 550;
+                red[i][1] = 625;
             }else if(i == 2){
-                x = 450;
-                y = 725;
+                red[i][0] = 450;
+                red[i][1] = 725;
             }else if(i == 3){
-                x = 550;
-                y = 725;
+                red[i][0] = 550;
+                red[i][1] = 725;
             }
             //ให้ red[i][j] กลับจุดเกิด
         }
-    }
-    //check yellow eat blue?
-    for(int i=0;i<4;i++)
-    {
-        int xy=*&blue[i][0];
-        int yy=*&blue[i][1];
 
-        if(x==xy and y==yy)
+        int xb=blue[i][0];
+        int yb=blue[i][1];
+
+        if(x==xb and y==yb)
         {
             if(i == 0){
-                x = 900;
-                y = 625;
+                blue[i][0] = 900;
+                blue[i][1] = 625;
             }else if(i == 1){
-                x = 1000;
-                y = 625;
+                blue[i][0] = 1000;
+                blue[i][1] = 625;
             }else if(i == 2){
-                x = 900;
-                y = 725;
+                blue[i][0] = 900;
+                blue[i][1] = 725;
             }else if(i == 3){
-                x = 1000;
-                y = 725;
+                blue[i][0] = 1000;
+                blue[i][1] = 725;
             }
             //ให้ blue[i][j] กลับจุดเกิด
         }
@@ -162,152 +151,143 @@ void find_enemy_yellow(int &x,int &y)
 
 void find_enemy_blue(int &x,int &y)
 {
-    //check blue eat green?
+    //check blue eat others?
     for(int i=0;i<4;i++)
     {
-        int xb=*&green[i][0];
-        int yb=*&green[i][1];
+        int xg=green[i][0];
+        int yg=green[i][1];
         
-        if(x==xb and y==yb)
+        if(x==xg and y==yg)
         {
             if(i == 0){
-                x = 450;
-                y = 175;
+                green[i][0] = 450;
+                green[i][1] = 175;
             }else if(i == 1){
-                x = 550;
-                y = 175;
+                green[i][0] = 550;
+                green[i][1] = 175;
             }else if(i == 2){
-                x = 450;
-                y = 275;
+                green[i][0] = 450;
+                green[i][1] = 275;
             }else if(i == 3){
-                x = 550;
-                y = 275;
+                green[i][0] = 550;
+                green[i][1] = 275;
             }
             //ให้ green[i][j] กลับจุดเกิด
         }
-    } 
-    //check blue eat yellow?
-    for(int i=0;i<4;i++)
-    {
-        int xb=*&yellow[i][0];
-        int yb=*&yellow[i][1];
+
+        int xy=yellow[i][0];
+        int yy=yellow[i][1];
         
-        if(x==xb and y==yb)
+        if(x==xy and y==yy)
         {
             if(i == 0){
-                x = 900;
-                y = 175;
+                yellow[i][0] = 900;
+                yellow[i][1] = 175;
             }else if(i == 1){
-                x = 1000;
-                y = 175;
+                yellow[i][0] = 1000;
+                yellow[i][1] = 175;
             }else if(i == 2){
-                x = 900;
-                y = 275;
+                yellow[i][0] = 900;
+                yellow[i][1] = 275;
             }else if(i == 3){
-                x = 1000;
-                y = 275;
+                yellow[i][0] = 1000;
+                yellow[i][1] = 275;
             }
             //ให้ yellow[i][j] กลับจุดเกิด
         }
-    }
-    //check blue eat red?
-    for(int i=0;i<4;i++)
-    {
-        int xb=*&red[i][0];
-        int yb=*&red[i][1];
+
+        int xr=red[i][0];
+        int yr=red[i][1];
         
-        if(x==xb and y==yb)
+        if(x==xr and y==yr)
         {
             if(i == 0){
-                x = 450;
-                y = 625;
+                red[i][0] = 450;
+                red[i][1] = 625;
             }else if(i == 1){
-                x = 550;
-                y = 625;
+                red[i][0] = 550;
+                red[i][1] = 625;
             }else if(i == 2){
-                x = 450;
-                y = 725;
+                red[i][0] = 450;
+                red[i][1] = 725;
             }else if(i == 3){
-                x = 550;
-                y = 725;
+                red[i][0] = 550;
+                red[i][1] = 725;
             }
             //ให้ red[i][j] กลับจุดเกิด
         }
     } 
+
 }
 
 void find_enemy_green(int &x,int &y)
 {
-    //check green eat red?
+    //check green eat others?
     for(int i=0;i<4;i++)
     {
-        int xg=*&red[i][0];
-        int yg=*&red[i][1];
+        int xg=red[i][0];
+        int yg=red[i][1];
         
         if(x==xg and y==yg)
         {
             if(i == 0){
-                x = 450;
-                y = 625;
+                red[i][0] = 450;
+                red[i][1] = 625;
             }else if(i == 1){
-                x = 550;
-                y = 625;
+                red[i][0] = 550;
+                red[i][1] = 625;
             }else if(i == 2){
-                x = 450;
-                y = 725;
+                red[i][0] = 450;
+                red[i][1] = 725;
             }else if(i == 3){
-                x = 550;
-                y = 725;
+                red[i][0] = 550;
+                red[i][1] = 725;
             }
             //ให้ red[i][j] กลับจุดเกิด
         }
-    } 
-    //check green eat yellow?
-    for(int i=0;i<4;i++)
-    {
-        int xg=*&yellow[i][0];
-        int yg=*&yellow[i][1];
+
+        int xy=yellow[i][0];
+        int yy=yellow[i][1];
         
-        if(x==xg and y==yg)
+        if(x==xy and y==yy)
         {
             if(i == 0){
-                x = 900;
-                y = 175;
+                yellow[i][0] = 900;
+                yellow[i][1] = 175;
             }else if(i == 1){
-                x = 1000;
-                y = 175;
+                yellow[i][0] = 1000;
+                yellow[i][1] = 175;
             }else if(i == 2){
-                x = 900;
-                y = 275;
+                yellow[i][0] = 900;
+                yellow[i][1] = 275;
             }else if(i == 3){
-                x = 1000;
-                y = 275;
+                yellow[i][0] = 1000;
+                yellow[i][1] = 275;
             }
             //ให้ yellow[i][j] กลับจุดเกิด
         }
-    }
-    //check green eat blue?
-    for(int i=0;i<4;i++)
-    {
-        int xg=*&blue[i][0];
-        int yg=*&blue[i][1];
+
+        int xb=blue[i][0];
+        int yb=blue[i][1];
         
-        if(x==xg and y==yg)
+        if(x==xb and y==yb)
         {
             if(i == 0){
-                x = 900;
-                y = 625;
+                blue[i][0] = 900;
+                blue[i][1] = 625;
             }else if(i == 1){
-                x = 1000;
-                y = 625;
+                blue[i][0] = 1000;
+                blue[i][1] = 625;
             }else if(i == 2){
-                x = 900;
-                y = 725;
+                blue[i][0] = 900;
+                blue[i][1] = 725;
             }else if(i == 3){
-                x = 1000;
-                y = 725;
+                blue[i][0] = 1000;
+                blue[i][1] = 725;
             }
             //ให้ blue[i][j] กลับจุดเกิด
         }
     } 
-}
+    } 
+  
+  
