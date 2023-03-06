@@ -137,22 +137,90 @@ void return_position(int& x, int& y) {
     y = y - (y % 50);
 }
 
-int* searchx(int x, int y) {
+int* searchx(int x, int y,int Round) {
     for (int i = 0; i < 4; i++) {
-        if (red[i][0] == x && red[i][1] == y) return &red[i][0];
-        if (blue[i][0] == x && blue[i][1] == y) return &blue[i][0];
-        if (yellow[i][0] == x && yellow[i][1] == y) return &yellow[i][0];
-        if (green[i][0] == x && green[i][1] == y) return &green[i][0];
+        if (red[i][0] == x && red[i][1] == y && Round!= 4 ) return &red[i][0];
+        if (blue[i][0] == x && blue[i][1] == y && Round != 3) return &blue[i][0];
+        if (yellow[i][0] == x && yellow[i][1] == y && Round != 2) return &yellow[i][0];
+        if (green[i][0] == x && green[i][1] == y && Round != 1) return &green[i][0];
     }return &nobody;
 }
-int* searchy(int x, int y) {
+int* searchy(int x, int y,int Round) {
     for (int i = 0; i < 4; i++) {
-        if (red[i][0] == x && red[i][1] == y) return &red[i][1];
-        if (blue[i][0] == x && blue[i][1] == y) return &blue[i][1];
-        if (yellow[i][0] == x && yellow[i][1] == y) return &yellow[i][1];
-        if (green[i][0] == x && green[i][1] == y) return &green[i][1];
+        if (red[i][0] == x && red[i][1] == y && Round != 4) return &red[i][1];
+        if (blue[i][0] == x && blue[i][1] == y && Round != 3) return &blue[i][1];
+        if (yellow[i][0] == x && yellow[i][1] == y && Round != 2) return &yellow[i][1];
+        if (green[i][0] == x && green[i][1] == y && Round != 1) return &green[i][1];
     }return &nobody;
-    
+
+}
+
+
+void chase_back(int* px, int* py) {
+    if (px == &blue[0][0] && py == &blue[0][1]) {
+        *px = 900;
+        *py = 625;
+    }
+    if (px == &blue[1][0] && py == &blue[1][1]) {
+        *px = 1000;
+        *py = 625;
+    }
+    if (px == &blue[2][0] && py == &blue[2][1]) {
+        *px = 900;
+        *py = 725;
+    }
+    if (px == &blue[3][0] && py == &blue[3][1]) {
+        *px = 1000;
+        *py = 725;
+    }
+    if (px == &red[0][0] && py == &red[0][1]) {
+        *px = 450;
+        *py = 625;
+    }
+    if (px == &red[1][0] && py == &red[1][1]) {
+        *px = 550;
+        *py = 625;
+    }
+    if (px == &red[2][0] && py == &red[2][1]) {
+        *px = 450;
+        *py = 725;
+    }
+    if (px == &red[3][0] && py == &red[3][1]) {
+        *px = 550;
+        *py = 725;
+    }
+    if (px == &green[0][0] && py == &green[0][1]) {
+        *px = 450;
+        *py = 175;
+    }
+    if (px == &green[1][0] && py == &green[1][1]) {
+        *px = 550;
+        *py = 175;
+    }
+    if (px == &green[2][0] && py == &green[2][1]) {
+        *px = 450;
+        *py = 275;
+    }
+    if (px == &green[3][0] && py == &green[3][1]) {
+        *px = 550;
+        *py = 275;
+    }
+    if (px == &yellow[0][0] && py == &yellow[0][1]) {
+        *px = 900;
+        *py = 175;
+    }
+    if (px == &yellow[1][0] && py == &yellow[1][1]) {
+        *px = 1000;
+        *py = 175;
+    }
+    if (px == &yellow[2][0] && py == &yellow[2][1]) {
+        *px = 900;
+        *py = 275;
+    }
+    if (px == &yellow[3][0] && py == &yellow[3][1]) {
+        *px = 1000;
+        *py = 275;
+    }
 }
 
 int move_red(int& x, int& y, int d) {
