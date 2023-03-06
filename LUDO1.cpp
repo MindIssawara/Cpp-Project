@@ -3,6 +3,7 @@
 #include<time.h>
 #include<cstdlib>
 #include "add.h"
+
 using namespace std;
 using namespace sf;
 
@@ -26,7 +27,7 @@ int main()
     Sprite background(bg), dice(d), frame(fd);
     Sprite r1(r), r2(r), r3(r), r4(r), b1(b), b2(b), b3(b), b4(b), g1(g), g2(g), g3(g), g4(g), y1(y), y2(y), y3(y), y4(y);
     int xc = 0, yc = 0;
-    int win[4] = {0,0,0,0};
+    int win[4] = { 0,0,0,0 };
 
 
     while (window.isOpen())
@@ -79,13 +80,14 @@ int main()
             Finished = 1;
             timeToRoll = 1;
         }//unused for now
-        
+
         if (Roll == 6) {
             if (event.key.code == Mouse::Left) {
                 if (pos.x >= 375 && pos.x <= 675 && pos.y >= 100 && pos.y <= 400 || pos.x >= 375 && pos.x <= 675 && pos.y >= 550 && pos.y <= 850 || pos.x >= 825 && pos.x <= 1125 && pos.y >= 100 && pos.y <= 400 || pos.x >= 825 && pos.x <= 1125 && pos.y >= 550 && pos.y <= 850) {
                     xc = pos.x;
                     yc = pos.y;
                     getstart(xc, yc, Round);
+                   
                 }
                 else {
                     if (event.key.code == Mouse::Left && pos.x >= 375 && pos.x <= 1125 && pos.y <= 850 && pos.y >= 100) {
@@ -93,13 +95,14 @@ int main()
                             xc = pos.x;
                             yc = pos.y;
                             return_position(xc, yc);
-                            int* px = searchx(xc, yc), * py = searchy(xc, yc);
+                            int* px = searchx(xc, yc , 0), * py = searchy(xc, yc , 0);
                             if (*px != 0 && *py != 0) {
                                 if (px == &green[0][0] || px == &green[1][0] || px == &green[2][0] || px == &green[3][0]) {
                                     if (py == &green[0][1] || py == &green[1][1] || py == &green[2][1] || py == &green[3][1]) {
                                         if (Round == 1 && !Finished) {
                                             win[0] = win[0] + move_green(*px, *py, Roll);
-
+                                            int* X = searchx(*px, *py ,Round), * Y = searchy(*px, *py ,Round);
+                                            chase_back(X, Y);
                                         }
                                     }
                                 }
@@ -107,6 +110,8 @@ int main()
                                     if (py == &yellow[0][1] || py == &yellow[1][1] || py == &yellow[2][1] || py == &yellow[3][1]) {
                                         if (Round == 2 && !Finished) {
                                             win[1] = win[1] + move_yellow(*px, *py, Roll);
+                                            int* X = searchx(*px, *py, Round), * Y = searchy(*px, *py, Round);
+                                            chase_back(X, Y);
                                         }
                                     }
                                 }
@@ -114,6 +119,8 @@ int main()
                                     if (py == &blue[0][1] || py == &blue[1][1] || py == &blue[2][1] || py == &blue[3][1]) {
                                         if (Round == 3 && !Finished) {
                                             win[2] = win[2] + move_blue(*px, *py, Roll);
+                                            int* X = searchx(*px, *py, Round), * Y = searchy(*px, *py, Round);
+                                            chase_back(X, Y);
                                         }
                                     }
                                 }
@@ -121,6 +128,8 @@ int main()
                                     if (py == &red[0][1] || py == &red[1][1] || py == &red[2][1] || py == &red[3][1]) {
                                         if (Round == 4 && !Finished) {
                                             win[3] = win[3] + move_red(*px, *py, Roll);
+                                            int* X = searchx(*px, *py, Round), * Y = searchy(*px, *py, Round);
+                                            chase_back(X, Y);
                                         }
                                     }
                                 }
@@ -144,12 +153,14 @@ int main()
                     xc = pos.x;
                     yc = pos.y;
                     return_position(xc, yc);
-                    int* px = searchx(xc, yc), * py = searchy(xc, yc);
+                    int* px = searchx(xc, yc , 0), * py = searchy(xc, yc , 0);
                     if (*px != 0 && *py != 0) {
                         if (px == &green[0][0] || px == &green[1][0] || px == &green[2][0] || px == &green[3][0]) {
                             if (py == &green[0][1] || py == &green[1][1] || py == &green[2][1] || py == &green[3][1]) {
                                 if (Round == 1 && !Finished) {
                                     win[0] = win[0] + move_green(*px, *py, Roll);
+                                    int* X = searchx(*px, *py, Round), * Y = searchy(*px, *py, Round);
+                                    chase_back(X, Y);
                                 }
                             }
                         }
@@ -157,6 +168,8 @@ int main()
                             if (py == &yellow[0][1] || py == &yellow[1][1] || py == &yellow[2][1] || py == &yellow[3][1]) {
                                 if (Round == 2 && !Finished) {
                                     win[1] = win[1] + move_yellow(*px, *py, Roll);
+                                    int* X = searchx(*px, *py, Round), * Y = searchy(*px, *py, Round);
+                                    chase_back(X, Y);
                                 }
                             }
                         }
@@ -164,6 +177,8 @@ int main()
                             if (py == &blue[0][1] || py == &blue[1][1] || py == &blue[2][1] || py == &blue[3][1]) {
                                 if (Round == 3 && !Finished) {
                                     win[2] = win[2] + move_blue(*px, *py, Roll);
+                                    int* X = searchx(*px, *py, Round), * Y = searchy(*px, *py, Round);
+                                    chase_back(X, Y);
                                 }
                             }
                         }
@@ -171,6 +186,8 @@ int main()
                             if (py == &red[0][1] || py == &red[1][1] || py == &red[2][1] || py == &red[3][1]) {
                                 if (Round == 4 && !Finished) {
                                     win[3] = win[3] + move_red(*px, *py, Roll);
+                                    int* X = searchx(*px, *py, Round), * Y = searchy(*px, *py, Round);
+                                    chase_back(X, Y);
                                 }
                             }
                         }
