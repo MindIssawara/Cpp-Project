@@ -11,7 +11,7 @@ using namespace std::chrono;
 
 
 bool timeToRoll = 0, Finished = 1;
-bool gstart = 0, ystart = 0, rstart = 0, bstart = 0;
+bool gstart = 0, ystart = 0, rstart = 0, bstart = 0, six = 0;
 int w = 50;
 int nobody = 0;
 int Round = 0;
@@ -20,9 +20,9 @@ int green[4][2] = { {450,175},{550,175},{450,275},{550,275} };
 int yellow[4][2] = { {900,175},{1000,175},{900,275}, {1000,275} };
 int blue[4][2] = { {900,625},{1000,625},{900,725},{1000,725} };
 
-int roll_dice(){
+int roll_dice() {
     int d;
-    d= rand() %6 +1;
+    d = rand() % 6 + 1;
     return d;
 }
 
@@ -133,19 +133,19 @@ void getstart(int xc, int yc, int P) {
 }
 
 void return_position(int& x, int& y) {
-    x = x - ((x+25) % 50);
+    x = x - ((x + 25) % 50);
     y = y - (y % 50);
 }
 
-int* searchx(int x, int y,int Round) {
+int* searchx(int x, int y, int Round) {
     for (int i = 0; i < 4; i++) {
-        if (red[i][0] == x && red[i][1] == y && Round!= 4 ) return &red[i][0];
+        if (red[i][0] == x && red[i][1] == y && Round != 4) return &red[i][0];
         if (blue[i][0] == x && blue[i][1] == y && Round != 3) return &blue[i][0];
         if (yellow[i][0] == x && yellow[i][1] == y && Round != 2) return &yellow[i][0];
         if (green[i][0] == x && green[i][1] == y && Round != 1) return &green[i][0];
     }return &nobody;
 }
-int* searchy(int x, int y,int Round) {
+int* searchy(int x, int y, int Round) {
     for (int i = 0; i < 4; i++) {
         if (red[i][0] == x && red[i][1] == y && Round != 4) return &red[i][1];
         if (blue[i][0] == x && blue[i][1] == y && Round != 3) return &blue[i][1];
@@ -225,7 +225,7 @@ void chase_back(int* px, int* py) {
 
 int move_red(int& x, int& y, int d) {
     if (x == 725 && y >= 500 && y <= 750) {
-        if (d <= (y-500) / w) {
+        if (d <= (y - 500) / w) {
             y -= (d * w);
         }
         if (x == 725 && y == 500) {
@@ -266,7 +266,7 @@ int move_red(int& x, int& y, int d) {
         else if (y == 800 && x == 775) x -= w;
         else if (y == 800 && x == 725) y -= w;
         else if (x == 725 && y >= 500 && y <= 750) {
-            if (d <= (y-500) / w) {
+            if (d <= (y - 500) / w) {
                 y -= w;
             }
         }
@@ -278,15 +278,15 @@ int move_red(int& x, int& y, int d) {
 
 int move_yellow(int& x, int& y, int d) {
     if (x == 725 && y >= 150 && y <= 400) {
-            if (d <= (400 - y) / w) {
-                y += (d*w);
-            }
-            if (x == 725 && y == 400) {
-                Finished = 1;
-                timeToRoll = 1;
-                return 1;
-            }
-        
+        if (d <= (400 - y) / w) {
+            y += (d * w);
+        }
+        if (x == 725 && y == 400) {
+            Finished = 1;
+            timeToRoll = 1;
+            return 1;
+        }
+
     }
     else for (int i = 0; i < d; i++) {
         if (x == 775 && y >= 100 && y <= 300) y += w;
@@ -332,7 +332,7 @@ int move_yellow(int& x, int& y, int d) {
 int move_blue(int& x, int& y, int dice)
 {
     if (x <= 1075 && x > 775 && y == 450) {
-        if (dice <= (x-775) / w) {
+        if (dice <= (x - 775) / w) {
             x -= (dice * w);
         }
         if (x == 775 && y == 450) {
@@ -424,7 +424,7 @@ int move_blue(int& x, int& y, int dice)
 
 int move_green(int& x, int& y, int dice) {
     if (x >= 375 && x < 675 && y == 450) {
-        if (dice <= (675-x) / w) {
+        if (dice <= (675 - x) / w) {
             x += (dice * w);
         }
         if (x == 775 && y == 450) {
@@ -515,7 +515,7 @@ int move_green(int& x, int& y, int dice) {
         //เลนที่กำลังจะถึงเส้นชัย
         else if (x >= 375 && x < 675 && y == 450)
         {
-            if (dice == (675 - x) / w) x+=w;
+            if (dice == (675 - x) / w) x += w;
 
         }
 
