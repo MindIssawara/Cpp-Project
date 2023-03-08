@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include<iostream>
 #include<time.h>
 #include<cstdlib>
@@ -8,15 +9,26 @@ using namespace std;
 using namespace sf;
 
 
-
 int main()
 {
+    /*SoundBuffer wall;
+    wall.loadFromFile("audio/Wallpaper.wav");
+    Sound sound;
+    sound.setBuffer(wall);
+    sound.play();*/ 
     int Roll = 1;
+    Texture cs, hm, st , ht , ex;
     Texture bg, d, fd;
     Texture g, r, y, b;
     srand(time(0));
     RenderWindow window(VideoMode(1500, 900), "LUDO!");
+    window.setMouseCursorVisible(false);
     window.setKeyRepeatEnabled(false);
+    ht.loadFromFile("image/HowTo.png");
+    ex.loadFromFile("image/exit.png");
+    cs.loadFromFile("image/cursor.png");
+    st.loadFromFile("image/start.png");
+    hm.loadFromFile("image/home.png");
     fd.loadFromFile("image/frame_dice.png");
     d.loadFromFile("image/dice.png");
     g.loadFromFile("image/g.png");
@@ -24,23 +36,41 @@ int main()
     b.loadFromFile("image/b.png");
     y.loadFromFile("image/y.png");
     bg.loadFromFile("image/background.png");
-    Sprite background(bg), dice(d), frame(fd);
+    Sprite background(bg), dice(d), frame(fd),home(hm),start(st),cursor(cs),howto(ht),exit(ex);
     Sprite r1(r), r2(r), r3(r), r4(r), b1(b), b2(b), b3(b), b4(b), g1(g), g2(g), g3(g), g4(g), y1(y), y2(y), y3(y), y4(y);
     int xc = 0, yc = 0;
     int win[4] = { 0,0,0,0 };
-
+    int page=1;
 
     while (window.isOpen())
     {
-
+        
         Vector2i pos = Mouse::getPosition(window);
         Event event;
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
                 window.close();
-
+            if (Mouse::isButtonPressed(Mouse::Button::Left) && page == 1) {
+                if (pos.x >= 1045 && pos.x <= 1295 && pos.y >= 660 && pos.y <= 760) {
+                    cout << "click";
+                    window.close();
+                }
+            }
         }
+
+        if (Mouse::isButtonPressed(Mouse::Button::Left) && page==1) {
+            if (pos.x >= 1045 && pos.x <= 1295 && pos.y >= 354 && pos.y <= 454) {
+                cout << "click";
+                timeToRoll = 1;
+                page = 0;
+            }
+            if (pos.x >= 1020 && pos.x <= 1370 && pos.y >= 507 && pos.y <= 607) {
+                cout << "click";
+                page = 2;
+            }
+        }
+
         if (Mouse::isButtonPressed(Mouse::Button::Left) && timeToRoll) {
             if (pos.x >= 125 && pos.x <= 283 && pos.y <= 258 && pos.y >= 100 && Round == 1) {
                 cout << "click";
@@ -87,7 +117,7 @@ int main()
                     xc = pos.x;
                     yc = pos.y;
                     getstart(xc, yc, Round);
-                   
+
                 }
                 else {
                     if (event.key.code == Mouse::Left && pos.x >= 375 && pos.x <= 1125 && pos.y <= 850 && pos.y >= 100) {
@@ -95,13 +125,13 @@ int main()
                             xc = pos.x;
                             yc = pos.y;
                             return_position(xc, yc);
-                            int* px = searchx(xc, yc , 0), * py = searchy(xc, yc , 0);
+                            int* px = searchx(xc, yc, 0), * py = searchy(xc, yc, 0);
                             if (*px != 0 && *py != 0) {
                                 if (px == &green[0][0] || px == &green[1][0] || px == &green[2][0] || px == &green[3][0]) {
                                     if (py == &green[0][1] || py == &green[1][1] || py == &green[2][1] || py == &green[3][1]) {
                                         if (Round == 1 && !Finished) {
                                             win[0] = win[0] + move_green(*px, *py, Roll);
-                                            int* X = searchx(*px, *py ,Round), * Y = searchy(*px, *py ,Round);
+                                            int* X = searchx(*px, *py, Round), * Y = searchy(*px, *py, Round);
                                             chase_back(X, Y);
                                         }
                                     }
@@ -153,7 +183,7 @@ int main()
                     xc = pos.x;
                     yc = pos.y;
                     return_position(xc, yc);
-                    int* px = searchx(xc, yc , 0), * py = searchy(xc, yc , 0);
+                    int* px = searchx(xc, yc, 0), * py = searchy(xc, yc, 0);
                     if (*px != 0 && *py != 0) {
                         if (px == &green[0][0] || px == &green[1][0] || px == &green[2][0] || px == &green[3][0]) {
                             if (py == &green[0][1] || py == &green[1][1] || py == &green[2][1] || py == &green[3][1]) {
@@ -197,6 +227,9 @@ int main()
 
             }
         }
+
+        
+       
 
         window.draw(background);
         r1.setPosition(red[0][0], red[0][1]);
@@ -251,6 +284,17 @@ int main()
             frame.setPosition(103, 645);
         }
         window.draw(dice);
+        if (page == 1) {
+            window.draw(home);
+            start.setPosition(1045, 354);
+            window.draw(start);
+            howto.setPosition(1020, 507);
+            window.draw(howto);
+            exit.setPosition(1045, 660);
+            window.draw(exit);
+        }
+        cursor.setPosition(pos.x, pos.y);
+        window.draw(cursor);
         window.display();
         //sleep_for(nanoseconds(100000000));//delay
 
@@ -258,3 +302,6 @@ int main()
 
     return 0;
 }
+
+
+
