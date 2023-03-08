@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
+#include <SFML/Audio.hpp> //unused for now
 #include<iostream>
 #include<time.h>
 #include<cstdlib>
@@ -75,28 +75,28 @@ int main()
             if (pos.x >= 125 && pos.x <= 283 && pos.y <= 258 && pos.y >= 100 && Round == 1) {
                 cout << "click";
                 Roll = roll_dice();
-                Round++;
+                if(!six)Round++;
                 Finished = 0;
                 timeToRoll = 0;
             }
             if (pos.x >= 1217 && pos.x <= 1385 && pos.y <= 258 && pos.y >= 100 && Round == 2) {
                 cout << "click";
                 Roll = roll_dice();
-                Round++;
+                if (!six) Round++;
                 Finished = 0;
                 timeToRoll = 0;
             }
             if (pos.x >= 1217 && pos.x <= 1385 && pos.y <= 850 && pos.y >= 692 && Round == 3) {
                 cout << "click";
                 Roll = roll_dice();
-                Round++;
+                if (!six) Round++;
                 Finished = 0;
                 timeToRoll = 0;
             }
             if (pos.x >= 125 && pos.x <= 283 && pos.y <= 850 && pos.y >= 692 && (Round == 4 || Round == 0)) {
                 cout << "click";
                 Roll = roll_dice();
-                Round++;
+                if (!six) Round++;
                 if (Round == 5) Round = 1;
                 Finished = 0;
                 timeToRoll = 0;
@@ -112,12 +112,12 @@ int main()
         }//unused for now
 
         if (Roll == 6) {
+            six = 1;
             if (event.key.code == Mouse::Left) {
                 if (pos.x >= 375 && pos.x <= 675 && pos.y >= 100 && pos.y <= 400 || pos.x >= 375 && pos.x <= 675 && pos.y >= 550 && pos.y <= 850 || pos.x >= 825 && pos.x <= 1125 && pos.y >= 100 && pos.y <= 400 || pos.x >= 825 && pos.x <= 1125 && pos.y >= 550 && pos.y <= 850) {
                     xc = pos.x;
                     yc = pos.y;
                     getstart(xc, yc, Round);
-
                 }
                 else {
                     if (event.key.code == Mouse::Left && pos.x >= 375 && pos.x <= 1125 && pos.y <= 850 && pos.y >= 100) {
@@ -174,6 +174,7 @@ int main()
             }
         }
         else if (Roll == 1 || Roll == 2 || Roll == 3 || Roll == 4 || Roll == 5) {
+            six = 0;
             if (Round == 1 && !gstart || Round == 2 && !ystart || Round == 3 && !bstart || Round == 4 && !rstart) {
                 Finished = 1;
                 timeToRoll = 1;
@@ -296,7 +297,6 @@ int main()
         cursor.setPosition(pos.x, pos.y);
         window.draw(cursor);
         window.display();
-        //sleep_for(nanoseconds(100000000));//delay
 
     }
 
