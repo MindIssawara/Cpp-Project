@@ -10,7 +10,7 @@ using namespace std::this_thread;
 using namespace std::chrono;
 
 
-bool timeToRoll = 1, Finished = 1;
+bool timeToRoll = 0, Finished = 1;
 bool gstart = 0, ystart = 0, rstart = 0, bstart = 0;
 int w = 50;
 int nobody = 0;
