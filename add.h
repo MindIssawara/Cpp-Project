@@ -8,12 +8,13 @@ using namespace sf;
 bool timeToRoll = 0, Finished = 1, six = 0;
 int pick[4] = { 0,0,0,0 };
 int w = 50;
-int nobody = 0;
+int nobody[5] = { 0,0,1,2, }, *picCount = &nobody[0];
 int Round = 0;
 int red[4][2] = { {450,625},{550,625},{450,725},{550,725} };
 int green[4][2] = { {450,175},{550,175},{450,275},{550,275} };
 int yellow[4][2] = { {900,175},{1000,175},{900,275}, {1000,275} };
 int blue[4][2] = { {900,625},{1000,625},{900,725},{1000,725} };
+
 
 int roll_dice() {
     int d;
@@ -137,6 +138,7 @@ void return_position(int& x, int& y) {
 }
 
 int* searchx(int x, int y, int Round = 0, bool pic = false) {
+    int count = 0;
     for (int i = 0; i < 4; i++) {
         if (!pic) {
             if (red[i][0] == x && red[i][1] == y && Round != 4) return &red[i][0];
@@ -145,30 +147,22 @@ int* searchx(int x, int y, int Round = 0, bool pic = false) {
             if (green[i][0] == x && green[i][1] == y && Round != 1) return &green[i][0];
         }
         else {
-            if (red[i][0] == x && red[i][1] == y && Round == 4) return &red[i][0];
-            if (blue[i][0] == x && blue[i][1] == y && Round == 3) return &blue[i][0];
-            if (yellow[i][0] == x && yellow[i][1] == y && Round == 2) return &yellow[i][0];
-            if (green[i][0] == x && green[i][1] == y && Round == 1) return &green[i][0];
+            if (red[i][0] == x && red[i][1] == y && Round == 4) count++;
+            if (blue[i][0] == x && blue[i][1] == y && Round == 3) count++;
+            if (yellow[i][0] == x && yellow[i][1] == y && Round == 2) count++;
+            if (green[i][0] == x && green[i][1] == y && Round == 1) count++;
         }
     }
-    return &nobody;
+    return &nobody[count];
 }
-int* searchy(int x, int y, int Round = 0, bool pic = false) {
+int* searchy(int x, int y, int Round = 0) {
     for (int i = 0; i < 4; i++) {
-        if (!pic) {
-            if (red[i][0] == x && red[i][1] == y && Round != 4) return &red[i][1];
-            if (blue[i][0] == x && blue[i][1] == y && Round != 3) return &blue[i][1];
-            if (yellow[i][0] == x && yellow[i][1] == y && Round != 2) return &yellow[i][1];
-            if (green[i][0] == x && green[i][1] == y && Round != 1) return &green[i][1];
-        }
-        else {
-            if (red[i][0] == x && red[i][1] == y && Round == 4) return &red[i][1];
-            if (blue[i][0] == x && blue[i][1] == y && Round == 3) return &blue[i][1];
-            if (yellow[i][0] == x && yellow[i][1] == y && Round == 2) return &yellow[i][1];
-            if (green[i][0] == x && green[i][1] == y && Round == 1) return &green[i][1];
-        }
+        if (red[i][0] == x && red[i][1] == y && Round != 4) return &red[i][1];
+        if (blue[i][0] == x && blue[i][1] == y && Round != 3) return &blue[i][1];
+        if (yellow[i][0] == x && yellow[i][1] == y && Round != 2) return &yellow[i][1];
+        if (green[i][0] == x && green[i][1] == y && Round != 1) return &green[i][1];
     }
-    return &nobody;
+    return &nobody[0];
 }
 
 
