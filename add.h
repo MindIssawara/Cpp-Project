@@ -2,12 +2,8 @@
 #include<iostream>
 #include<time.h>
 #include<cstdlib>
-#include<chrono>
-#include<thread>
 using namespace std;
 using namespace sf;
-using namespace std::this_thread;
-using namespace std::chrono;
 
 
 bool timeToRoll = 0, Finished = 1, six = 0;
