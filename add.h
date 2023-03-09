@@ -10,8 +10,8 @@ using namespace std::this_thread;
 using namespace std::chrono;
 
 
-bool timeToRoll = 0, Finished = 1;
-bool gstart = 0, ystart = 0, rstart = 0, bstart = 0, six = 0;
+bool timeToRoll = 0, Finished = 1, six = 0;
+bool pick[4] = { 0,0,0,0 };
 int w = 50;
 int nobody = 0;
 int Round = 0;
@@ -30,22 +30,22 @@ void getstartM(int x, int y, int& mx, int& my) {
     if (x >= 450 && x <= 600 && y >= 175 && y <= 325) {
         mx = 425;
         my = 400;
-        gstart = 1;
+        pick[0] = 1;
     }
     if (x >= 900 && x <= 1050 && y >= 175 && y <= 325) {
         mx = 775;
         my = 150;
-        ystart = 1;
+        pick[1] = 1;
     }
     if (x >= 450 && x <= 600 && y >= 625 && y <= 775) {
         mx = 675;
         my = 750;
-        rstart = 1;
+        pick[2] = 1;
     }
     if (x >= 900 && x <= 1050 && y >= 625 && y <= 775) {
         mx = 1025;
         my = 500;
-        bstart = 1;
+        pick[3] = 1;
     }
 }
 
