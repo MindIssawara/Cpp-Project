@@ -268,22 +268,39 @@ int main()
 
 
 
-        r1.setTextureRect(IntRect(0 * 50, 0, 50, 50));
-        r2.setTextureRect(IntRect(0 * 50, 0, 50, 50));
-        r3.setTextureRect(IntRect(0 * 50, 0, 50, 50));
-        r4.setTextureRect(IntRect(0 * 50, 0, 50, 50));
-        b1.setTextureRect(IntRect(0 * 50, 0, 50, 50));
-        b2.setTextureRect(IntRect(0 * 50, 0, 50, 50));
-        b3.setTextureRect(IntRect(0 * 50, 0, 50, 50));
-        b4.setTextureRect(IntRect(0 * 50, 0, 50, 50));
-        g1.setTextureRect(IntRect(0 * 50, 0, 50, 50));
-        g2.setTextureRect(IntRect(0 * 50, 0, 50, 50));
-        g3.setTextureRect(IntRect(0 * 50, 0, 50, 50));
-        g4.setTextureRect(IntRect(0 * 50, 0, 50, 50));
-        y1.setTextureRect(IntRect(0 * 50, 0, 50, 50));
-        y2.setTextureRect(IntRect(0 * 50, 0, 50, 50));
-        y3.setTextureRect(IntRect(0 * 50, 0, 50, 50));
-        y4.setTextureRect(IntRect(0 * 50, 0, 50, 50));
+        if(green[0][0]== 675 && green[0][1] == 450) g1.setTextureRect(IntRect((win[0] - 1) * 50, 0, 50, 50));
+        else g1.setTextureRect(IntRect(0, 0, 50, 50));
+        if (green[1][0] == 675 && green[1][1] == 450) g2.setTextureRect(IntRect((win[0] - 1) * 50, 0, 50, 50));
+        else g2.setTextureRect(IntRect(0, 0, 50, 50));
+        if (green[2][0] == 675 && green[2][1] == 450) g3.setTextureRect(IntRect((win[0] - 1) * 50, 0, 50, 50));
+        else g3.setTextureRect(IntRect(0, 0, 50, 50));
+        if (green[3][0] == 675 && green[3][1] == 450) g4.setTextureRect(IntRect((win[0] - 1) * 50, 0, 50, 50));
+        else g4.setTextureRect(IntRect(0, 0, 50, 50));
+        if (yellow[0][0] == 725 && yellow[0][1] == 400) y1.setTextureRect(IntRect((win[1] - 1) * 50, 0, 50, 50));
+        else y1.setTextureRect(IntRect(0, 0, 50, 50));
+        if (yellow[1][0] == 725 && yellow[1][1] == 400) y2.setTextureRect(IntRect((win[1] - 1 )* 50, 0, 50, 50));
+        else y2.setTextureRect(IntRect(0, 0, 50, 50));
+        if (yellow[2][0] == 725 && yellow[2][1] == 400) y3.setTextureRect(IntRect((win[1] - 1) * 50, 0, 50, 50));
+        else y3.setTextureRect(IntRect(0, 0, 50, 50));
+        if (yellow[3][0] == 725 && yellow[3][1] == 400) y4.setTextureRect(IntRect((win[1] - 1) * 50, 0, 50, 50));
+        else y4.setTextureRect(IntRect(0, 0, 50, 50));
+        if (blue[0][0] == 775 && blue[0][1] == 450) b1.setTextureRect(IntRect((win[2] - 1) * 50, 0, 50, 50));
+        else b1.setTextureRect(IntRect(0, 0, 50, 50));
+        if (blue[1][0] == 775 && blue[1][1] == 450) b2.setTextureRect(IntRect((win[2] - 1) * 50, 0, 50, 50));
+        else b2.setTextureRect(IntRect(0, 0, 50, 50));
+        if (blue[2][0] == 775 && blue[2][1] == 450) b3.setTextureRect(IntRect((win[2] - 1) * 50, 0, 50, 50));
+        else b3.setTextureRect(IntRect(0, 0, 50, 50));
+        if (blue[3][0] == 775 && blue[3][1] == 450) b4.setTextureRect(IntRect((win[2] - 1) * 50, 0, 50, 50));
+        else b4.setTextureRect(IntRect(0, 0, 50, 50));
+        if (red[0][0] == 725 && red[0][1] == 500) r1.setTextureRect(IntRect((win[3] - 1) * 50, 0, 50, 50));
+        else r1.setTextureRect(IntRect(0, 0, 50, 50));
+        if (red[0][0] == 725 && red[0][1] == 500) r2.setTextureRect(IntRect((win[3] - 1) * 50, 0, 50, 50));
+        else r2.setTextureRect(IntRect(0, 0, 50, 50));
+        if (red[0][0] == 725 && red[0][1] == 500) r3.setTextureRect(IntRect((win[3] - 1) * 50, 0, 50, 50));
+        else r3.setTextureRect(IntRect(0, 0, 50, 50));
+        if (red[0][0] == 725 && red[0][1] == 500) r4.setTextureRect(IntRect((win[3] - 1) * 50, 0, 50, 50));
+        else r4.setTextureRect(IntRect(0, 0, 50, 50));
+        
         window.draw(background);
         r1.setPosition(red[0][0], red[0][1]);
         r2.setPosition(red[1][0], red[1][1]);
