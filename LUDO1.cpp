@@ -15,9 +15,9 @@ int main()
     wall.loadFromFile("audio/Wallpaper.wav");
     Sound sound;
     sound.setBuffer(wall);
-    sound.play();*/ 
+    sound.play();*/
     int Roll = 1;
-    Texture cs, hm, st , ht , ex;
+    Texture cs, hm, st, ht, ex;
     Texture bg, d, fd;
     Texture g, r, y, b;
     srand(time(0));
@@ -36,15 +36,15 @@ int main()
     b.loadFromFile("image/b.png");
     y.loadFromFile("image/y.png");
     bg.loadFromFile("image/background.png");
-    Sprite background(bg), dice(d), frame(fd),home(hm),start(st),cursor(cs),howto(ht),exit(ex);
+    Sprite background(bg), dice(d), frame(fd), home(hm), start(st), cursor(cs), howto(ht), exit(ex);
     Sprite r1(r), r2(r), r3(r), r4(r), b1(b), b2(b), b3(b), b4(b), g1(g), g2(g), g3(g), g4(g), y1(y), y2(y), y3(y), y4(y);
     int xc = 0, yc = 0;
     int win[4] = { 0,0,0,0 };
-    int page=1;
+    int page = 1;
 
     while (window.isOpen())
     {
-        
+
         Vector2i pos = Mouse::getPosition(window);
         Event event;
         while (window.pollEvent(event))
@@ -59,7 +59,7 @@ int main()
             }
         }
 
-        if (Mouse::isButtonPressed(Mouse::Button::Left) && page==1) {
+        if (Mouse::isButtonPressed(Mouse::Button::Left) && page == 1) {
             if (pos.x >= 1045 && pos.x <= 1295 && pos.y >= 354 && pos.y <= 454) {
                 cout << "click";
                 timeToRoll = 1;
@@ -75,7 +75,7 @@ int main()
             if (pos.x >= 125 && pos.x <= 283 && pos.y <= 258 && pos.y >= 100 && Round == 1) {
                 cout << "click";
                 Roll = roll_dice();
-                if(!six)Round++;
+                if (!six)Round++;
                 Finished = 0;
                 timeToRoll = 0;
             }
@@ -175,7 +175,7 @@ int main()
         }
         else if (Roll == 1 || Roll == 2 || Roll == 3 || Roll == 4 || Roll == 5) {
             six = 0;
-            if (Round == 1 && !gstart || Round == 2 && !ystart || Round == 3 && !bstart || Round == 4 && !rstart) {
+            if (Round == 1 && !pick[0] || Round == 2 && !pick[1] || Round == 3 && !pick[2] || Round == 4 && !pick[3]) {
                 Finished = 1;
                 timeToRoll = 1;
             }
@@ -229,8 +229,8 @@ int main()
             }
         }
 
-        
-       
+
+
 
         window.draw(background);
         r1.setPosition(red[0][0], red[0][1]);
@@ -302,6 +302,5 @@ int main()
 
     return 0;
 }
-
 
 
