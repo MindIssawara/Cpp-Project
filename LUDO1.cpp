@@ -1,12 +1,10 @@
 #include "add.h"
+#include <windows.h>
+#pragma comment(lib, "winmm.lib")
 
 int main()
 {
-    /*SoundBuffer wall;
-    wall.loadFromFile("audio/Wallpaper.wav");
-    Sound sound;
-    sound.setBuffer(wall);
-    sound.play();*/
+    PlaySound(TEXT("audio/Wallpaper.wav"), NULL, SND_LOOP | SND_ASYNC);
     int Roll = 1;
     Texture cs, hm, st, ht, ex;
     Texture bg, d, fd;
