@@ -136,22 +136,39 @@ void return_position(int& x, int& y) {
     y = y - (y % 50);
 }
 
-int* searchx(int x, int y, int Round) {
+int* searchx(int x, int y, int Round = 0, bool pic = false) {
     for (int i = 0; i < 4; i++) {
-        if (red[i][0] == x && red[i][1] == y && Round != 4) return &red[i][0];
-        if (blue[i][0] == x && blue[i][1] == y && Round != 3) return &blue[i][0];
-        if (yellow[i][0] == x && yellow[i][1] == y && Round != 2) return &yellow[i][0];
-        if (green[i][0] == x && green[i][1] == y && Round != 1) return &green[i][0];
-    }return &nobody;
+        if (!pic) {
+            if (red[i][0] == x && red[i][1] == y && Round != 4) return &red[i][0];
+            if (blue[i][0] == x && blue[i][1] == y && Round != 3) return &blue[i][0];
+            if (yellow[i][0] == x && yellow[i][1] == y && Round != 2) return &yellow[i][0];
+            if (green[i][0] == x && green[i][1] == y && Round != 1) return &green[i][0];
+        }
+        else {
+            if (red[i][0] == x && red[i][1] == y && Round == 4) return &red[i][0];
+            if (blue[i][0] == x && blue[i][1] == y && Round == 3) return &blue[i][0];
+            if (yellow[i][0] == x && yellow[i][1] == y && Round == 2) return &yellow[i][0];
+            if (green[i][0] == x && green[i][1] == y && Round == 1) return &green[i][0];
+        }
+    }
+    return &nobody;
 }
-int* searchy(int x, int y, int Round) {
+int* searchy(int x, int y, int Round = 0, bool pic = false) {
     for (int i = 0; i < 4; i++) {
-        if (red[i][0] == x && red[i][1] == y && Round != 4) return &red[i][1];
-        if (blue[i][0] == x && blue[i][1] == y && Round != 3) return &blue[i][1];
-        if (yellow[i][0] == x && yellow[i][1] == y && Round != 2) return &yellow[i][1];
-        if (green[i][0] == x && green[i][1] == y && Round != 1) return &green[i][1];
-    }return &nobody;
-
+        if (!pic) {
+            if (red[i][0] == x && red[i][1] == y && Round != 4) return &red[i][1];
+            if (blue[i][0] == x && blue[i][1] == y && Round != 3) return &blue[i][1];
+            if (yellow[i][0] == x && yellow[i][1] == y && Round != 2) return &yellow[i][1];
+            if (green[i][0] == x && green[i][1] == y && Round != 1) return &green[i][1];
+        }
+        else {
+            if (red[i][0] == x && red[i][1] == y && Round == 4) return &red[i][1];
+            if (blue[i][0] == x && blue[i][1] == y && Round == 3) return &blue[i][1];
+            if (yellow[i][0] == x && yellow[i][1] == y && Round == 2) return &yellow[i][1];
+            if (green[i][0] == x && green[i][1] == y && Round == 1) return &green[i][1];
+        }
+    }
+    return &nobody;
 }
 
 
