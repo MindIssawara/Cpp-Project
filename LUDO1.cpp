@@ -31,10 +31,10 @@ int main()
     hm.loadFromFile("image/home.png");
     fd.loadFromFile("image/frame_dice.png");
     d.loadFromFile("image/dice.png");
-    g.loadFromFile("image/g.png");
-    r.loadFromFile("image/r.png");
-    b.loadFromFile("image/b.png");
-    y.loadFromFile("image/y.png");
+    g.loadFromFile("image/gรวม.png");
+    r.loadFromFile("image/rรวม.png");
+    b.loadFromFile("image/bรวม.png");
+    y.loadFromFile("image/yรวม.png");
     bg.loadFromFile("image/background.png");
     Sprite background(bg), dice(d), frame(fd), home(hm), start(st), cursor(cs), howto(ht), exit(ex);
     Sprite r1(r), r2(r), r3(r), r4(r), b1(b), b2(b), b3(b), b4(b), g1(g), g2(g), g3(g), g4(g), y1(y), y2(y), y3(y), y4(y);
@@ -231,7 +231,22 @@ int main()
 
 
 
-
+        r1.setTextureRect(IntRect(0* 50, 0, 50, 50));
+        r2.setTextureRect(IntRect(0 * 50, 0, 50, 50));
+        r3.setTextureRect(IntRect(0 * 50, 0, 50, 50));
+        r4.setTextureRect(IntRect(0 * 50, 0, 50, 50));
+        b1.setTextureRect(IntRect(0 * 50, 0, 50, 50));
+        b2.setTextureRect(IntRect(0 * 50, 0, 50, 50));
+        b3.setTextureRect(IntRect(0 * 50, 0, 50, 50));
+        b4.setTextureRect(IntRect(0 * 50, 0, 50, 50));
+        g1.setTextureRect(IntRect(0 * 50, 0, 50, 50));
+        g2.setTextureRect(IntRect(0 * 50, 0, 50, 50));
+        g3.setTextureRect(IntRect(0 * 50, 0, 50, 50));
+        g4.setTextureRect(IntRect(0 * 50, 0, 50, 50));
+        y1.setTextureRect(IntRect(0 * 50, 0, 50, 50));
+        y2.setTextureRect(IntRect(0 * 50, 0, 50, 50));
+        y3.setTextureRect(IntRect(0 * 50, 0, 50, 50));
+        y4.setTextureRect(IntRect(0 * 50, 0, 50, 50));
         window.draw(background);
         r1.setPosition(red[0][0], red[0][1]);
         r2.setPosition(red[1][0], red[1][1]);
@@ -302,5 +317,4 @@ int main()
 
     return 0;
 }
-
 
