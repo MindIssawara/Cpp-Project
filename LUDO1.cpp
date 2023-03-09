@@ -4,7 +4,7 @@
 
 int main()
 {
-    
+    PlaySound(TEXT("audio/Wallpaper.wav"), NULL, SND_LOOP | SND_ASYNC);
     int Roll = 1;
     Texture cs, hm, st, ht, ex;
     Texture bg, d, fd;
