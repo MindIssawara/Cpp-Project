@@ -4,7 +4,7 @@
 
 int main()
 {
-    PlaySound(TEXT("audio/Wallpaper.wav"), NULL, SND_LOOP | SND_ASYNC);
+    
     int Roll = 1;
     Texture cs, hm, st, ht, ex;
     Texture bg, d, fd;
@@ -28,7 +28,7 @@ int main()
     Sprite background(bg), dice(d), frame(fd), home(hm), start(st), cursor(cs), howto(ht), exit(ex);
     Sprite r1(r), r2(r), r3(r), r4(r), b1(b), b2(b), b3(b), b4(b), g1(g), g2(g), g3(g), g4(g), y1(y), y2(y), y3(y), y4(y);
     int xc = 0, yc = 0;
-    int win[4] = { 0,0,0,0 }, num[4] = {0,0,0,0};
+    int win[4] = { 0,0,0,0 }, num[4] = { 0,0,0,0 };
     int page = 1;
 
     while (window.isOpen())
@@ -107,6 +107,12 @@ int main()
                     xc = pos.x;
                     yc = pos.y;
                     getstart(xc, yc, Round);
+                    int* X, * Y;
+                    do {
+                        X = searchx(xc, yc, Round);
+                        Y = searchy(xc, yc, Round);
+                        chase_back(X, Y);
+                    } while (*X && *Y);
                 }
                 else {
                     if (event.key.code == Mouse::Left && pos.x >= 375 && pos.x <= 1125 && pos.y <= 850 && pos.y >= 100) {
@@ -188,7 +194,7 @@ int main()
         }
         else if (Roll == 1 || Roll == 2 || Roll == 3 || Roll == 4 || Roll == 5) {
             six = 0;
-            if (Round == 1 && pick[0] ==0 || Round == 2 && pick[1] ==0 || Round == 3 && pick[2] ==0 || Round == 4 && pick[3] ==0) {
+            if (Round == 1 && pick[0] == 0 || Round == 2 && pick[1] == 0 || Round == 3 && pick[2] == 0 || Round == 4 && pick[3] == 0) {
                 Finished = 1;
                 timeToRoll = 1;
             }
@@ -268,10 +274,10 @@ int main()
 
 
 
-        picCount = searchx(green[0][0], green[0][1], 1,1);
+        picCount = searchx(green[0][0], green[0][1], 1, 1);
         if (green[0][0] == 675 && green[0][1] == 450) g1.setTextureRect(IntRect((win[0] - 1) * 50, 0, 50, 50));
         else g1.setTextureRect(IntRect(*picCount * 50, 0, 50, 50));
-        picCount = searchx(green[1][0], green[1][1], 1,1);
+        picCount = searchx(green[1][0], green[1][1], 1, 1);
         if (green[1][0] == 675 && green[1][1] == 450) g2.setTextureRect(IntRect((win[0] - 1) * 50, 0, 50, 50));
         else g2.setTextureRect(IntRect(*picCount * 50, 0, 50, 50));
         picCount = searchx(green[2][0], green[2][1], 1, 1);
@@ -317,7 +323,6 @@ int main()
         if (red[3][0] == 725 && red[3][1] == 500) r4.setTextureRect(IntRect((win[3] - 1) * 50, 0, 50, 50));
         else r4.setTextureRect(IntRect(*picCount * 50, 0, 50, 50));
 
-        
         window.draw(background);
         r1.setPosition(red[0][0], red[0][1]);
         r2.setPosition(red[1][0], red[1][1]);
