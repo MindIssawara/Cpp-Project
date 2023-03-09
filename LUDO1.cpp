@@ -1,13 +1,4 @@
-#include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp> //unused for now
-#include<iostream>
-#include<time.h>
-#include<cstdlib>
 #include "add.h"
-
-using namespace std;
-using namespace sf;
-
 
 int main()
 {
