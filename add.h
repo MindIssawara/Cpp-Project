@@ -5,7 +5,6 @@
 using namespace std;
 using namespace sf;
 
-
 bool timeToRoll = 0, Finished = 1, six = 0;
 bool pick[4] = { 0,0,0,0 };
 int w = 50;
@@ -27,21 +26,25 @@ void getstartM(int x, int y, int& mx, int& my) {
         mx = 425;
         my = 400;
         pick[0] = 1;
+        // green
     }
     if (x >= 900 && x <= 1050 && y >= 175 && y <= 325) {
         mx = 775;
         my = 150;
         pick[1] = 1;
-    }
-    if (x >= 450 && x <= 600 && y >= 625 && y <= 775) {
-        mx = 675;
-        my = 750;
-        pick[2] = 1;
+        //yellow
     }
     if (x >= 900 && x <= 1050 && y >= 625 && y <= 775) {
         mx = 1025;
         my = 500;
+        pick[2] = 1;
+        //blue
+    }
+    if (x >= 450 && x <= 600 && y >= 625 && y <= 775) {
+        mx = 675;
+        my = 750;
         pick[3] = 1;
+        //red
     }
 }
 
