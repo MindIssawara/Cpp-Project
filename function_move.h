@@ -206,7 +206,7 @@ int move_blue(int& x, int& y, int dice)
         }
         else if (x <= 1075 && x > 775 && y == 450)
         {
-            if (dice == (x - 775) / w) x -= w;
+            if (dice <= (x - 775) / w) x -= w;
         }
     }
     Finished = 1;
@@ -307,7 +307,7 @@ int move_green(int& x, int& y, int dice) {
         //เลนที่กำลังจะถึงเส้นชัย
         else if (x >= 375 && x < 675 && y == 450)
         {
-            if (dice == (675 - x) / w) x+=w;
+            if (dice <= (675 - x) / w) x+=w;
 
         }
 
