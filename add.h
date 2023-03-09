@@ -8,7 +8,7 @@ using namespace sf;
 bool timeToRoll = 0, Finished = 1, six = 0;
 int pick[4] = { 0,0,0,0 };
 int w = 50;
-int nobody[5] = { 0,0,1,2, }, *picCount = &nobody[0];
+int nobody[5] = { 0,0,1,2,3 }, *picCount = &nobody[0];
 int Round = 0;
 int red[4][2] = { {450,625},{550,625},{450,725},{550,725} };
 int green[4][2] = { {450,175},{550,175},{450,275},{550,275} };
