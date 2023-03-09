@@ -445,7 +445,7 @@ int move_green(int& x, int& y, int dice) {
         if (dice <= (675 - x) / w) {
             x += (dice * w);
         }
-        if (x == 775 && y == 450) {
+        if (x == 675 && y == 450) {
             Finished = 1;
             timeToRoll = 1;
             return 1;
