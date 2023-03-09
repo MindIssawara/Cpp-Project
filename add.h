@@ -6,7 +6,7 @@ using namespace std;
 using namespace sf;
 
 bool timeToRoll = 0, Finished = 1, six = 0;
-bool pick[4] = { 0,0,0,0 };
+int pick[4] = { 0,0,0,0 };
 int w = 50;
 int nobody = 0;
 int Round = 0;
@@ -25,25 +25,25 @@ void getstartM(int x, int y, int& mx, int& my) {
     if (x >= 450 && x <= 600 && y >= 175 && y <= 325) {
         mx = 425;
         my = 400;
-        pick[0] = 1;
+        pick[0] += 1;
         // green
     }
     if (x >= 900 && x <= 1050 && y >= 175 && y <= 325) {
         mx = 775;
         my = 150;
-        pick[1] = 1;
+        pick[1] += 1;
         //yellow
     }
     if (x >= 900 && x <= 1050 && y >= 625 && y <= 775) {
         mx = 1025;
         my = 500;
-        pick[2] = 1;
+        pick[2] += 1;
         //blue
     }
     if (x >= 450 && x <= 600 && y >= 625 && y <= 775) {
         mx = 675;
         my = 750;
-        pick[3] = 1;
+        pick[3] += 1;
         //red
     }
 }
@@ -156,69 +156,85 @@ int* searchy(int x, int y, int Round) {
 
 
 void chase_back(int* px, int* py) {
-    if (px == &blue[0][0] && py == &blue[0][1]) {
-        *px = 900;
-        *py = 625;
-    }
-    if (px == &blue[1][0] && py == &blue[1][1]) {
-        *px = 1000;
-        *py = 625;
-    }
-    if (px == &blue[2][0] && py == &blue[2][1]) {
-        *px = 900;
-        *py = 725;
-    }
-    if (px == &blue[3][0] && py == &blue[3][1]) {
-        *px = 1000;
-        *py = 725;
-    }
-    if (px == &red[0][0] && py == &red[0][1]) {
-        *px = 450;
-        *py = 625;
-    }
-    if (px == &red[1][0] && py == &red[1][1]) {
-        *px = 550;
-        *py = 625;
-    }
-    if (px == &red[2][0] && py == &red[2][1]) {
-        *px = 450;
-        *py = 725;
-    }
-    if (px == &red[3][0] && py == &red[3][1]) {
-        *px = 550;
-        *py = 725;
-    }
     if (px == &green[0][0] && py == &green[0][1]) {
         *px = 450;
         *py = 175;
+        pick[0] -= 1;
     }
     if (px == &green[1][0] && py == &green[1][1]) {
         *px = 550;
         *py = 175;
+        pick[0] -= 1;
     }
     if (px == &green[2][0] && py == &green[2][1]) {
         *px = 450;
         *py = 275;
+        pick[0] -= 1;
     }
     if (px == &green[3][0] && py == &green[3][1]) {
         *px = 550;
         *py = 275;
+        pick[0] -= 1;
     }
     if (px == &yellow[0][0] && py == &yellow[0][1]) {
         *px = 900;
         *py = 175;
+        pick[1] -= 1;
     }
     if (px == &yellow[1][0] && py == &yellow[1][1]) {
         *px = 1000;
         *py = 175;
+        pick[1] -= 1;
     }
     if (px == &yellow[2][0] && py == &yellow[2][1]) {
         *px = 900;
         *py = 275;
+        pick[1] -= 1;
     }
     if (px == &yellow[3][0] && py == &yellow[3][1]) {
         *px = 1000;
         *py = 275;
+        pick[1] -= 1;
+    }
+    if (px == &blue[0][0] && py == &blue[0][1]) {
+        *px = 900;
+        *py = 625;
+        pick[2] -= 1;
+    }
+    if (px == &blue[1][0] && py == &blue[1][1]) {
+        *px = 1000;
+        *py = 625;
+        pick[2] -= 1;
+    }
+    if (px == &blue[2][0] && py == &blue[2][1]) {
+        *px = 900;
+        *py = 725;
+        pick[2] -= 1;
+    }
+    if (px == &blue[3][0] && py == &blue[3][1]) {
+        *px = 1000;
+        *py = 725;
+        pick[2] -= 1;
+    }
+    if (px == &red[0][0] && py == &red[0][1]) {
+        *px = 450;
+        *py = 625;
+        pick[3] -= 1;
+    }
+    if (px == &red[1][0] && py == &red[1][1]) {
+        *px = 550;
+        *py = 625;
+        pick[3] -= 1;
+    }
+    if (px == &red[2][0] && py == &red[2][1]) {
+        *px = 450;
+        *py = 725;
+        pick[3] -= 1;
+    }
+    if (px == &red[3][0] && py == &red[3][1]) {
+        *px = 550;
+        *py = 725;
+        pick[3] -= 1;
     }
 }
 
@@ -264,7 +280,7 @@ int move_red(int& x, int& y, int d) {
         else if (x == 775 && y >= 550 && y <= 750) y += w;
         else if (y == 800 && x == 775) x -= w;
         else if (y == 800 && x == 725) y -= w;
-        else if (x == 725 && y >= 500 && y <= 750)  y -= w;    
+        else if (x == 725 && y >= 500 && y <= 750)  y -= w;
     }
     Finished = 1;
     timeToRoll = 1;
