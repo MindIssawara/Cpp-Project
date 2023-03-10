@@ -14,6 +14,10 @@ int red[4][2] = { {450,625},{550,625},{450,725},{550,725} };
 int green[4][2] = { {450,175},{550,175},{450,275},{550,275} };
 int yellow[4][2] = { {900,175},{1000,175},{900,275}, {1000,275} };
 int blue[4][2] = { {900,625},{1000,625},{900,725},{1000,725} };
+int xc = 0, yc = 0;
+int win[4] = { 0,0,0,0 }, num[4] = { 0,0,0,0 };
+int page = 1;
+int Roll = 1;
 
 int roll_dice() {
     int d;
@@ -265,7 +269,7 @@ void chase_back(int* px, int* py) {
 }
 
 int move_red(int& x, int& y, int d) {
-    if (x == 725 && y > 500 && y <= 750) {
+    if (x == 725 && y >= 500 && y <= 750) {
         if (d <= (y - 500) / w) {
             y -= (d * w);
         }
@@ -306,23 +310,22 @@ int move_red(int& x, int& y, int d) {
         else if (x == 775 && y >= 550 && y <= 750) y += w;
         else if (y == 800 && x == 775) x -= w;
         else if (y == 800 && x == 725) y -= w;
-        else if (x == 725 && y >= 500 && y <= 750)  {
+        else if (x == 725 && y >= 500 && y <= 750) {
             y -= w;
-            if (i== 5) {
-            Finished = 1;
-            timeToRoll = 1;
-            return 1;
-        }
-      }                                             
+            if (i == 5) {
+                Finished = 1;
+                timeToRoll = 1;
+                return 1;
+            }
+        }  
     }
     Finished = 1;
     timeToRoll = 1;
     return 0;
 }
 
-
 int move_yellow(int& x, int& y, int d) {
-    if (x == 725 && y >= 150 && y < 400) {
+    if (x == 725 && y >= 150 && y <= 400) {
         if (d <= (400 - y) / w) {
             y += (d * w);
         }
@@ -364,13 +367,13 @@ int move_yellow(int& x, int& y, int d) {
         else if (y == 100 && x == 675) x += w;
         else if (y == 100 && x == 725) y += w;
         else if (x == 725 && y >= 150 && y <= 400) {
-           y += w;
-           if (i== 5) {
-            Finished = 1;
-            timeToRoll = 1;
-            return 1;
-           }
-       }
+            y += w;
+            if (i == 5) {
+                Finished = 1;
+                timeToRoll = 1;
+                return 1;
+            }
+        }
     }
     Finished = 1;
     timeToRoll = 1;
@@ -571,4 +574,34 @@ int move_green(int& x, int& y, int dice) {
     Finished = 1;
     timeToRoll = 1;
     return 0;
+}
+
+void ResetAll(int Reset = 0) {
+    timeToRoll = 0;
+    Finished = 1;
+    six = 0;
+    pick[0] = 0; pick[1] = 0; pick[2] = 0; pick[3] = 0;
+    picCount = &nobody[0];
+    Round = 0;
+    red[0][0] = 450; red[0][1] = 625; 
+    red[1][0] = 550; red[1][1] = 625;
+    red[2][0] = 450; red[2][1] = 725;
+    red[3][0] = 550; red[3][1] = 725;
+    green[0][0] = 450; green[0][1] = 175;
+    green[1][0] = 550; green[1][1] = 175;
+    green[2][0] = 450; green[2][1] = 275;
+    green[3][0] = 550; green[3][1] = 275;
+    yellow[0][0] = 900; yellow[0][1] = 175;
+    yellow[1][0] = 1000; yellow[1][1] = 175;
+    yellow[2][0] = 900; yellow[2][1] = 275;
+    yellow[3][0] = 1000; yellow[3][1] = 275;
+    blue[0][0] = 900;  blue[0][1] = 625;
+    blue[1][0] = 1000;  blue[1][1] = 625;
+    blue[2][0] = 900;  blue[2][1] = 725;
+    blue[3][0] = 1000;  blue[3][1] = 725;
+    xc = 0; yc = 0;
+    win[0] = 0; win[1] = 0; win[2] = 0; win[3] = 0;
+    num[0] = 0; num[1] = 0; num[2] = 0; num[3] = 0;
+    page = Reset;
+    Roll = 1;
 }
