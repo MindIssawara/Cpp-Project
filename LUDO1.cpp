@@ -7,12 +7,16 @@ int main()
     PlaySound(TEXT("audio/Wallpaper.wav"), NULL, SND_LOOP | SND_ASYNC);
     int Roll = 1;
     Texture cs, hm, st, ht, ex;
-    Texture bg, d, fd;
+    Texture bg, d, fd,winR,winB,winG,winY;
     Texture g, r, y, b;
     srand(time(0));
     RenderWindow window(VideoMode(1500, 900), "LUDO!");
     window.setMouseCursorVisible(false);
     window.setKeyRepeatEnabled(false);
+    winR.loadFromFile("image/winR.png");
+    winG.loadFromFile("image/winG.png");
+    winB.loadFromFile("image/winB.png");
+    winY.loadFromFile("image/winY.png");
     ht.loadFromFile("image/HowTo.png");
     ex.loadFromFile("image/exit.png");
     cs.loadFromFile("image/cursor.png");
@@ -26,6 +30,7 @@ int main()
     y.loadFromFile("image/yรวม.png");
     bg.loadFromFile("image/background.png");
     Sprite background(bg), dice(d), frame(fd), home(hm), start(st), cursor(cs), howto(ht), exit(ex);
+    Sprite winnerR(winR), winnerB(winB), winnerG(winG), winnerY(winY);
     Sprite r1(r), r2(r), r3(r), r4(r), b1(b), b2(b), b3(b), b4(b), g1(g), g2(g), g3(g), g4(g), y1(y), y2(y), y3(y), y4(y);
     int xc = 0, yc = 0;
     int win[4] = { 0,0,0,0 }, num[4] = { 0,0,0,0 };
@@ -99,7 +104,7 @@ int main()
             Finished = 1;
             timeToRoll = 1;
         }//unused for now
-
+        
         if (Roll == 6) {
             six = 1;
             if (event.key.code == Mouse::Left) {
@@ -272,7 +277,7 @@ int main()
             }
         }
 
-
+        
 
         picCount = searchx(green[0][0], green[0][1], 1, 1);
         if (green[0][0] == 675 && green[0][1] == 450) g1.setTextureRect(IntRect((win[0] - 1) * 50, 0, 50, 50));
@@ -386,6 +391,22 @@ int main()
             window.draw(exit);
         }
         cursor.setPosition(pos.x, pos.y);
+        if (win[0] == 4) {
+            window.draw(winnerG);
+            page = 4;
+        }
+        if (win[1] == 4) {
+            window.draw(winnerY);
+            page = 4;
+        }
+        if (win[2] == 4) {
+            window.draw(winnerB);
+            page = 4;
+        }
+        if (win[3] == 4) {
+            window.draw(winnerR);
+            page = 4;
+        }
         window.draw(cursor);
         window.display();
 
