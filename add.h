@@ -308,17 +308,18 @@ int move_red(int& x, int& y, int d) {
         else if (y == 800 && x == 725) y -= w;
         else if (x == 725 && y >= 500 && y <= 750)  {
             y -= w;
-        if (i== 5) {
+            if (i== 5) {
             Finished = 1;
             timeToRoll = 1;
             return 1;
         }
-                                                   
+      }                                             
     }
     Finished = 1;
     timeToRoll = 1;
     return 0;
 }
+
 
 int move_yellow(int& x, int& y, int d) {
     if (x == 725 && y >= 150 && y < 400) {
@@ -362,11 +363,14 @@ int move_yellow(int& x, int& y, int d) {
         else if (x == 675 && y >= 150 && y <= 350) y -= w;
         else if (y == 100 && x == 675) x += w;
         else if (y == 100 && x == 725) y += w;
-        else if (x == 725 && y >= 150 && y <= 400) {y += w
+        else if (x == 725 && y >= 150 && y <= 400) {
+           y += w;
            if (i== 5) {
             Finished = 1;
             timeToRoll = 1;
-            return 1;  }
+            return 1;
+           }
+       }
     }
     Finished = 1;
     timeToRoll = 1;
