@@ -2,10 +2,10 @@
 #include <windows.h>
 #pragma comment(lib, "winmm.lib")
 
+
 int main()
 {
     PlaySound(TEXT("audio/Wallpaper.wav"), NULL, SND_LOOP | SND_ASYNC);
-    int Roll = 1;
     Texture cs, hm, st, ht, ex;
     Texture bg, d, fd,winR,winB,winG,winY;
     Texture g, r, y, b;
@@ -32,13 +32,9 @@ int main()
     Sprite background(bg), dice(d), frame(fd), home(hm), start(st), cursor(cs), howto(ht), exit(ex);
     Sprite winnerR(winR), winnerB(winB), winnerG(winG), winnerY(winY);
     Sprite r1(r), r2(r), r3(r), r4(r), b1(b), b2(b), b3(b), b4(b), g1(g), g2(g), g3(g), g4(g), y1(y), y2(y), y3(y), y4(y);
-    int xc = 0, yc = 0;
-    int win[4] = { 0,0,0,0 }, num[4] = { 0,0,0,0 };
-    int page = 1;
 
     while (window.isOpen())
     {
-
         Vector2i pos = Mouse::getPosition(window);
         Event event;
         while (window.pollEvent(event))
@@ -104,7 +100,7 @@ int main()
             Finished = 1;
             timeToRoll = 1;
         }//unused for now
-        
+
         if (Roll == 6) {
             six = 1;
             if (event.key.code == Mouse::Left) {
