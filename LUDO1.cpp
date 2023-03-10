@@ -1,7 +1,10 @@
 #include "add.h"
 #include <windows.h>
+#include<chrono>
+#include<thread>
 #pragma comment(lib, "winmm.lib")
-
+using namespace std::this_thread;
+using namespace std::chrono;
 
 int main()
 {
@@ -32,6 +35,7 @@ int main()
     Sprite background(bg), dice(d), frame(fd), home(hm), start(st), cursor(cs), howto(ht), exit(ex);
     Sprite winnerR(winR), winnerB(winB), winnerG(winG), winnerY(winY);
     Sprite r1(r), r2(r), r3(r), r4(r), b1(b), b2(b), b3(b), b4(b), g1(g), g2(g), g3(g), g4(g), y1(y), y2(y), y3(y), y4(y);
+    bool wait = 0;
 
     while (window.isOpen())
     {
@@ -192,12 +196,19 @@ int main()
                 }
 
             }
+            if (Round == 1 && pick[0] == 0 || Round == 2 && pick[1] == 0 || Round == 3 && pick[2] == 0 || Round == 4 && pick[3] == 0) {
+                wait = 1;
+            }
         }
         else if (Roll == 1 || Roll == 2 || Roll == 3 || Roll == 4 || Roll == 5) {
             six = 0;
-            if (Round == 1 && pick[0] == 0 || Round == 2 && pick[1] == 0 || Round == 3 && pick[2] == 0 || Round == 4 && pick[3] == 0) {
+            if (Round == 1 && pick[0] == 0 || Round == 2 && pick[1] == 0 || Round == 3 && pick[2] == 0 || Round == 4 && pick[3] == 0 && !wait) {
                 Finished = 1;
                 timeToRoll = 1;
+            }
+            if (wait) {
+                sleep_for(nanoseconds(100000000));
+                wait = 0;
             }
             if (event.key.code == Mouse::Left && pos.x >= 375 && pos.x <= 1125 && pos.y <= 850 && pos.y >= 100) {
                 if (pos.x >= 375 && pos.x <= 675 && pos.y >= 400 && pos.y <= 550 || pos.x >= 825 && pos.x <= 1125 && pos.y >= 400 && pos.y <= 550 || pos.x >= 675 && pos.x <= 825 && pos.y >= 100 && pos.y <= 400 || pos.x >= 675 && pos.x <= 825 && pos.y >= 550 && pos.y <= 850) {
