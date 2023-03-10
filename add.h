@@ -265,7 +265,7 @@ void chase_back(int* px, int* py) {
 }
 
 int move_red(int& x, int& y, int d) {
-    if (x == 725 && y >= 500 && y <= 750) {
+    if (x == 725 && y > 500 && y <= 750) {
         if (d <= (y - 500) / w) {
             y -= (d * w);
         }
@@ -314,7 +314,7 @@ int move_red(int& x, int& y, int d) {
 }
 
 int move_yellow(int& x, int& y, int d) {
-    if (x == 725 && y >= 150 && y <= 400) {
+    if (x == 725 && y >= 150 && y < 400) {
         if (d <= (400 - y) / w) {
             y += (d * w);
         }
