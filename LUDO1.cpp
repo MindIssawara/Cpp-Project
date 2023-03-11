@@ -10,7 +10,7 @@ int main()
 {
     PlaySound(TEXT("audio/Wallpaper.wav"), NULL, SND_LOOP | SND_ASYNC);
     Texture cs, hm, st, ht, ex;
-    Texture bg, d, fd,winR,winB,winG,winY;
+    Texture bg, d, fd, winR, winB, winG, winY;
     Texture g, r, y, b;
     srand(time(0));
     RenderWindow window(VideoMode(1500, 900), "LUDO!");
@@ -66,14 +66,14 @@ int main()
         }
 
         if (Mouse::isButtonPressed(Mouse::Button::Left) && timeToRoll) {
-            if (pos.x >= 125 && pos.x <= 283 && pos.y <= 258 && pos.y >= 100 && Round == 1) {
+            if (pos.x >= 125 && pos.x <= 283 && pos.y <= 305 && pos.y >= 147 && Round == 1) {
                 cout << "click";
                 Roll = roll_dice();
                 if (!six)Round++;
                 Finished = 0;
                 timeToRoll = 0;
             }
-            if (pos.x >= 1217 && pos.x <= 1385 && pos.y <= 258 && pos.y >= 100 && Round == 2) {
+            if (pos.x >= 1217 && pos.x <= 1385 && pos.y <= 305 && pos.y >= 147 && Round == 2) {
                 cout << "click";
                 Roll = roll_dice();
                 if (!six) Round++;
@@ -284,7 +284,7 @@ int main()
             }
         }
 
-        
+
 
         picCount = searchx(green[0][0], green[0][1], 1, 1);
         if (green[0][0] == 675 && green[0][1] == 450) g1.setTextureRect(IntRect((win[0] - 1) * 50, 0, 50, 50));
@@ -370,14 +370,14 @@ int main()
         window.draw(y4);
         frame.setTextureRect(IntRect(Round * 204, 0, 204, 216));
         window.draw(frame);
-        dice.setTextureRect(IntRect((Roll - 1) * 158 + timeToRoll*948, 0, 158, 158));
+        dice.setTextureRect(IntRect((Roll - 1) * 158 + timeToRoll * 948, 0, 158, 158));
         if (Round == 1) {
-            dice.setPosition(125, 100);
-            frame.setPosition(103, 53);
+            dice.setPosition(125,147);
+            frame.setPosition(103,100);
         }
         if (Round == 2) {
-            dice.setPosition(1217, 100);
-            frame.setPosition(1195, 53);
+            dice.setPosition(1217,147);
+            frame.setPosition(1195, 100);
         }
         if (Round == 3) {
             dice.setPosition(1217, 692);
