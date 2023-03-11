@@ -24,10 +24,13 @@ int xc = 0, yc = 0;
 int win[4] = { 0,0,0,0 }, num[4] = { 0,0,0,0 };
 int page = 1;
 int Roll = 1;
+bool wait = 0, muteornot = 0, mutepressed = 0, GotWinner = 0;
 
 void playSound(int x = 1) {
     if (x == 0) PlaySound(TEXT("audio/click.wav"), NULL, SND_FILENAME | SND_ASYNC);
     if (x == 1) PlaySound(TEXT("audio/Wallpaper.wav"), NULL, SND_LOOP | SND_ASYNC);
+    if (x == 2) PlaySound(TEXT("audio/winner.wav"), NULL, SND_FILENAME | SND_ASYNC);
+    cout << "1";
 }
 
 int roll_dice() {
@@ -323,7 +326,7 @@ int move_red(int& x, int& y, int d) {
         else if (y == 800 && x == 725) y -= w;
         else if (x == 725 && y >= 500 && y <= 750) {
             y -= w;
-          
+
         }
     }
     Finished = 1;
@@ -375,13 +378,14 @@ int move_yellow(int& x, int& y, int d) {
         else if (y == 100 && x == 725) y += w;
         else if (x == 725 && y >= 150 && y <= 400) {
             y += w;
-            
+
         }
     }
     Finished = 1;
     timeToRoll = 1;
     return 0;
 }
+
 
 int move_blue(int& x, int& y, int dice)
 {
@@ -607,4 +611,11 @@ void ResetAll(int Reset = 0) {
     num[0] = 0; num[1] = 0; num[2] = 0; num[3] = 0;
     page = Reset;
     Roll = 1;
+    if (Reset == 1) {
+        wait = 0;
+        muteornot = 0;
+        mutepressed = 0;
+        GotWinner = 0;
+        playSound(1);
+    } 
 }
