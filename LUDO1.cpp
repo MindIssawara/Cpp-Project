@@ -80,7 +80,7 @@ int main()
         if (Mouse::isButtonPressed(Mouse::Button::Left) && page == 0) {
             if (pos.x >= 1353 && pos.x <= 1433 && pos.y >= 100 && pos.y <= 180) {
                 cout << "click";
-                sleep_for(nanoseconds(100000000));
+                sleep_for(nanoseconds(200000000));
                 muteornot = !muteornot;
                 mutepressed = 1;
             }
@@ -460,5 +460,4 @@ int main()
 void playSound(int x=1) {
     if(x==0) PlaySound(TEXT("audio/click.wav"), NULL, SND_FILENAME | SND_ASYNC);
     if(x==1) PlaySound(TEXT("audio/Wallpaper.wav"), NULL, SND_LOOP | SND_ASYNC);
-    cout << "1";
 }
