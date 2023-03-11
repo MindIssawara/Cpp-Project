@@ -2,6 +2,12 @@
 #include<iostream>
 #include<time.h>
 #include<cstdlib>
+#include <windows.h>
+#include<chrono>
+#include<thread>
+#pragma comment(lib, "winmm.lib")
+using namespace std::this_thread;
+using namespace std::chrono;
 using namespace std;
 using namespace sf;
 
@@ -18,6 +24,11 @@ int xc = 0, yc = 0;
 int win[4] = { 0,0,0,0 }, num[4] = { 0,0,0,0 };
 int page = 1;
 int Roll = 1;
+
+void playSound(int x = 1) {
+    if (x == 0) PlaySound(TEXT("audio/click.wav"), NULL, SND_FILENAME | SND_ASYNC);
+    if (x == 1) PlaySound(TEXT("audio/Wallpaper.wav"), NULL, SND_LOOP | SND_ASYNC);
+}
 
 int roll_dice() {
     int d;
