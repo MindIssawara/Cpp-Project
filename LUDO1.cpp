@@ -26,7 +26,7 @@ int main()
     st.loadFromFile("image/start.png");
     hm.loadFromFile("image/home.png");
     fd.loadFromFile("image/frame_dice.png");
-    d.loadFromFile("image/dice.png");
+    d.loadFromFile("image/dice2.png");
     g.loadFromFile("image/gรวม.png");
     r.loadFromFile("image/rรวม.png");
     b.loadFromFile("image/bรวม.png");
@@ -370,7 +370,7 @@ int main()
         window.draw(y4);
         frame.setTextureRect(IntRect(Round * 204, 0, 204, 216));
         window.draw(frame);
-        dice.setTextureRect(IntRect((Roll - 1) * 158, 0, 158, 158));
+        dice.setTextureRect(IntRect((Roll - 1) * 158 + timeToRoll*948, 0, 158, 158));
         if (Round == 1) {
             dice.setPosition(125, 100);
             frame.setPosition(103, 53);
