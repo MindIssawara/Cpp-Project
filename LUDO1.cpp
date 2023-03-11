@@ -33,7 +33,7 @@ int main()
     Sprite background(bg), dice(d), frame(fd), home(hm), start(st), cursor(cs), howto(ht), exit(ex), howtoP(htp), homebut1(hb1),mute(mu) , newgame(ng);
     Sprite winnerR(winR), winnerB(winB), winnerG(winG), winnerY(winY);
     Sprite r1(r), r2(r), r3(r), r4(r), b1(b), b2(b), b3(b), b4(b), g1(g), g2(g), g3(g), g4(g), y1(y), y2(y), y3(y), y4(y);
-    bool wait = 0,muteornot=0,mutepressed=0;
+    
 
     while (window.isOpen())
     {
@@ -129,7 +129,7 @@ int main()
         if (event.key.code == Keyboard::Up) {
             Finished = 1;
             timeToRoll = 1;
-            cout<<"UP";
+            cout << "UP";
         }//unused for now
 
         if (Roll == 6) {
@@ -436,23 +436,28 @@ int main()
         newgame.setPosition(582, 747);
         if (win[0] == 4) {
             window.draw(winnerG);
-            page = 3;
             window.draw(newgame);
+            GotWinner=1;
         }
         if (win[1] == 4) {
             window.draw(winnerY);
-            page = 3;
             window.draw(newgame);
+            GotWinner=1;
         }
         if (win[2] == 4) {
             window.draw(winnerB);
-            page = 3;
             window.draw(newgame);
+            GotWinner=1;
         }
         if (win[3] == 4) {
             window.draw(winnerR);
-            page = 3;
             window.draw(newgame);
+            GotWinner=1;
+        }
+        if (GotWinner == 1 && page!=3) {
+            GotWinner = 0;
+            playSound(2);
+            page = 3;
         }
         window.draw(cursor);
         window.display();
