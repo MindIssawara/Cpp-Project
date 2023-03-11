@@ -280,7 +280,7 @@ void chase_back(int* px, int* py) {
 }
 
 int move_red(int& x, int& y, int d) {
-    if (x == 725 && y >= 500 && y <= 750) {
+    if (x == 725 && y > 500 && y <= 750) {
         if (d <= (y - 500) / w) {
             y -= (d * w);
         }
@@ -328,7 +328,7 @@ int move_red(int& x, int& y, int d) {
                 timeToRoll = 1;
                 return 1;
             }
-        }  
+        }
     }
     Finished = 1;
     timeToRoll = 1;
@@ -336,7 +336,7 @@ int move_red(int& x, int& y, int d) {
 }
 
 int move_yellow(int& x, int& y, int d) {
-    if (x == 725 && y >= 150 && y <= 400) {
+    if (x == 725 && y >= 150 && y < 400) {
         if (d <= (400 - y) / w) {
             y += (d * w);
         }
@@ -594,7 +594,7 @@ void ResetAll(int Reset = 0) {
     pick[0] = 0; pick[1] = 0; pick[2] = 0; pick[3] = 0;
     picCount = &nobody[0];
     Round = 0;
-    red[0][0] = 450; red[0][1] = 625; 
+    red[0][0] = 450; red[0][1] = 625;
     red[1][0] = 550; red[1][1] = 625;
     red[2][0] = 450; red[2][1] = 725;
     red[3][0] = 550; red[3][1] = 725;
