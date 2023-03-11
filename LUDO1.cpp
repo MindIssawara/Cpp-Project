@@ -9,13 +9,15 @@ using namespace std::chrono;
 int main()
 {
     PlaySound(TEXT("audio/Wallpaper.wav"), NULL, SND_LOOP | SND_ASYNC);
-    Texture cs, hm, st, ht, ex;
-    Texture bg, d, fd, winR, winB, winG, winY;
+    Texture cs, hm, st, ht, ex ,htp , hb1;
+    Texture bg, d, fd,winR,winB,winG,winY;
     Texture g, r, y, b;
     srand(time(0));
     RenderWindow window(VideoMode(1500, 900), "LUDO!");
     window.setMouseCursorVisible(false);
     window.setKeyRepeatEnabled(false);
+    htp.loadFromFile("image/HowToPage.png");
+    hb1.loadFromFile("image/homebut.png");
     winR.loadFromFile("image/winR.png");
     winG.loadFromFile("image/winG.png");
     winB.loadFromFile("image/winB.png");
@@ -32,7 +34,7 @@ int main()
     b.loadFromFile("image/bรวม.png");
     y.loadFromFile("image/yรวม.png");
     bg.loadFromFile("image/background.png");
-    Sprite background(bg), dice(d), frame(fd), home(hm), start(st), cursor(cs), howto(ht), exit(ex);
+    Sprite background(bg), dice(d), frame(fd), home(hm), start(st), cursor(cs), howto(ht), exit(ex) , howtoP(htp),homebut1(hb1);
     Sprite winnerR(winR), winnerB(winB), winnerG(winG), winnerY(winY);
     Sprite r1(r), r2(r), r3(r), r4(r), b1(b), b2(b), b3(b), b4(b), g1(g), g2(g), g3(g), g4(g), y1(y), y2(y), y3(y), y4(y);
     bool wait = 0;
@@ -65,15 +67,22 @@ int main()
             }
         }
 
+        if (Mouse::isButtonPressed(Mouse::Button::Left) && page == 2) {
+            if (pos.x >= 1200 && pos.x <= 1425 && pos.y >= 725 && pos.y <= 875) {
+                cout << "click";
+                page = 1;
+            }
+        }
+
         if (Mouse::isButtonPressed(Mouse::Button::Left) && timeToRoll) {
-            if (pos.x >= 125 && pos.x <= 283 && pos.y <= 305 && pos.y >= 147 && Round == 1) {
+            if (pos.x >= 125 && pos.x <= 283 && pos.y <= 258 && pos.y >= 100 && Round == 1) {
                 cout << "click";
                 Roll = roll_dice();
                 if (!six)Round++;
                 Finished = 0;
                 timeToRoll = 0;
             }
-            if (pos.x >= 1217 && pos.x <= 1385 && pos.y <= 305 && pos.y >= 147 && Round == 2) {
+            if (pos.x >= 1217 && pos.x <= 1385 && pos.y <= 258 && pos.y >= 100 && Round == 2) {
                 cout << "click";
                 Roll = roll_dice();
                 if (!six) Round++;
@@ -284,7 +293,7 @@ int main()
             }
         }
 
-
+        
 
         picCount = searchx(green[0][0], green[0][1], 1, 1);
         if (green[0][0] == 675 && green[0][1] == 450) g1.setTextureRect(IntRect((win[0] - 1) * 50, 0, 50, 50));
@@ -370,13 +379,13 @@ int main()
         window.draw(y4);
         frame.setTextureRect(IntRect(Round * 204, 0, 204, 216));
         window.draw(frame);
-        dice.setTextureRect(IntRect((Roll - 1) * 158 + timeToRoll * 948, 0, 158, 158));
+        dice.setTextureRect(IntRect((Roll - 1) * 158 + timeToRoll*948, 0, 158, 158));
         if (Round == 1) {
-            dice.setPosition(125,147);
-            frame.setPosition(103,100);
+            dice.setPosition(125, 147);
+            frame.setPosition(103, 100);
         }
         if (Round == 2) {
-            dice.setPosition(1217,147);
+            dice.setPosition(1217, 147);
             frame.setPosition(1195, 100);
         }
         if (Round == 3) {
@@ -396,6 +405,11 @@ int main()
             window.draw(howto);
             exit.setPosition(1045, 660);
             window.draw(exit);
+        }
+        if (page == 2) {
+            window.draw(howtoP);
+            homebut1.setPosition(1200, 725);
+            window.draw(homebut1);
         }
         cursor.setPosition(pos.x, pos.y);
         if (win[0] == 4) {
