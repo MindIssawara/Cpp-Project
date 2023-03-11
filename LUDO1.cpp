@@ -1,23 +1,16 @@
 #include "add.h"
-#include <windows.h>
-#include<chrono>
-#include<thread>
-#pragma comment(lib, "winmm.lib")
-using namespace std::this_thread;
-using namespace std::chrono;
-
-void playSound(int);
 
 int main()
 {
     playSound(1);
-    Texture cs, hm, st, ht, ex, htp, hb1,mu;
+    Texture cs, hm, st, ht, ex, htp, hb1 ,mu, ng; 
     Texture bg, d, fd, winR, winB, winG, winY;
     Texture g, r, y, b;
     srand(time(0));
     RenderWindow window(VideoMode(1500, 900), "LUDO!");
     window.setMouseCursorVisible(false);
     window.setKeyRepeatEnabled(false);
+    ng.loadFromFile("image/NG.png");
     mu.loadFromFile("image/onoff.png");
     htp.loadFromFile("image/HowToPage.png");
     hb1.loadFromFile("image/homebot.png");
@@ -37,7 +30,7 @@ int main()
     b.loadFromFile("image/bรวม.png");
     y.loadFromFile("image/yรวม.png");
     bg.loadFromFile("image/background.png");
-    Sprite background(bg), dice(d), frame(fd), home(hm), start(st), cursor(cs), howto(ht), exit(ex), howtoP(htp), homebut1(hb1),mute(mu);
+    Sprite background(bg), dice(d), frame(fd), home(hm), start(st), cursor(cs), howto(ht), exit(ex), howtoP(htp), homebut1(hb1),mute(mu) , newgame(ng);
     Sprite winnerR(winR), winnerB(winB), winnerG(winG), winnerY(winY);
     Sprite r1(r), r2(r), r3(r), r4(r), b1(b), b2(b), b3(b), b4(b), g1(g), g2(g), g3(g), g4(g), y1(y), y2(y), y3(y), y4(y);
     bool wait = 0,muteornot=0,mutepressed=0;
@@ -58,31 +51,37 @@ int main()
             }
         }
 
-        if (Mouse::isButtonPressed(Mouse::Button::Left) && page == 1) {
-            if (pos.x >= 1121 && pos.x <= 1371 && pos.y >= 354 && pos.y <= 454) {
-                cout << "click";
-                timeToRoll = 1;
-                page = 0;
+        if (Mouse::isButtonPressed(Mouse::Button::Left)) {
+            if (page == 1) {
+                if (pos.x >= 1121 && pos.x <= 1371 && pos.y >= 354 && pos.y <= 454) {
+                    cout << "click";
+                    timeToRoll = 1;
+                    page = 0;
+                }
+                if (pos.x >= 1071 && pos.x <= 1421 && pos.y >= 506 && pos.y <= 606) {
+                    cout << "click";
+                    page = 2;
+                }
             }
-            if (pos.x >= 1071 && pos.x <= 1421 && pos.y >= 506 && pos.y <= 606) {
-                cout << "click";
-                page = 2;
+            if (page == 2) {
+                if (pos.x >= 1200 && pos.x <= 1425 && pos.y >= 725 && pos.y <= 875) {
+                    cout << "click";
+                    page = 1;
+                }
             }
-        }
-
-        if (Mouse::isButtonPressed(Mouse::Button::Left) && page == 2) {
-            if (pos.x >= 1200 && pos.x <= 1425 && pos.y >= 725 && pos.y <= 875) {
-                cout << "click";
-                page = 1;
+            if (page == 3) {
+                if (pos.x >= 582 && pos.x <= 921 && pos.y >= 747 && pos.y <= 839) {
+                    cout << "click";
+                    ResetAll(1);
+                }
             }
-        }
-
-        if (Mouse::isButtonPressed(Mouse::Button::Left) && page == 0) {
-            if (pos.x >= 1353 && pos.x <= 1433 && pos.y >= 100 && pos.y <= 180) {
-                cout << "click";
-                sleep_for(nanoseconds(200000000));
-                muteornot = !muteornot;
-                mutepressed = 1;
+            if (page == 0) {
+                if (pos.x >= 1353 && pos.x <= 1433 && pos.y >= 100 && pos.y <= 180) {
+                    cout << "click";
+                    sleep_for(nanoseconds(200000000));
+                    muteornot = !muteornot;
+                    mutepressed = 1;
+                }
             }
         }
 
@@ -128,6 +127,23 @@ int main()
         window.clear(Color::White);
 
         if (event.key.code == Keyboard::Up) {
+            Finished = 1;
+            timeToRoll = 1;
+        }//unused for now
+
+        if (event.key.code == Keyboard::Down) {
+            if (Round == 1) {
+                win[0] = 4;
+            }
+            if (Round == 2) {
+                win[1] = 4;
+            }
+            if (Round == 3) {
+                win[2] = 4;
+            }
+            if (Round == 4) {
+                win[3] = 4;
+            }
             Finished = 1;
             timeToRoll = 1;
         }//unused for now
@@ -433,21 +449,26 @@ int main()
             window.draw(homebut1);
         }
         cursor.setPosition(pos.x, pos.y);
+        newgame.setPosition(582, 747);
         if (win[0] == 4) {
             window.draw(winnerG);
-            page = 4;
+            page = 3;
+            window.draw(newgame);
         }
         if (win[1] == 4) {
             window.draw(winnerY);
-            page = 4;
+            page = 3;
+            window.draw(newgame);
         }
         if (win[2] == 4) {
             window.draw(winnerB);
-            page = 4;
+            page = 3;
+            window.draw(newgame);
         }
         if (win[3] == 4) {
             window.draw(winnerR);
-            page = 4;
+            page = 3;
+            window.draw(newgame);
         }
         window.draw(cursor);
         window.display();
@@ -455,9 +476,4 @@ int main()
     }
 
     return 0;
-}
-
-void playSound(int x=1) {
-    if(x==0) PlaySound(TEXT("audio/click.wav"), NULL, SND_FILENAME | SND_ASYNC);
-    if(x==1) PlaySound(TEXT("audio/Wallpaper.wav"), NULL, SND_LOOP | SND_ASYNC);
 }
