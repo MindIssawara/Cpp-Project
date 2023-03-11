@@ -75,28 +75,28 @@ int main()
         }
 
         if (Mouse::isButtonPressed(Mouse::Button::Left) && timeToRoll) {
-            if (pos.x >= 192 && pos.x <= 350 && pos.y <= 258 && pos.y >= 100 && Round == 1) {
+            if (pos.x >= 182 && pos.x <= 340 && pos.y <= 258 && pos.y >= 100 && Round == 1) {
                 cout << "click";
                 Roll = roll_dice();
                 if (!six)Round++;
                 Finished = 0;
                 timeToRoll = 0;
             }
-            if (pos.x >= 1150 && pos.x <= 1318 && pos.y <= 258 && pos.y >= 100 && Round == 2) {
+            if (pos.x >= 1160 && pos.x <= 1328 && pos.y <= 258 && pos.y >= 100 && Round == 2) {
                 cout << "click";
                 Roll = roll_dice();
                 if (!six) Round++;
                 Finished = 0;
                 timeToRoll = 0;
             }
-            if (pos.x >= 1150 && pos.x <= 1318 && pos.y <= 850 && pos.y >= 692 && Round == 3) {
+            if (pos.x >= 1160 && pos.x <= 1328 && pos.y <= 850 && pos.y >= 692 && Round == 3) {
                 cout << "click";
                 Roll = roll_dice();
                 if (!six) Round++;
                 Finished = 0;
                 timeToRoll = 0;
             }
-            if (pos.x >= 192 && pos.x <= 350 && pos.y <= 850 && pos.y >= 692 && (Round == 4 || Round == 0)) {
+            if (pos.x >= 182 && pos.x <= 340 && pos.y <= 850 && pos.y >= 692 && (Round == 4 || Round == 0)) {
                 cout << "click";
                 Roll = roll_dice();
                 if (!six) Round++;
@@ -381,20 +381,20 @@ int main()
         window.draw(frame);
         dice.setTextureRect(IntRect((Roll - 1) * 158 + timeToRoll*948, 0, 158, 158));
         if (Round == 1) {
-            dice.setPosition(192, 147);
-            frame.setPosition(170, 100);
+            dice.setPosition(182, 147);
+            frame.setPosition(160, 100);
         }
         if (Round == 2) {
-            dice.setPosition(1284, 147);
-            frame.setPosition(1262, 100);
+            dice.setPosition(1160, 147);
+            frame.setPosition(1138, 100);
         }
         if (Round == 3) {
-            dice.setPosition(1284, 692);
-            frame.setPosition(1262, 645);
+            dice.setPosition(1160, 692);
+            frame.setPosition(1138, 645);
         }
         if (Round == 4 || Round == 0) {
-            dice.setPosition(192, 692);
-            frame.setPosition(170, 645);
+            dice.setPosition(182, 692);
+            frame.setPosition(160, 645);
         }
         window.draw(dice);
         if (page == 1) {
