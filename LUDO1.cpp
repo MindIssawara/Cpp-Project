@@ -18,7 +18,7 @@ int main()
     RenderWindow window(VideoMode(1500, 900), "LUDO!");
     window.setMouseCursorVisible(false);
     window.setKeyRepeatEnabled(false);
-    mu.loadFromFile("image/mute.png");
+    mu.loadFromFile("image/onoff.png");
     htp.loadFromFile("image/HowToPage.png");
     hb1.loadFromFile("image/homebot.png");
     winR.loadFromFile("image/winR.png");
