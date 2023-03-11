@@ -129,23 +129,7 @@ int main()
         if (event.key.code == Keyboard::Up) {
             Finished = 1;
             timeToRoll = 1;
-        }//unused for now
-
-        if (event.key.code == Keyboard::Down) {
-            if (Round == 1) {
-                win[0] = 4;
-            }
-            if (Round == 2) {
-                win[1] = 4;
-            }
-            if (Round == 3) {
-                win[2] = 4;
-            }
-            if (Round == 4) {
-                win[3] = 4;
-            }
-            Finished = 1;
-            timeToRoll = 1;
+            cout<<"UP";
         }//unused for now
 
         if (Roll == 6) {
