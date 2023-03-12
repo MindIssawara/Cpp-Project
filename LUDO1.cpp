@@ -143,14 +143,6 @@ int main()
             cout << "UP";
         }//unused for now
 
-        if (event.key.code == Keyboard::Left) {
-            green[0][0] = 375, green[0][1] = 450;
-            yellow[0][0] = 725, yellow[0][1] = 100;
-            blue[0][0] = 1075, blue[0][1] = 450;
-            red[0][0] = 725, red[0][1] = 800;
-            pick[0] = 1, pick[1] = 1, pick[2] = 1, pick[3] = 1;
-            cout << pick[0] << pick[1] << pick[2] << pick[3];
-        }
         if (Roll == 6) {
             six = 1;
             if (event.key.code == Mouse::Left) {
