@@ -3,17 +3,19 @@
 int main()
 {
     playSound(1);
-    Texture cs, hm, st, ht, ex, htp, hb1 ,mu, ng; 
+    Texture cs, hm, st, ht, ex, htp, hb1 , hb2 ,mu, ng,rb; 
     Texture bg, d, fd, winR, winB, winG, winY;
     Texture g, r, y, b;
     srand(time(0));
     RenderWindow window(VideoMode(1500, 900), "LUDO!");
     window.setMouseCursorVisible(false);
     window.setKeyRepeatEnabled(false);
+    rb.loadFromFile("image/reset.png");
     ng.loadFromFile("image/NG.png");
     mu.loadFromFile("image/onoff.png");
     htp.loadFromFile("image/HowToPage.png");
     hb1.loadFromFile("image/homebot.png");
+    hb2.loadFromFile("image/homegamepage.png");
     winR.loadFromFile("image/winR.png");
     winG.loadFromFile("image/winG.png");
     winB.loadFromFile("image/winB.png");
@@ -30,7 +32,7 @@ int main()
     b.loadFromFile("image/bรวม.png");
     y.loadFromFile("image/yรวม.png");
     bg.loadFromFile("image/background.png");
-    Sprite background(bg), dice(d), frame(fd), home(hm), start(st), cursor(cs), howto(ht), exit(ex), howtoP(htp), homebut1(hb1),mute(mu) , newgame(ng);
+    Sprite background(bg), dice(d), frame(fd), home(hm), start(st), cursor(cs), howto(ht), exit(ex), howtoP(htp), homebot1(hb1),mute(mu) , newgame(ng),homebot2(hb2),resetbot(rb);
     Sprite winnerR(winR), winnerB(winB), winnerG(winG), winnerY(winY);
     Sprite r1(r), r2(r), r3(r), r4(r), b1(b), b2(b), b3(b), b4(b), g1(g), g2(g), g3(g), g4(g), y1(y), y2(y), y3(y), y4(y);
     
@@ -82,6 +84,15 @@ int main()
                     muteornot = !muteornot;
                     mutepressed = 1;
                 }
+                if (pos.x >= 1353 && pos.x <= 1433 && pos.y >= 190 && pos.y <= 270) {
+                    cout << "click";
+                    ResetAll(1);
+                }
+                if (pos.x >= 1353 && pos.x <= 1433 && pos.y >= 280 && pos.y <= 360) {
+                    cout << "click";
+                    ResetAll(0);
+                    timeToRoll = 1;
+                }
             }
         }
 
@@ -132,6 +143,14 @@ int main()
             cout << "UP";
         }//unused for now
 
+        if (event.key.code == Keyboard::Left) {
+            green[0][0] = 375, green[0][1] = 450;
+            yellow[0][0] = 725, yellow[0][1] = 100;
+            blue[0][0] = 1075, blue[0][1] = 450;
+            red[0][0] = 725, red[0][1] = 800;
+            pick[0] = 1, pick[1] = 1, pick[2] = 1, pick[3] = 1;
+            cout << pick[0] << pick[1] << pick[2] << pick[3];
+        }
         if (Roll == 6) {
             six = 1;
             if (event.key.code == Mouse::Left) {
@@ -400,6 +419,10 @@ int main()
         mute.setPosition(1353,100);
         mute.setTextureRect(IntRect(!muteornot * 80, 0, 80, 80));
         window.draw(mute);
+        homebot2.setPosition(1353, 190);
+        window.draw(homebot2);
+        resetbot.setPosition(1353, 280);
+        window.draw(resetbot);
         dice.setTextureRect(IntRect((Roll - 1) * 158 + timeToRoll * 948, 0, 158, 158));
         if (Round == 1) {
             dice.setPosition(182, 147);
@@ -429,8 +452,8 @@ int main()
         }
         if (page == 2) {
             window.draw(howtoP);
-            homebut1.setPosition(1200, 725);
-            window.draw(homebut1);
+            homebot1.setPosition(1200, 725);
+            window.draw(homebot1);
         }
         cursor.setPosition(pos.x, pos.y);
         newgame.setPosition(582, 747);
