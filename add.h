@@ -5,14 +5,15 @@
 #include <windows.h>
 #include<chrono>
 #include<thread>
+#include<set>
 #pragma comment(lib, "winmm.lib")
 using namespace std::this_thread;
 using namespace std::chrono;
 using namespace std;
 using namespace sf;
 
-bool timeToRoll = 0, Finished = 1, six = 0;
-int pick[4] = { 0,0,0,0 };
+bool timeToRoll = 0, Finished = 1, six = 0,can = 1;
+int pick[4] = { 0,0,0,0 }, in_start[4] = { 4,4,4,4 };
 int w = 50;
 int nobody[5] = { 0,0,1,2,3 }, * picCount = &nobody[0];
 int Round = 0;
@@ -25,12 +26,12 @@ int win[4] = { 0,0,0,0 }, num[4] = { 0,0,0,0 };
 int page = 1;
 int Roll = 1;
 bool wait = 0, muteornot = 0, mutepressed = 0, GotWinner = 0;
+set<int*> Ggoal, Ygoal, Bgoal, Rgoal;
 
 void playSound(int x = 1) {
     if (x == 0) PlaySound(TEXT("audio/click.wav"), NULL, SND_FILENAME | SND_ASYNC);
     if (x == 1) PlaySound(TEXT("audio/Wallpaper.wav"), NULL, SND_LOOP | SND_ASYNC);
     if (x == 2) PlaySound(TEXT("audio/winner.wav"), NULL, SND_FILENAME | SND_ASYNC);
-    cout << "1";
 }
 
 int roll_dice() {
@@ -43,24 +44,28 @@ void getstartM(int x, int y, int& mx, int& my) {
     if (x >= 450 && x <= 600 && y >= 175 && y <= 325) {
         mx = 425;
         my = 400;
+        in_start[0] -= 1;
         pick[0] += 1;
         // green
     }
     if (x >= 900 && x <= 1050 && y >= 175 && y <= 325) {
         mx = 775;
         my = 150;
+        in_start[1] -= 1;
         pick[1] += 1;
         //yellow
     }
     if (x >= 900 && x <= 1050 && y >= 625 && y <= 775) {
         mx = 1025;
         my = 500;
+        in_start[2] -= 1;
         pick[2] += 1;
         //blue
     }
     if (x >= 450 && x <= 600 && y >= 625 && y <= 775) {
         mx = 675;
         my = 750;
+        in_start[3] -= 1;
         pick[3] += 1;
         //red
     }
@@ -204,82 +209,102 @@ void chase_back(int* px, int* py) {
         *px = 450;
         *py = 175;
         pick[0] -= 1;
+        in_start[0] += 1;
     }
     if (px == &green[1][0] && py == &green[1][1]) {
         *px = 550;
         *py = 175;
         pick[0] -= 1;
+        in_start[0] += 1;
     }
     if (px == &green[2][0] && py == &green[2][1]) {
         *px = 450;
         *py = 275;
         pick[0] -= 1;
+        in_start[0] += 1;
     }
     if (px == &green[3][0] && py == &green[3][1]) {
         *px = 550;
         *py = 275;
         pick[0] -= 1;
+        in_start[0] += 1;
     }
     if (px == &yellow[0][0] && py == &yellow[0][1]) {
         *px = 900;
         *py = 175;
         pick[1] -= 1;
+        in_start[1] += 1;
     }
     if (px == &yellow[1][0] && py == &yellow[1][1]) {
         *px = 1000;
         *py = 175;
         pick[1] -= 1;
+        in_start[1] += 1;
     }
     if (px == &yellow[2][0] && py == &yellow[2][1]) {
         *px = 900;
         *py = 275;
         pick[1] -= 1;
+        in_start[1] += 1;
     }
     if (px == &yellow[3][0] && py == &yellow[3][1]) {
         *px = 1000;
         *py = 275;
         pick[1] -= 1;
+        in_start[1] += 1;
     }
     if (px == &blue[0][0] && py == &blue[0][1]) {
         *px = 900;
         *py = 625;
         pick[2] -= 1;
+        in_start[2] += 1;
     }
     if (px == &blue[1][0] && py == &blue[1][1]) {
         *px = 1000;
         *py = 625;
         pick[2] -= 1;
+        in_start[2] += 1;
     }
     if (px == &blue[2][0] && py == &blue[2][1]) {
         *px = 900;
         *py = 725;
         pick[2] -= 1;
+        in_start[2] += 1;
     }
     if (px == &blue[3][0] && py == &blue[3][1]) {
         *px = 1000;
         *py = 725;
         pick[2] -= 1;
+        in_start[2] += 1;
     }
     if (px == &red[0][0] && py == &red[0][1]) {
         *px = 450;
         *py = 625;
         pick[3] -= 1;
+        in_start[3] += 1;
     }
     if (px == &red[1][0] && py == &red[1][1]) {
         *px = 550;
         *py = 625;
         pick[3] -= 1;
+        in_start[3] += 1;
     }
     if (px == &red[2][0] && py == &red[2][1]) {
         *px = 450;
         *py = 725;
         pick[3] -= 1;
+        in_start[3] += 1;
     }
     if (px == &red[3][0] && py == &red[3][1]) {
         *px = 550;
         *py = 725;
         pick[3] -= 1;
+        in_start[3] += 1;
     }
+    cout << "in_start[0]" << in_start[0];
+    cout << "in_start[1]" << in_start[1];
+    cout << "in_start[2]" << in_start[2];
+    cout << "in_start[3]" << in_start[3];
 }
 
 int move_red(int& x, int& y, int d) {
@@ -385,7 +410,6 @@ int move_yellow(int& x, int& y, int d) {
     timeToRoll = 1;
     return 0;
 }
-
 
 int move_blue(int& x, int& y, int dice)
 {
@@ -586,8 +610,9 @@ int move_green(int& x, int& y, int dice) {
 void ResetAll(int Reset = 0) {
     timeToRoll = 0;
     Finished = 1;
-    six = 0;
+    six = 0; can = 1;
     pick[0] = 0; pick[1] = 0; pick[2] = 0; pick[3] = 0;
+    in_start[0] = 4; in_start[1] = 4; in_start[2] = 4; in_start[3] = 4;
     picCount = &nobody[0];
     Round = 0;
     red[0][0] = 450; red[0][1] = 625;
@@ -609,6 +634,7 @@ void ResetAll(int Reset = 0) {
     xc = 0; yc = 0;
     win[0] = 0; win[1] = 0; win[2] = 0; win[3] = 0;
     num[0] = 0; num[1] = 0; num[2] = 0; num[3] = 0;
+    Ggoal.clear(); Ygoal.clear(); Bgoal.clear(); Rgoal.clear();
     page = Reset;
     Roll = 1;
     if (Reset == 1) {
@@ -617,5 +643,5 @@ void ResetAll(int Reset = 0) {
         mutepressed = 0;
         GotWinner = 0;
         playSound(1);
-    } 
+    }
 }
