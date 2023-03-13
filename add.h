@@ -301,10 +301,6 @@ void chase_back(int* px, int* py) {
         pick[3] -= 1;
         in_start[3] += 1;
     }
-    cout << "in_start[0]" << in_start[0];
-    cout << "in_start[1]" << in_start[1];
-    cout << "in_start[2]" << in_start[2];
-    cout << "in_start[3]" << in_start[3];
 }
 
 int move_red(int& x, int& y, int d) {
