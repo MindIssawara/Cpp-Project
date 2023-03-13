@@ -3,7 +3,7 @@
 int main()
 {
     playSound(1);
-    Texture cs, hm, st, ht, ex, htp, hb1, hb2, mu, ng , rb;
+    Texture cs, hm, st, ht, ex, htp, hb1, hb2, mu, ng, rb;
     Texture bg, d, fd, winR, winB, winG, winY;
     Texture g, r, y, b;
     srand(time(0));
@@ -86,7 +86,7 @@ int main()
                 }
             }
         }
-        
+
         if (mutepressed) {
             mutepressed = 0;
             if (muteornot == 1) playSound(0);
@@ -123,6 +123,7 @@ int main()
 
         }
         window.clear(Color::White);
+
         if (Round == 1 && Ggoal.size() == pick[0]) {
             can = 0;
             if (Roll == 6 && in_start[0] != 0) {
@@ -186,8 +187,15 @@ int main()
         }
         if (Roll == 6) {
             six = 1;
-            if (event.key.code == Mouse::Left) {
-                if (pos.x >= 375 && pos.x <= 675 && pos.y >= 100 && pos.y <= 400 || pos.x >= 375 && pos.x <= 675 && pos.y >= 550 && pos.y <= 850 || pos.x >= 825 && pos.x <= 1125 && pos.y >= 100 && pos.y <= 400 || pos.x >= 825 && pos.x <= 1125 && pos.y >= 550 && pos.y <= 850) {
+        }
+        else {
+            six = 0;
+        }
+
+
+        if (event.key.code == Mouse::Left) {
+            if (pos.x >= 375 && pos.x <= 675 && pos.y >= 100 && pos.y <= 400 || pos.x >= 375 && pos.x <= 675 && pos.y >= 550 && pos.y <= 850 || pos.x >= 825 && pos.x <= 1125 && pos.y >= 100 && pos.y <= 400 || pos.x >= 825 && pos.x <= 1125 && pos.y >= 550 && pos.y <= 850) {
+                if (Roll == 6) {
                     xc = pos.x;
                     yc = pos.y;
                     getstart(xc, yc, Round);
@@ -198,232 +206,125 @@ int main()
                         chase_back(X, Y);
                     } while (*X && *Y);
                 }
-                else {
-                    if (event.key.code == Mouse::Left && pos.x >= 375 && pos.x <= 1125 && pos.y <= 850 && pos.y >= 100) {
-                        if (pos.x >= 375 && pos.x <= 675 && pos.y >= 400 && pos.y <= 550 || pos.x >= 825 && pos.x <= 1125 && pos.y >= 400 && pos.y <= 550 || pos.x >= 675 && pos.x <= 825 && pos.y >= 100 && pos.y <= 400 || pos.x >= 675 && pos.x <= 825 && pos.y >= 550 && pos.y <= 850) {
-                            xc = pos.x;
-                            yc = pos.y;
-                            return_position(xc, yc);
-                            int* px = searchx(xc, yc, 0), * py = searchy(xc, yc, 0);
-                            if (*px != 0 && *py != 0) {
-                                if (px == &green[0][0] || px == &green[1][0] || px == &green[2][0] || px == &green[3][0]) {
-                                    if (py == &green[0][1] || py == &green[1][1] || py == &green[2][1] || py == &green[3][1]) {
-                                        if (Round == 1 && !Finished) {
-                                            num[0] = move_green(*px, *py, Roll);
-                                            win[0] = win[0] + num[0];
-                                            pick[0] -= num[0];
-                                            if (*px >= 425 && *px <= 625 && *py == 450) {
-                                                Ggoal.insert(px);
-                                                wait = 1;
-                                            }
-                                            if (num[0] == 1) {
-                                                Ggoal.erase(px);
-                                            }
-                                            int* X, * Y;
-                                            do {
-                                                X = searchx(*px, *py, Round);
-                                                Y = searchy(*px, *py, Round);
-                                                chase_back(X, Y);
-                                            } while (*X && *Y);
-                                        }
-                                    }
-                                }
-                                if (px == &yellow[0][0] || px == &yellow[1][0] || px == &yellow[2][0] || px == &yellow[3][0]) {
-                                    if (py == &yellow[0][1] || py == &yellow[1][1] || py == &yellow[2][1] || py == &yellow[3][1]) {
-                                        if (Round == 2 && !Finished) {
-                                            num[1] = move_yellow(*px, *py, Roll);
-                                            win[1] = win[1] + num[1];
-                                            pick[1] -= num[1];
-                                            if (*py >= 150 && *py <= 350 && *px == 725) {
-                                                Ygoal.insert(py);
-                                                wait = 1;
-                                            }
-                                            if (num[1] == 1) {
-                                                Ygoal.erase(py);
-                                            }
-                                            int* X, * Y;
-                                            do {
-                                                X = searchx(*px, *py, Round);
-                                                Y = searchy(*px, *py, Round);
-                                                chase_back(X, Y);
-                                            } while (*X && *Y);
-                                        }
-                                    }
-                                }
-                                if (px == &blue[0][0] || px == &blue[1][0] || px == &blue[2][0] || px == &blue[3][0]) {
-                                    if (py == &blue[0][1] || py == &blue[1][1] || py == &blue[2][1] || py == &blue[3][1]) {
-                                        if (Round == 3 && !Finished) {
-                                            num[2] = move_blue(*px, *py, Roll);
-                                            win[2] = win[2] + num[2];
-                                            pick[2] -= num[2];
-                                            if (*px <= 1025 && *px >= 825 && *py == 450) {
-                                                Bgoal.insert(px);
-                                                wait = 1;
-                                            }
-                                            if (num[2] == 1) {
-                                                Bgoal.erase(px);
-                                            }
-                                            int* X, * Y;
-                                            do {
-                                                X = searchx(*px, *py, Round);
-                                                Y = searchy(*px, *py, Round);
-                                                chase_back(X, Y);
-                                            } while (*X && *Y);
-                                        }
-                                    }
-                                }
-                                if (px == &red[0][0] || px == &red[1][0] || px == &red[2][0] || px == &red[3][0]) {
-                                    if (py == &red[0][1] || py == &red[1][1] || py == &red[2][1] || py == &red[3][1]) {
-                                        if (Round == 4 && !Finished) {
-                                            num[3] = move_red(*px, *py, Roll);
-                                            win[3] = win[3] + num[3];
-                                            pick[3] -= num[3];
-                                            if (*py >= 550 && *py <= 750 && *px == 725) {
-                                                Rgoal.insert(py);
-                                                wait = 1;
-                                            }
-                                            if (num[3] == 1) {
-                                                Rgoal.erase(py);
-                                            }
-                                            int* X, * Y;
-                                            do {
-                                                X = searchx(*px, *py, Round);
-                                                Y = searchy(*px, *py, Round);
-                                                chase_back(X, Y);
-                                               
-                                            } while (*X && *Y);
-                                        }
-                                    }
-                                }
+            }
+            else if (pos.x >= 375 && pos.x <= 675 && pos.y >= 400 && pos.y <= 550 || pos.x >= 825 && pos.x <= 1125 && pos.y >= 400 && pos.y <= 550 || pos.x >= 675 && pos.x <= 825 && pos.y >= 100 && pos.y <= 400 || pos.x >= 675 && pos.x <= 825 && pos.y >= 550 && pos.y <= 850) {
+                if (Roll != 6) {
 
-                            }
-
-                        }
-
+                    if (Round == 1 && pick[0] == 0 || Round == 2 && pick[1] == 0 || Round == 3 && pick[2] == 0 || Round == 4 && pick[3] == 0 && !wait) {
+                        six = 0;
+                        Finished = 1;
+                        timeToRoll = 1;
+                    }
+                    if (wait) {
+                        sleep_for(nanoseconds(100000000));
+                        wait = 0;
                     }
                 }
-
-            }
-            if (Round == 1 && pick[0] == 0 || Round == 2 && pick[1] == 0 || Round == 3 && pick[2] == 0 || Round == 4 && pick[3] == 0) {
-                wait = 1;
-            }
-        }
-        else if (Roll == 1 || Roll == 2 || Roll == 3 || Roll == 4 || Roll == 5) {
-            six = 0;
-            if (Round == 1 && pick[0] == 0 || Round == 2 && pick[1] == 0 || Round == 3 && pick[2] == 0 || Round == 4 && pick[3] == 0 && !wait) {
-                Finished = 1;
-                timeToRoll = 1;
-            }
-            if (wait) {
-                sleep_for(nanoseconds(100000000));
-                wait = 0;
-            }
-            if (event.key.code == Mouse::Left && pos.x >= 375 && pos.x <= 1125 && pos.y <= 850 && pos.y >= 100) {
-                if (pos.x >= 375 && pos.x <= 675 && pos.y >= 400 && pos.y <= 550 || pos.x >= 825 && pos.x <= 1125 && pos.y >= 400 && pos.y <= 550 || pos.x >= 675 && pos.x <= 825 && pos.y >= 100 && pos.y <= 400 || pos.x >= 675 && pos.x <= 825 && pos.y >= 550 && pos.y <= 850) {
-                    xc = pos.x;
-                    yc = pos.y;
-                    return_position(xc, yc);
-                    int* px = searchx(xc, yc, 0), * py = searchy(xc, yc, 0);
-                    if (*px != 0 && *py != 0) {
-                        if (px == &green[0][0] || px == &green[1][0] || px == &green[2][0] || px == &green[3][0]) {
-                            if (py == &green[0][1] || py == &green[1][1] || py == &green[2][1] || py == &green[3][1]) {
-                                if (Round == 1 && !Finished) {
-                                    num[0] = move_green(*px, *py, Roll);
-                                    win[0] = win[0] + num[0];
-                                    pick[0] -= num[0];
-                                    if (*px >= 425 && *px <= 625 && *py == 450) {
-                                        Ggoal.insert(px);
-                                        wait = 1;
-                                    }
-                                    if (num[0] == 1) {
-                                        Ggoal.erase(px);
-                                    }
-                                    int* X, * Y;
-                                    do {
-                                        X = searchx(*px, *py, Round);
-                                        Y = searchy(*px, *py, Round);
-                                        chase_back(X, Y);
-                                    } while (*X && *Y);
+                xc = pos.x;
+                yc = pos.y;
+                return_position(xc, yc);
+                int* px = searchx(xc, yc, 0), * py = searchy(xc, yc, 0);
+                if (*px != 0 && *py != 0) {
+                    if (px == &green[0][0] || px == &green[1][0] || px == &green[2][0] || px == &green[3][0]) {
+                        if (py == &green[0][1] || py == &green[1][1] || py == &green[2][1] || py == &green[3][1]) {
+                            if (Round == 1 && !Finished) {
+                                num[0] = move_green(*px, *py, Roll);
+                                win[0] = win[0] + num[0];
+                                pick[0] -= num[0];
+                                if (*px >= 425 && *px <= 625 && *py == 450) {
+                                    Ggoal.insert(px);
+                                    wait = 1;
                                 }
+                                if (num[0] == 1) {
+                                    Ggoal.erase(px);
+                                }
+                                int* X, * Y;
+                                do {
+                                    X = searchx(*px, *py, Round);
+                                    Y = searchy(*px, *py, Round);
+                                    chase_back(X, Y);
+                                } while (*X && *Y);
                             }
                         }
-                        if (px == &yellow[0][0] || px == &yellow[1][0] || px == &yellow[2][0] || px == &yellow[3][0]) {
-                            if (py == &yellow[0][1] || py == &yellow[1][1] || py == &yellow[2][1] || py == &yellow[3][1]) {
-                                if (Round == 2 && !Finished) {
-                                    num[1] = move_yellow(*px, *py, Roll);
-                                    win[1] = win[1] + num[1];
-                                    pick[1] -= num[1];
-                                    if (*py >= 150 && *py <= 350 && *px == 725) {
-                                        Ygoal.insert(py);
-                                        wait = 1;
-                                    }
-                                    if (num[1] == 1) {
-                                        Ygoal.erase(py);
-                                    }
-                                    int* X, * Y;
-                                    do {
-                                        X = searchx(*px, *py, Round);
-                                        Y = searchy(*px, *py, Round);
-                                        chase_back(X, Y);
-                                    } while (*X && *Y);
-                                }
-                            }
-                        }
-                        if (px == &blue[0][0] || px == &blue[1][0] || px == &blue[2][0] || px == &blue[3][0]) {
-                            if (py == &blue[0][1] || py == &blue[1][1] || py == &blue[2][1] || py == &blue[3][1]) {
-                                if (Round == 3 && !Finished) {
-                                    num[2] = move_blue(*px, *py, Roll);
-                                    win[2] = win[2] + num[2];
-                                    pick[2] -= num[2];
-                                    if (*px <= 1025 && *px >= 825 && *py == 450) {
-                                        Bgoal.insert(px);
-                                        wait = 1;
-                                    }
-                                    if (num[2] == 1) {
-                                        Bgoal.erase(px);
-                                    }
-
-                                    int* X, * Y;
-                                    do {
-                                        X = searchx(*px, *py, Round);
-                                        Y = searchy(*px, *py, Round);
-                                        chase_back(X, Y);
-                                        
-                                    } while (*X && *Y);
-                                }
-                            }
-                        }
-                        if (px == &red[0][0] || px == &red[1][0] || px == &red[2][0] || px == &red[3][0]) {
-                            if (py == &red[0][1] || py == &red[1][1] || py == &red[2][1] || py == &red[3][1]) {
-                                if (Round == 4 && !Finished) {
-                                    num[3] = move_red(*px, *py, Roll);
-                                    win[3] = win[3] + num[3];
-                                    pick[3] -= num[3];
-                                    if (*py >= 550 && *py <= 750 && *px == 725) {
-                                        Rgoal.insert(py);
-                                        wait = 1;
-                                    }
-                                    if (num[3] == 1) {
-                                        Rgoal.erase(py);
-                                    }
-                                    int* X, * Y;
-                                    do {
-                                        X = searchx(*px, *py, Round);
-                                        Y = searchy(*px, *py, Round);
-                                        chase_back(X, Y);
-                                       
-                                    } while (*X && *Y);
-                                }
-                            }
-                        }
-
                     }
-                }
+                    if (px == &yellow[0][0] || px == &yellow[1][0] || px == &yellow[2][0] || px == &yellow[3][0]) {
+                        if (py == &yellow[0][1] || py == &yellow[1][1] || py == &yellow[2][1] || py == &yellow[3][1]) {
+                            if (Round == 2 && !Finished) {
+                                num[1] = move_yellow(*px, *py, Roll);
+                                win[1] = win[1] + num[1];
+                                pick[1] -= num[1];
+                                if (*py >= 150 && *py <= 350 && *px == 725) {
+                                    Ygoal.insert(py);
+                                    wait = 1;
+                                }
+                                if (num[1] == 1) {
+                                    Ygoal.erase(py);
+                                }
+                                int* X, * Y;
+                                do {
+                                    X = searchx(*px, *py, Round);
+                                    Y = searchy(*px, *py, Round);
+                                    chase_back(X, Y);
+                                } while (*X && *Y);
+                            }
+                        }
+                    }
+                    if (px == &blue[0][0] || px == &blue[1][0] || px == &blue[2][0] || px == &blue[3][0]) {
+                        if (py == &blue[0][1] || py == &blue[1][1] || py == &blue[2][1] || py == &blue[3][1]) {
+                            if (Round == 3 && !Finished) {
+                                num[2] = move_blue(*px, *py, Roll);
+                                win[2] = win[2] + num[2];
+                                pick[2] -= num[2];
+                                if (*px <= 1025 && *px >= 825 && *py == 450) {
+                                    Bgoal.insert(px);
+                                    wait = 1;
+                                }
+                                if (num[2] == 1) {
+                                    Bgoal.erase(px);
+                                }
 
+                                int* X, * Y;
+                                do {
+                                    X = searchx(*px, *py, Round);
+                                    Y = searchy(*px, *py, Round);
+                                    chase_back(X, Y);
+
+                                } while (*X && *Y);
+                            }
+                        }
+                    }
+                    if (px == &red[0][0] || px == &red[1][0] || px == &red[2][0] || px == &red[3][0]) {
+                        if (py == &red[0][1] || py == &red[1][1] || py == &red[2][1] || py == &red[3][1]) {
+                            if (Round == 4 && !Finished) {
+                                num[3] = move_red(*px, *py, Roll);
+                                win[3] = win[3] + num[3];
+                                pick[3] -= num[3];
+                                if (*py >= 550 && *py <= 750 && *px == 725) {
+                                    Rgoal.insert(py);
+                                    wait = 1;
+                                }
+                                if (num[3] == 1) {
+                                    Rgoal.erase(py);
+                                }
+                                int* X, * Y;
+                                do {
+                                    X = searchx(*px, *py, Round);
+                                    Y = searchy(*px, *py, Round);
+                                    chase_back(X, Y);
+
+                                } while (*X && *Y);
+                            }
+                        }
+                    }
+                    if ((Round == 1 && pick[0] == 0 || Round == 2 && pick[1] == 0 || Round == 3 && pick[2] == 0 || Round == 4 && pick[3] == 0) && six) {
+                        wait = 1;
+                    }
+
+
+
+                }
             }
         }
-
-
 
         picCount = searchx(green[0][0], green[0][1], 1, 1);
         if (green[0][0] == 675 && green[0][1] == 450) g1.setTextureRect(IntRect((win[0] - 1) * 50, 0, 50, 50));
@@ -578,7 +479,7 @@ int main()
         window.draw(cursor);
         window.display();
 
-    }
 
+    }
     return 0;
 }
