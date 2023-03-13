@@ -46,7 +46,6 @@ int main()
                 window.close();
             if (Mouse::isButtonPressed(Mouse::Button::Left) && page == 1) {
                 if (pos.x >= 1121 && pos.x <= 1371 && pos.y >= 660 && pos.y <= 760) {
-                    cout << "click";
                     window.close();
                 }
             }
@@ -55,40 +54,33 @@ int main()
         if (Mouse::isButtonPressed(Mouse::Button::Left)) {
             if (page == 1) {
                 if (pos.x >= 1121 && pos.x <= 1371 && pos.y >= 354 && pos.y <= 454) {
-                    cout << "click";
                     timeToRoll = 1;
                     page = 0;
                 }
                 if (pos.x >= 1071 && pos.x <= 1421 && pos.y >= 506 && pos.y <= 606) {
-                    cout << "click";
                     page = 2;
                 }
             }
             if (page == 2) {
                 if (pos.x >= 1200 && pos.x <= 1425 && pos.y >= 725 && pos.y <= 875) {
-                    cout << "click";
                     page = 1;
                 }
             }
             if (page == 3) {
                 if (pos.x >= 582 && pos.x <= 921 && pos.y >= 747 && pos.y <= 839) {
-                    cout << "click";
                     ResetAll(1);
                 }
             }
             if (page == 0) {
                 if (pos.x >= 1353 && pos.x <= 1433 && pos.y >= 100 && pos.y <= 180) {
-                    cout << "click";
                     sleep_for(nanoseconds(200000000));
                     muteornot = !muteornot;
                     mutepressed = 1;
                 }
                 if (pos.x >= 1353 && pos.x <= 1433 && pos.y >= 190 && pos.y <= 270) {
-                    cout << "click";
                     ResetAll(1);
                 }
                 if (pos.x >= 1353 && pos.x <= 1433 && pos.y >= 280 && pos.y <= 360) {
-                    cout << "click";
                     ResetAll(0);
                     timeToRoll = 1;
                 }
@@ -103,28 +95,24 @@ int main()
 
         if (Mouse::isButtonPressed(Mouse::Button::Left) && timeToRoll) {
             if (pos.x >= 182 && pos.x <= 340 && pos.y <= 258 && pos.y >= 100 && Round == 1) {
-                cout << "click";
                 Roll = roll_dice();
                 if (!six)Round++;
                 Finished = 0;
                 timeToRoll = 0;
             }
             if (pos.x >= 1160 && pos.x <= 1328 && pos.y <= 258 && pos.y >= 100 && Round == 2) {
-                cout << "click";
                 Roll = roll_dice();
                 if (!six) Round++;
                 Finished = 0;
                 timeToRoll = 0;
             }
             if (pos.x >= 1160 && pos.x <= 1328 && pos.y <= 850 && pos.y >= 692 && Round == 3) {
-                cout << "click";
                 Roll = roll_dice();
                 if (!six) Round++;
                 Finished = 0;
                 timeToRoll = 0;
             }
             if (pos.x >= 182 && pos.x <= 340 && pos.y <= 850 && pos.y >= 692 && (Round == 4 || Round == 0)) {
-                cout << "click";
                 Roll = roll_dice();
                 if (!six) Round++;
                 if (Round == 5) Round = 1;
@@ -204,10 +192,6 @@ int main()
                     yc = pos.y;
                     getstart(xc, yc, Round);
                     int* X, * Y;
-                    cout << "in_start[0]" << in_start[0];
-                    cout << "in_start[1]" << in_start[1];
-                    cout << "in_start[2]" << in_start[2];
-                    cout << "in_start[3]" << in_start[3];
                     do {
                         X = searchx(xc, yc, Round);
                         Y = searchy(xc, yc, Round);
