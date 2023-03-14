@@ -57,7 +57,7 @@ int main()
                 }
             }
         }
-   
+
         //เมื่อคลิกเมาส์ซ้าย
         if (Mouse::isButtonPressed(Mouse::Button::Left)) {
             //หน้าโฮม
@@ -141,9 +141,9 @@ int main()
                 timeToRoll = 0;
             }
         }
-        
+
         window.clear(Color::White);
-       
+
         if (Round == 1 && Ggoal.size() == pick[0]) {//เช็คว่าหมากทั้งหมดในกระดานอยู่ในเลนเข้าเส้นชัยไหม
             can = 0;//หมากในกระดานไม่สามารถเดินต่อไปได้ถ้าจำนวนแต้มจากการทอยลูกเต๋าเกินช่องที่เหลือให้เดินเข้าเส้นชัยจะskip turn
             if (Roll == 6 && in_start[0] != 0) {//ถ้าทอยได้ 6 แล้วยังมีหมากในฐานสามารถเล่นต่อได้
@@ -205,7 +205,7 @@ int main()
             timeToRoll = 1;//ทอยลูกเต๋าต่อได้
             can = 1;
         }
-        
+
         if (Roll == 6) {//ถ้าทอยลูกเต๋าได้แต้มเป็น 6 จะสามารถทอยเพิ่มได้อีกครั้ง 
             six = 1;
         }
@@ -220,7 +220,9 @@ int main()
                 if (Roll == 6) { //หมากจะออกจากฐานเมื่อทอยได้เลข 6 เท่านั้น
                     xc = pos.x;
                     yc = pos.y;
-                    getstart(xc, yc, Round);
+                    return_position(xc, yc,1);
+                    int* px = searchx(xc, yc, 0), * py = searchy(xc, yc, 0);
+                    getstart(*px, *py, Round);
                     int* X, * Y;
                     do {//เมื่อหมากที่เดินทับลงไปในหมากที่อยู่ในช่องนั้นจะส่งหมากทุกตัวที่มีกลับไปยังฐานของตัวเอง
                         X = searchx(xc, yc, Round);
