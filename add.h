@@ -36,8 +36,8 @@ set<int*> Ggoal, Ygoal, Bgoal, Rgoal;//ใช้เพื่อเก็บค�
 
 //ฟังก์ชั่นเล่นเสียง
 void playSound(int x = 1) {
-    if (x == 0) PlaySound(TEXT("audio/click.wav"), NULL, SND_FILENAME | SND_ASYNC);//เล่นเพลงคลอเกมแบบลูป
-    if (x == 1) PlaySound(TEXT("audio/Wallpaper.wav"), NULL, SND_LOOP | SND_ASYNC);//เล่นเสียงตึ้ดด1ครั้งว่าปิดเสียงครั้งเดียวจบ
+    if (x == 0) PlaySound(TEXT("audio/click.wav"), NULL, SND_FILENAME | SND_ASYNC);//เล่นเสียงตึ้ดด1ครั้งว่าปิดเสียงครั้งเดียวจบ 
+    if (x == 1) PlaySound(TEXT("audio/Wallpaper.wav"), NULL, SND_LOOP | SND_ASYNC);//เล่นเพลงคลอเกมแบบลูป
     if (x == 2) PlaySound(TEXT("audio/winner.wav"), NULL, SND_FILENAME | SND_ASYNC);//เสียงหน้าชนะเล่นครั้งเดียวจบ
 }
 
