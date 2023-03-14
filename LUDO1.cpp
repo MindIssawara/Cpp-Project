@@ -1,96 +1,116 @@
-#include "add.h"
+#include "add.h" ใส่ไฟล์รวมฟังก์ชั่นที่ทำไว้
 
 int main()
 {
-    playSound(1);
-    Texture cs, hm, st, ht, ex, htp, hb1, hb2, mu, ng, rb;
-    Texture bg, d, fd, winR, winB, winG, winY;
-    Texture g, r, y, b;
-    srand(time(0));
-    RenderWindow window(VideoMode(1500, 900), "LUDO!");
-    window.setMouseCursorVisible(false);
-    window.setKeyRepeatEnabled(false);
-    rb.loadFromFile("image/reset.png");
-    ng.loadFromFile("image/NG.png");
-    mu.loadFromFile("image/onoff.png");
-    htp.loadFromFile("image/HowToPage.png");
-    hb1.loadFromFile("image/homebot.png");
-    hb2.loadFromFile("image/homegamepage.png");
-    winR.loadFromFile("image/winR.png");
-    winG.loadFromFile("image/winG.png");
-    winB.loadFromFile("image/winB.png");
-    winY.loadFromFile("image/winY.png");
-    ht.loadFromFile("image/HowTo.png");
-    ex.loadFromFile("image/exit.png");
-    cs.loadFromFile("image/cursor.png");
-    st.loadFromFile("image/start.png");
-    hm.loadFromFile("image/home.png");
-    fd.loadFromFile("image/frame_dice.png");
-    d.loadFromFile("image/dice2.png");
-    g.loadFromFile("image/gรวม.png");
-    r.loadFromFile("image/rรวม.png");
-    b.loadFromFile("image/bรวม.png");
-    y.loadFromFile("image/yรวม.png");
-    bg.loadFromFile("image/background.png");
+    playSound(1); //เรียกเล่นเสียงคลอเกม
+    //ใส่Textureคล้ายการโหลดรูปเข้าโปรแกรมว่าถ้า Spriteนี้ใช้Texture อะไร
+    //ประกาศตัวแปรTextureทั้งหมด หรือรูปที่จะเอาเข้าโปรแกรมทั้งหมด
+    Texture cs, hm, st, ht, ex, htp, hb1, hb2, mu, ng, rb; //texture ปุ่ม และcursor
+    Texture bg, d, fd, winR, winB, winG, winY; //ฉากหลัง เต๋า กรอบเต๋า ภาพผู้ชนะ
+    Texture g, r, y, b; //ตัวหมาก
+    srand(time(0)); //ไว้random
+    RenderWindow window(VideoMode(1500, 900), "LUDO!!!"); //วาดหน้าต่างแสดงผลขนาด 1500*900
+    window.setMouseCursorVisible(false); //ปิดภาพcursorอันปกติ ไว้ใช้ภาพที่เตรียมไว้แทน
+    window.setKeyRepeatEnabled(false); //กดซ้ำไม่ได้
+    rb.loadFromFile("image/reset.png"); //ปุ่มรีเซ็ต
+    ng.loadFromFile("image/NG.png"); //ปุ่ม new game เมื่อชนะจบเกม
+    mu.loadFromFile("image/onoff.png"); //ปุ่มปิดเปิดเพลง
+    htp.loadFromFile("image/HowToPage.png"); //หน้าฮาวทู
+    hb1.loadFromFile("image/homebot.png"); //ปุ่มโฮมที่หน้าฮาวทู
+    hb2.loadFromFile("image/homegamepage.png"); //ปุ่มโฮมที่หน้าเกม
+    winR.loadFromFile("image/winR.png"); //สีแดงชนะ
+    winG.loadFromFile("image/winG.png"); //สีเขียวชนะ
+    winB.loadFromFile("image/winB.png"); //สีฟ้าชนะ
+    winY.loadFromFile("image/winY.png"); //สีเหลืองชนะ
+    ht.loadFromFile("image/HowTo.png"); //ปุ่มฮาวทู
+    ex.loadFromFile("image/exit.png"); //ปุ่มออก
+    cs.loadFromFile("image/cursor.png"); //Cursor
+    st.loadFromFile("image/start.png"); //ปุ่มเริ่มเกม
+    hm.loadFromFile("image/home.png"); //ปุ่มโฮม
+    fd.loadFromFile("image/frame_dice.png"); //กรอบลูกเต๋า
+    d.loadFromFile("image/dice2.png"); //ลูกเต๋า
+    g.loadFromFile("image/gรวม.png"); //หมากเขียว
+    r.loadFromFile("image/rรวม.png"); //หมากแดง
+    b.loadFromFile("image/bรวม.png"); //หมากฟ้า
+    y.loadFromFile("image/yรวม.png"); //หมากเหลือง
+    bg.loadFromFile("image/background.png"); //พื้นหลัง
+    //สร้างสไปร์ทแล้วใส่Textureตามที่กำหนดไว้
     Sprite background(bg), dice(d), frame(fd), home(hm), start(st), cursor(cs), howto(ht), exit(ex), howtoP(htp), homebot1(hb1), mute(mu), newgame(ng), homebot2(hb2), resetbot(rb);
     Sprite winnerR(winR), winnerB(winB), winnerG(winG), winnerY(winY);
     Sprite r1(r), r2(r), r3(r), r4(r), b1(b), b2(b), b3(b), b4(b), g1(g), g2(g), g3(g), g4(g), y1(y), y2(y), y3(y), y4(y);
 
+    //ลูปขณะเปิดwindow
     while (window.isOpen())
     {
-        Vector2i pos = Mouse::getPosition(window);
-        Event event;
+        Vector2i pos = Mouse::getPosition(window); //ตัวแปรVector2iไว้เก็บค่าตำแหน่งของเมาส์
+        Event event; //ตัวแปรevent
         while (window.pollEvent(event))
         {
+            //เมื่อปิดหน้าต่างด้วยปุ่มปิดโปรแกรม
             if (event.type == sf::Event::Closed)
                 window.close();
+            //เมื่อเมาส์คลิกและอยู๋หน้าโฮม
             if (Mouse::isButtonPressed(Mouse::Button::Left) && page == 1) {
+                //ขอบเขตตำแหน่งปุ่มexit
                 if (pos.x >= 1121 && pos.x <= 1371 && pos.y >= 660 && pos.y <= 760) {
                     window.close();
                 }
             }
         }
-
+   
+        //เมื่อคลิกเมาส์ซ้าย
         if (Mouse::isButtonPressed(Mouse::Button::Left)) {
+            //หน้าโฮม
             if (page == 1) {
+                //ปุ่มเริ่มเกม
                 if (pos.x >= 1121 && pos.x <= 1371 && pos.y >= 354 && pos.y <= 454) {
-                    timeToRoll = 1;
-                    page = 0;
+                    timeToRoll = 1; //เปลี่ยนสถานะให้ลูกเต๋าทอยได้
+                    page = 0; //ไปหน้าเกม
                 }
+                //ปุ่มฮาวทู
                 if (pos.x >= 1071 && pos.x <= 1421 && pos.y >= 506 && pos.y <= 606) {
-                    page = 2;
+                    page = 2;//หน้าฮาวทู
                 }
             }
+            //หน้าฮาวทู
             if (page == 2) {
+                //ปุ่มกลับหน้าโฮม
                 if (pos.x >= 1200 && pos.x <= 1425 && pos.y >= 725 && pos.y <= 875) {
-                    page = 1;
+                    page = 1; //ไปหน้าโฮม
                 }
             }
+            //หน้าชนะเกม จบเกม
             if (page == 3) {
+                //ปุ่มเริ่มเกมใหม่
                 if (pos.x >= 582 && pos.x <= 921 && pos.y >= 747 && pos.y <= 839) {
-                    ResetAll(1);
+                    ResetAll(1); //รีเซตไปหน้าโฮม
                 }
             }
+            //หน้าเกม
             if (page == 0) {
+                //ปุ่มปิดเปิดเสียง
                 if (pos.x >= 1353 && pos.x <= 1433 && pos.y >= 100 && pos.y <= 180) {
-                    sleep_for(nanoseconds(200000000));
-                    muteornot = !muteornot;
-                    mutepressed = 1;
+                    sleep_for(nanoseconds(200000000)); //ดีเลย์
+                    muteornot = !muteornot; //สลับสถานะเปิดปิด
+                    mutepressed = 1; //ปุ่มถูกกด
                 }
+                //ปุ่มกลับหน้าโฮม
                 if (pos.x >= 1353 && pos.x <= 1433 && pos.y >= 190 && pos.y <= 270) {
-                    ResetAll(1);
+                    ResetAll(1); //รีเซตไปหน้าโฮม
                 }
+                //ปุ่มรีเซตกระดาน
                 if (pos.x >= 1353 && pos.x <= 1433 && pos.y >= 280 && pos.y <= 360) {
-                    ResetAll(0);
-                    timeToRoll = 1;
+                    ResetAll(0); //รีเซตหน้าเกม
+                    timeToRoll = 1; //เปลี่ยนสถานะลูกเต๋าให้ถึงเวลาทอย
                 }
             }
         }
 
+        //ถ้าปุ่มปิดเปิดเสียงโดนกด
         if (mutepressed) {
-            mutepressed = 0;
-            if (muteornot == 1) playSound(0);
-            else playSound(1);
+            mutepressed = 0;//เปลี่ยนสถานะเป็นไม่ได้กด
+            if (muteornot == 1) playSound(0); //เล่นเสียงปิด
+            else playSound(1); //เล่นเพลงคลอเกมต่อ
         }
 
         if (Mouse::isButtonPressed(Mouse::Button::Left) && timeToRoll) {//เมื่อคลิกซ้ายเมาส์ลงและอยู่ในเงื่อนไขที่สามารถทอยเต๋าได้(timeToRoll == 1)
@@ -329,9 +349,11 @@ int main()
             }
         }
 
-        picCount = searchx(green[0][0], green[0][1], 1, 1);
-        if (green[0][0] == 675 && green[0][1] == 450) g1.setTextureRect(IntRect((win[0] - 1) * 50, 0, 50, 50));
-        else g1.setTextureRect(IntRect(*picCount * 50, 0, 50, 50));
+        picCount = searchx(green[0][0], green[0][1], 1, 1); //หาจำนวนหมากสีเดียวกันที่ยืนตำแหน่งเดียวกัน
+        //setTextureRectคือเลือกภาพเฉพาะส่วนบนรูปเต็ม โดย setTextureRect(IntRect(เริ่มที่ x, เริ่มที่ y, ความกว้างรูป,ความสูงรูป))
+        if (green[0][0] == 675 && green[0][1] == 450) g1.setTextureRect(IntRect((win[0] - 1) * 50, 0, 50, 50));//ที่จุดเส้นชัย
+        else g1.setTextureRect(IntRect(*picCount * 50, 0, 50, 50));//ซ้อนกัน ณ ตำแหน่งใดๆบนกระดาน
+        //เหมือนเดิมจนครบทุกตัว
         picCount = searchx(green[1][0], green[1][1], 1, 1);
         if (green[1][0] == 675 && green[1][1] == 450) g2.setTextureRect(IntRect((win[0] - 1) * 50, 0, 50, 50));
         else g2.setTextureRect(IntRect(*picCount * 50, 0, 50, 50));
@@ -378,7 +400,8 @@ int main()
         if (red[3][0] == 725 && red[3][1] == 500) r4.setTextureRect(IntRect((win[3] - 1) * 50, 0, 50, 50));
         else r4.setTextureRect(IntRect(*picCount * 50, 0, 50, 50));
 
-        window.draw(background);
+        window.draw(background);//ภาพพื้นหลัง
+        //เซ็ตตำแหน่งหมากบนกระดาน ซึ่งเปลี่ยนไปเรื่อยๆระหว่างเล่นตามตำแหน่งที่เก็บไว้บนarray
         r1.setPosition(red[0][0], red[0][1]);
         r2.setPosition(red[1][0], red[1][1]);
         r3.setPosition(red[2][0], red[2][1]);
@@ -395,6 +418,7 @@ int main()
         y2.setPosition(yellow[1][0], yellow[1][1]);
         y3.setPosition(yellow[2][0], yellow[2][1]);
         y4.setPosition(yellow[3][0], yellow[3][1]);
+        //วาดหมาก
         window.draw(r1);
         window.draw(r2);
         window.draw(r3);
@@ -411,33 +435,36 @@ int main()
         window.draw(y2);
         window.draw(y3);
         window.draw(y4);
+        //ให้กรอบเต๋าเปลี่ยนสีตามรอบที่สีใดกำลังเล่นอยู่
         frame.setTextureRect(IntRect(Round * 204, 0, 204, 216));
-        window.draw(frame);
+        window.draw(frame);//วาด
         mute.setPosition(1353, 100);
-        mute.setTextureRect(IntRect(!muteornot * 80, 0, 80, 80));
+        mute.setTextureRect(IntRect(!muteornot * 80, 0, 80, 80));//ภาพปิดหรือเปิดเสียงสลับกัน
         window.draw(mute);
         homebot2.setPosition(1353, 190);
         window.draw(homebot2);
         resetbot.setPosition(1353, 280);
         window.draw(resetbot);
-        dice.setTextureRect(IntRect((Roll - 1) * 158 + timeToRoll * 948, 0, 158, 158));
+        dice.setTextureRect(IntRect((Roll - 1) * 158 + timeToRoll * 948, 0, 158, 158));//สลับว่าทอยได้เท่าไหร่และถึงสเตจว่าทอยต่อได้รึยัง ถ้าทอยได้สีดำ ถ้ารอactionของผู้เล่นสีแดง
+        //ย้ายตำแหน่งเต๋าตามรอบของสีใดๆ
         if (Round == 1) {
-            dice.setPosition(182, 147);
+            dice.setPosition(182, 147);//สีเขียวซ้ายบน
             frame.setPosition(160, 100);
         }
         if (Round == 2) {
-            dice.setPosition(1160, 147);
+            dice.setPosition(1160, 147);//สีเหลืองขวาบน
             frame.setPosition(1138, 100);
         }
         if (Round == 3) {
-            dice.setPosition(1160, 692);
+            dice.setPosition(1160, 692);//สีฟ้าขวาล่าง
             frame.setPosition(1138, 645);
         }
         if (Round == 4 || Round == 0) {
-            dice.setPosition(182, 692);
+            dice.setPosition(182, 692);//สีแดงซ้ายล่าง
             frame.setPosition(160, 645);
         }
-        window.draw(dice);
+        window.draw(dice);//วาดเต๋า
+        //วาดหน้าโฮม
         if (page == 1) {
             window.draw(home);
             start.setPosition(1121, 354);
@@ -447,39 +474,42 @@ int main()
             exit.setPosition(1121, 660);
             window.draw(exit);
         }
+        //วาดหน้าฮาวทู
         if (page == 2) {
             window.draw(howtoP);
             homebot1.setPosition(1200, 725);
             window.draw(homebot1);
         }
-        cursor.setPosition(pos.x, pos.y);
+        cursor.setPosition(pos.x, pos.y);//วาดcursorให้เปลี่ยนตำแหน่งตามเมาส์เคลื่อน
         newgame.setPosition(582, 747);
+        //วาดฉากชนะ
         if (win[0] == 4) {
-            window.draw(winnerG);
-            window.draw(newgame);
-            GotWinner = 1;
+            window.draw(winnerG);//วาดฉากสีเขียวชนะ
+            window.draw(newgame);//ปุ่มเกมใหม่
+            GotWinner = 1;//ได้ผู้ชนะแล้ว
         }
         if (win[1] == 4) {
-            window.draw(winnerY);
+            window.draw(winnerY);//สีเหลืองชนะ
             window.draw(newgame);
             GotWinner = 1;
         }
         if (win[2] == 4) {
-            window.draw(winnerB);
+            window.draw(winnerB);//สีฟ้าชนะ
             window.draw(newgame);
             GotWinner = 1;
         }
         if (win[3] == 4) {
-            window.draw(winnerR);
+            window.draw(winnerR);//สีแดงชนะ
             window.draw(newgame);
             GotWinner = 1;
         }
+        //ได้ผู้ชนะ
         if (GotWinner == 1 && page != 3) {
-            GotWinner = 0;
-            playSound(2);
-            page = 3;
+            GotWinner = 0;//เปลี่ยนสถานะได้ผู้ชนะ
+            playSound(2);//เล่นเสียงชนะ
+            page = 3;//เปลี่ยนสถานะเป็นหน้าชนะ
         }
-        window.draw(cursor);
+        window.draw(cursor);//วาดcursorไว้บนสุด
         window.display();
 
 
