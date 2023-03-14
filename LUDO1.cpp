@@ -216,13 +216,13 @@ int main()
 
         if (event.key.code == Mouse::Left) {//เมื่อคลิกซ้ายที่เมาส์
             //เมื่อpositionของเมาส์อยู่ที่บริเวณฐานของหมากแต่ละสี
-            if ((pos.x >= 375 && pos.x <= 675 && pos.y >= 100 && pos.y <= 400&&Round==1) || (pos.x >= 375 && pos.x <= 675 && pos.y >= 550 && pos.y <= 850&&Round ==4) || (pos.x >= 825 && pos.x <= 1125 && pos.y >= 100 && pos.y <= 400&&Round==2) || (pos.x >= 825 && pos.x <= 1125 && pos.y >= 550 && pos.y <= 850&&Round==3)) {
+            if ((pos.x >= 375 && pos.x <= 675 && pos.y >= 100 && pos.y <= 400 && Round == 1) || (pos.x >= 375 && pos.x <= 675 && pos.y >= 550 && pos.y <= 850 && Round == 4) || (pos.x >= 825 && pos.x <= 1125 && pos.y >= 100 && pos.y <= 400 && Round == 2) || (pos.x >= 825 && pos.x <= 1125 && pos.y >= 550 && pos.y <= 850 && Round == 3)) {
                 if (Roll == 6) { //หมากจะออกจากฐานเมื่อทอยได้เลข 6 เท่านั้น
                     xc = pos.x;
                     yc = pos.y;
                     return_position(xc, yc, 1);
                     int* px = searchx(xc, yc, 0), * py = searchy(xc, yc, 0);
-                    getstart(*px, *py, Round);
+                    getstart(px, py, Round);
                     int* X, * Y;
                     do {//เมื่อหมากที่เดินทับลงไปในหมากที่อยู่ในช่องนั้นจะส่งหมากทุกตัวที่มีกลับไปยังฐานของตัวเอง
                         X = searchx(*px, *py, Round);
