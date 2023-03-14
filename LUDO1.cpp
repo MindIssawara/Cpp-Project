@@ -225,8 +225,8 @@ int main()
                     getstart(*px, *py, Round);
                     int* X, * Y;
                     do {//เมื่อหมากที่เดินทับลงไปในหมากที่อยู่ในช่องนั้นจะส่งหมากทุกตัวที่มีกลับไปยังฐานของตัวเอง
-                        X = searchx(xc, yc, Round);
-                        Y = searchy(xc, yc, Round);
+                        X = searchx(*px, *py, Round);
+                        Y = searchy(*px, *py, Round);
                         chase_back(X, Y);
                     } while (*X && *Y);
                 }
