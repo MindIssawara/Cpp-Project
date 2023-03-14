@@ -93,12 +93,13 @@ int main()
             else playSound(1);
         }
 
-        if (Mouse::isButtonPressed(Mouse::Button::Left) && timeToRoll) {
-            if (pos.x >= 182 && pos.x <= 340 && pos.y <= 258 && pos.y >= 100 && Round == 1) {
+        if (Mouse::isButtonPressed(Mouse::Button::Left) && timeToRoll) {//เมื่อคลิกซ้ายเมาส์ลงและอยู่ในเงื่อนไขที่สามารถทอยเต๋าได้(timeToRoll == 1)
+            //ใช้สำหรับทอยลูกเต๋า โดยใช้Roundเพื่อแยกเป็นแต่ละturnของแต่ละสี
+            if (pos.x >= 182 && pos.x <= 340 && pos.y <= 258 && pos.y >= 100 && Round == 1) {//positionของลูกเต๋าของแต่ละRound
                 Roll = roll_dice();
                 if (!six)Round++;
-                Finished = 0;
-                timeToRoll = 0;
+                Finished = 0;//ยังไม่เสร็จturn
+                timeToRoll = 0;//ยังไม่สามารถทอยลูกเต๋าต่อได้
             }
             if (pos.x >= 1160 && pos.x <= 1328 && pos.y <= 258 && pos.y >= 100 && Round == 2) {
                 Roll = roll_dice();
@@ -115,23 +116,22 @@ int main()
             if (pos.x >= 182 && pos.x <= 340 && pos.y <= 850 && pos.y >= 692 && (Round == 4 || Round == 0)) {
                 Roll = roll_dice();
                 if (!six) Round++;
-                if (Round == 5) Round = 1;
+                if (Round == 5) Round = 1;//ถ้าครบ 4 รอบจะวนไปยังสีแรกใหม่
                 Finished = 0;
                 timeToRoll = 0;
             }
-
-
         }
+        
         window.clear(Color::White);
-
-        if (Round == 1 && Ggoal.size() == pick[0]) {
-            can = 0;
-            if (Roll == 6 && in_start[0] != 0) {
+       
+        if (Round == 1 && Ggoal.size() == pick[0]) {//เช็คว่าหมากทั้งหมดในกระดานอยู่ในเลนเข้าเส้นชัยไหม
+            can = 0;//หมากในกระดานไม่สามารถเดินต่อไปได้ถ้าจำนวนแต้มจากการทอยลูกเต๋าเกินช่องที่เหลือให้เดินเข้าเส้นชัยจะskip turn
+            if (Roll == 6 && in_start[0] != 0) {//ถ้าทอยได้ 6 แล้วยังมีหมากในฐานสามารถเล่นต่อได้
                 can = 1;
             }
             else {
                 for (auto i : Ggoal) {
-                    if (Roll <= (675 - *i) / w) {
+                    if (Roll <= (675 - *i) / w) {//ถ้าจำนวนแต้มของหมากตัวใดตัวนึงในเลนเส้นชัยไม่เกินสามารถเล่นturnนี้ได้
                         can = 1;
                     }
                 }
@@ -176,16 +176,17 @@ int main()
                 }
             }
         }
-        if (!can) {
-            if (wait) {
+        if (!can) {//ใช้ข้ามตาเวลาที่ไม่มีตัวที่สามารถเดินได้บนกระดาน(can == 0)
+            if (wait) {//delayหลักกดคลิกลูกเต๋า
                 sleep_for(nanoseconds(100000000));
                 wait = 0;
             }
-            Finished = 1;
-            timeToRoll = 1;
+            Finished = 1;//จบturn
+            timeToRoll = 1;//ทอยลูกเต๋าต่อได้
             can = 1;
         }
-        if (Roll == 6) {
+        
+        if (Roll == 6) {//ถ้าทอยลูกเต๋าได้แต้มเป็น 6 จะสามารถทอยเพิ่มได้อีกครั้ง 
             six = 1;
         }
         else {
@@ -193,29 +194,31 @@ int main()
         }
 
 
-        if (event.key.code == Mouse::Left) {
+        if (event.key.code == Mouse::Left) {//เมื่อคลิกซ้ายที่เมาส์
+            //เมื่อpositionของเมาส์อยู่ที่บริเวณฐานของหมากแต่ละสี
             if (pos.x >= 375 && pos.x <= 675 && pos.y >= 100 && pos.y <= 400 || pos.x >= 375 && pos.x <= 675 && pos.y >= 550 && pos.y <= 850 || pos.x >= 825 && pos.x <= 1125 && pos.y >= 100 && pos.y <= 400 || pos.x >= 825 && pos.x <= 1125 && pos.y >= 550 && pos.y <= 850) {
-                if (Roll == 6) {
+                if (Roll == 6) { //หมากจะออกจากฐานเมื่อทอยได้เลข 6 เท่านั้น
                     xc = pos.x;
                     yc = pos.y;
                     getstart(xc, yc, Round);
                     int* X, * Y;
-                    do {
+                    do {//เมื่อหมากที่เดินทับลงไปในหมากที่อยู่ในช่องนั้นจะส่งหมากทุกตัวที่มีกลับไปยังฐานของตัวเอง
                         X = searchx(xc, yc, Round);
                         Y = searchy(xc, yc, Round);
                         chase_back(X, Y);
                     } while (*X && *Y);
                 }
             }
+            //เมื่อpositionของเมาส์อยู่ในช่วงของกระดานเดินหมาก
             else if (pos.x >= 375 && pos.x <= 675 && pos.y >= 400 && pos.y <= 550 || pos.x >= 825 && pos.x <= 1125 && pos.y >= 400 && pos.y <= 550 || pos.x >= 675 && pos.x <= 825 && pos.y >= 100 && pos.y <= 400 || pos.x >= 675 && pos.x <= 825 && pos.y >= 550 && pos.y <= 850) {
                 if (Roll != 6) {
-
+                    //ใช้เพื่อskip turnเวลาที่ไม่มีหมากบนกระดานและทอยไม่ได้ 6 ทำให้ไม่สามารถเอาหมากออกมาได้
                     if (Round == 1 && pick[0] == 0 || Round == 2 && pick[1] == 0 || Round == 3 && pick[2] == 0 || Round == 4 && pick[3] == 0 && !wait) {
                         six = 0;
                         Finished = 1;
                         timeToRoll = 1;
                     }
-                    if (wait) {
+                    if (wait) {//delayหลังกดลูกเต๋า
                         sleep_for(nanoseconds(100000000));
                         wait = 0;
                     }
@@ -224,22 +227,22 @@ int main()
                 yc = pos.y;
                 return_position(xc, yc);
                 int* px = searchx(xc, yc, 0), * py = searchy(xc, yc, 0);
-                if (*px != 0 && *py != 0) {
-                    if (px == &green[0][0] || px == &green[1][0] || px == &green[2][0] || px == &green[3][0]) {
+                if (*px != 0 && *py != 0) {//ถ้าบริเวณที่กดมีหมากอยู่จึงจะเข้าเงื่อนไข
+                    if (px == &green[0][0] || px == &green[1][0] || px == &green[2][0] || px == &green[3][0]) {//หมากของสีเขียว
                         if (py == &green[0][1] || py == &green[1][1] || py == &green[2][1] || py == &green[3][1]) {
                             if (Round == 1 && !Finished) {
-                                num[0] = move_green(*px, *py, Roll);
-                                win[0] = win[0] + num[0];
-                                pick[0] -= num[0];
-                                if (*px >= 425 && *px <= 625 && *py == 450) {
-                                    Ggoal.insert(px);
+                                num[0] = move_green(*px, *py, Roll);//รับค่า 1 เมื่อหมากเดินเข้าเส้นชัย
+                                win[0] = win[0] + num[0];//เก็บค่าจำนวนตัวที่เข้าเส้นชัย
+                                pick[0] -= num[0];//จำนวนหมากที่เดินอยู่ในกระดานลดลง
+                                if (*px >= 425 && *px <= 625 && *py == 450) {//ถ้าเข้าเลนเส้นชัย
+                                    Ggoal.insert(px);//เก็บค่าหมากที่อยู่ในเลนเส้นชัย
                                     wait = 1;
                                 }
                                 if (num[0] == 1) {
-                                    Ggoal.erase(px);
+                                    Ggoal.erase(px);//ลบค่าหมากออกเมื่อหมากเขาเส้นชัย
                                 }
                                 int* X, * Y;
-                                do {
+                                do {//เมื่อหมากที่เดินทับลงไปในหมากที่อยู่ในช่องนั้นจะส่งหมากทุกตัวที่มีกลับไปยังฐานของตัวเอง
                                     X = searchx(*px, *py, Round);
                                     Y = searchy(*px, *py, Round);
                                     chase_back(X, Y);
@@ -247,7 +250,7 @@ int main()
                             }
                         }
                     }
-                    if (px == &yellow[0][0] || px == &yellow[1][0] || px == &yellow[2][0] || px == &yellow[3][0]) {
+                    if (px == &yellow[0][0] || px == &yellow[1][0] || px == &yellow[2][0] || px == &yellow[3][0]) {//หมากสีเหลือง
                         if (py == &yellow[0][1] || py == &yellow[1][1] || py == &yellow[2][1] || py == &yellow[3][1]) {
                             if (Round == 2 && !Finished) {
                                 num[1] = move_yellow(*px, *py, Roll);
@@ -269,7 +272,7 @@ int main()
                             }
                         }
                     }
-                    if (px == &blue[0][0] || px == &blue[1][0] || px == &blue[2][0] || px == &blue[3][0]) {
+                    if (px == &blue[0][0] || px == &blue[1][0] || px == &blue[2][0] || px == &blue[3][0]) {//หมากสีฟ้า
                         if (py == &blue[0][1] || py == &blue[1][1] || py == &blue[2][1] || py == &blue[3][1]) {
                             if (Round == 3 && !Finished) {
                                 num[2] = move_blue(*px, *py, Roll);
@@ -293,7 +296,7 @@ int main()
                             }
                         }
                     }
-                    if (px == &red[0][0] || px == &red[1][0] || px == &red[2][0] || px == &red[3][0]) {
+                    if (px == &red[0][0] || px == &red[1][0] || px == &red[2][0] || px == &red[3][0]) {//หมากสีแดง
                         if (py == &red[0][1] || py == &red[1][1] || py == &red[2][1] || py == &red[3][1]) {
                             if (Round == 4 && !Finished) {
                                 num[3] = move_red(*px, *py, Roll);
@@ -317,7 +320,7 @@ int main()
                         }
                     }
                     if ((Round == 1 && pick[0] == 0 || Round == 2 && pick[1] == 0 || Round == 3 && pick[2] == 0 || Round == 4 && pick[3] == 0) && six) {
-                        wait = 1;
+                        wait = 1;//delayเมื่อหมากทอยได้ 6 ให้ไม่ไปกดลูกเต๋าซ้ำ
                     }
 
 
