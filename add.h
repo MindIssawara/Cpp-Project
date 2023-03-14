@@ -33,15 +33,15 @@ int Roll = 1; //แต้มที่ทอยได้
 bool wait = 0, muteornot = 0, mutepressed = 0, GotWinner = 0;
 set<int*> Ggoal, Ygoal, Bgoal, Rgoal;//ใช้เพื่อเก็บค่าว่ามีหมากตัวไหนบ้างอยู่ในเลนเส้นชัย
 
-//ฟังก์ชั่นเล่นเสียง
-void playSound(int x = 1) {
+
+void playSound(int x = 1) { //ฟังก์ชั่นเล่นเสียง
     if (x == 0) PlaySound(TEXT("audio/click.wav"), NULL, SND_FILENAME | SND_ASYNC);//เล่นเสียงตึ้ดด1ครั้งว่าปิดเสียงครั้งเดียวจบ 
     if (x == 1) PlaySound(TEXT("audio/Wallpaper.wav"), NULL, SND_LOOP | SND_ASYNC);//เล่นเพลงคลอเกมแบบลูป
     if (x == 2) PlaySound(TEXT("audio/winner.wav"), NULL, SND_FILENAME | SND_ASYNC);//เสียงหน้าชนะเล่นครั้งเดียวจบ
 }
 
-//ทอยเต๋า รีเทิร์นเป็นแต้มที่ทอยได้
-int roll_dice() {
+
+int roll_dice() { //ทอยเต๋า รีเทิร์นเป็นแต้มที่ทอยได้
     int d;
     d = rand() % 6 + 1;
     return d;
