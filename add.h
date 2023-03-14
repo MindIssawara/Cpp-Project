@@ -48,157 +48,50 @@ int roll_dice() {
 }
 
 //getstartMove เป็นฟังก์ชั่นที่ถูกเรียกใช้ในgetstart มีไว้เพื่อเรียกหมากออกมาอยู่บนรางเดินจุดเริ่มต้น ซึ่งแต่ละสีเริ่มที่จุดต่างกัน
-void getstartM(int x, int y, int& mx, int& my) {
+void getstart(int *x, int *y,int Round) {
     //เช็คว่าเป็นสีอะไร ด้วยค่า position ที่คลิกมา
-    if (x >= 450 && x <= 600 && y >= 175 && y <= 325) {
-        mx = 425; //จุดเริ่มต้นสีเขียว
-        my = 400;
+    if (*x >= 450 && *x <= 600 && *y >= 175 && *y <= 325 && !Finished) {
+        *x = 425; //จุดเริ่มต้นสีเขียว
+        *y = 400;
         in_start[0] -= 1;//หมากจากฐานลดลง
         pick[0] += 1;//ตัวบนกระดานเพิ่มขึ้น
+        timeToRoll = 1; //เปลี่ยนสถานะการทอยเต๋าว่าทอยได้
+        Finished = 1; //กระทำขั้นนี้เสร็จแล้ว
         // green
     }
-    if (x >= 900 && x <= 1050 && y >= 175 && y <= 325) {
-        mx = 775;//จุดเริ่มต้นสีเหลือง
-        my = 150;
+    if (*x >= 900 && *x <= 1050 && *y >= 175 && *y <= 325 && !Finished) {
+        *x = 775;//จุดเริ่มต้นสีเหลือง
+        *y = 150;
         in_start[1] -= 1;
         pick[1] += 1;
+        timeToRoll = 1; 
+        Finished = 1; 
         //yellow
     }
-    if (x >= 900 && x <= 1050 && y >= 625 && y <= 775) {
-        mx = 1025;//จุดเริ่มต้นสีฟ้า
-        my = 500;
+    if (*x >= 900 && *x <= 1050 && *y >= 625 && *y <= 775 && !Finished) {
+        *x = 1025;//จุดเริ่มต้นสีฟ้า
+        *y = 500;
         in_start[2] -= 1;
         pick[2] += 1;
+        timeToRoll = 1; 
+        Finished = 1; 
         //blue
     }
-    if (x >= 450 && x <= 600 && y >= 625 && y <= 775) {
-        mx = 675;//จุดเริ่มต้นสีแดง
-        my = 750;
+    if (*x >= 450 && *x <= 600 && *y >= 625 && *y <= 775 && !Finished) {
+        *x = 675;//จุดเริ่มต้นสีแดง
+        *y = 750;
         in_start[3] -= 1;
         pick[3] += 1;
+        timeToRoll = 1; 
+        Finished = 1; 
         //red
     }
 }
 
-//โค้ดเมื่อเลือกหมากจากฐานไปจุดเริ่มต้นบนราง
-void getstart(int& xc, int& yc, int P) {
-    //หมากเขียวตัวที่ 1 โดย xc yc คือค่า x y ตำแหน่งที่เมาส์คลิกลงไปบนหน้าต่างแสดงผล ในifคือช่วงค่าที่เป็นพื้นที่ของหมากเขียวตัวที่1 ส่วนFinishedคือเช็คว่ากระทำในขั้นตอนนี้เสร็จรึยัง
-    if (xc >= 450 && xc <= 500 && yc >= 175 && yc <= 225 && P == 1 && !Finished) {
-        getstartM(xc, yc, green[0][0], green[0][1]);//เรียกใช้moveไปจุดเริ่มต้นบนราง
-        xc = green[0][0], yc = green[0][1];//นำค่าไปใช้ต่อในchase_back
-        timeToRoll = 1; //เปลี่ยนสถานะการทอยเต๋าว่าทอยได้
-        Finished = 1; //กระทำขั้นนี้เสร็จแล้ว
-    }
-    //หมากเขียวตัวที่ 2
-    if (xc >= 550 && xc <= 600 && yc >= 175 && yc <= 225 && P == 1 && !Finished) {
-        getstartM(xc, yc, green[1][0], green[1][1]);
-        xc = green[1][0], yc = green[1][1];
-        timeToRoll = 1;
-        Finished = 1;
-    }
-    //หมากเขียวตัวที่ 3
-    if (xc >= 450 && xc <= 500 && yc >= 275 && yc <= 325 && P == 1 && !Finished) {
-        getstartM(xc, yc, green[2][0], green[2][1]);
-        xc = green[2][0], yc = green[2][1];
-        timeToRoll = 1;
-        Finished = 1;
-    }
-    //หมากเขียวตัวที่ 4
-    if (xc >= 550 && xc <= 600 && yc >= 275 && yc <= 325 && P == 1 && !Finished) {
-        getstartM(xc, yc, green[3][0], green[3][1]);
-        xc = green[3][0], yc = green[3][1];
-        timeToRoll = 1;
-        Finished = 1;
-    }
-    //หมากเหลืองตัวที่ 1
-    if (xc >= 900 && xc <= 950 && yc >= 175 && yc <= 225 && P == 2 && !Finished) {
-        getstartM(xc, yc, yellow[0][0], yellow[0][1]);
-        xc = yellow[0][0], yc = yellow[0][1];
-        timeToRoll = 1;
-        Finished = 1;
-    }
-    //หมากเหลืองตัวที่ 2
-    if (xc >= 1000 && xc <= 1050 && yc >= 175 && yc <= 225 && P == 2 && !Finished) {
-        getstartM(xc, yc, yellow[1][0], yellow[1][1]);
-        xc = yellow[1][0], yc = yellow[1][1];
-        timeToRoll = 1;
-        Finished = 1;
-    }
-    //หมากเหลืองตัวที่ 3
-    if (xc >= 900 && xc <= 950 && yc >= 275 && yc <= 325 && P == 2 && !Finished) {
-        getstartM(xc, yc, yellow[2][0], yellow[2][1]);
-        xc = yellow[2][0], yc = yellow[2][1];
-        timeToRoll = 1;
-        Finished = 1;
-    }
-    //หมากเหลืองตัวที่ 4
-    if (xc >= 1000 && xc <= 1050 && yc >= 275 && yc <= 325 && P == 2 && !Finished) {
-        getstartM(xc, yc, yellow[3][0], yellow[3][1]);
-        xc = yellow[3][0], yc = yellow[3][1];
-        timeToRoll = 1;
-        Finished = 1;
-    }
-    //หมากฟ้าตัวที่ 1
-    if (xc >= 900 && xc <= 950 && yc >= 625 && yc <= 675 && P == 3 && !Finished) {
-        getstartM(xc, yc, blue[0][0], blue[0][1]);
-        xc = blue[0][0], yc = blue[0][1];
-        timeToRoll = 1;
-        Finished = 1;
-    }
-    //หมากฟ้าตัวที่ 2
-    if (xc >= 1000 && xc <= 1050 && yc >= 625 && yc <= 675 && P == 3 && !Finished) {
-        getstartM(xc, yc, blue[1][0], blue[1][1]);
-        xc = blue[1][0], yc = blue[1][1];
-        timeToRoll = 1;
-        Finished = 1;
-    }
-    //หมากฟ้าตัวที่ 3
-    if (xc >= 900 && xc <= 950 && yc >= 725 && yc <= 775 && P == 3 && !Finished) {
-        getstartM(xc, yc, blue[2][0], blue[2][1]);
-        xc = blue[2][0], yc = blue[2][1];
-        timeToRoll = 1;
-        Finished = 1;
-    }
-    //หมากฟ้าตัวที่ 4
-    if (xc >= 1000 && xc <= 1050 && yc >= 725 && yc <= 775 && P == 3 && !Finished) {
-        getstartM(xc, yc, blue[3][0], blue[3][1]);
-        xc = blue[3][0], yc = blue[3][1];
-        timeToRoll = 1;
-        Finished = 1;
-    }
-    //หมากแดงตัวที่ 1
-    if (xc >= 450 && xc <= 500 && yc >= 625 && yc <= 675 && P == 4 && !Finished) {
-        getstartM(xc, yc, red[0][0], red[0][1]);
-        xc = red[0][0], yc = red[0][1];
-        timeToRoll = 1;
-        Finished = 1;
-    }
-    //หมากแดงตัวที่ 2
-    if (xc >= 550 && xc <= 600 && yc >= 625 && yc <= 675 && P == 4 && !Finished) {
-        getstartM(xc, yc, red[1][0], red[1][1]);
-        xc = red[1][0], yc = red[1][1];
-        timeToRoll = 1;
-        Finished = 1;
-    }
-    //หมากแดงตัวที่ 3
-    if (xc >= 450 && xc <= 500 && yc >= 725 && yc <= 775 && P == 4 && !Finished) {
-        getstartM(xc, yc, red[2][0], red[2][1]);
-        xc = red[2][0], yc = red[2][1];
-        timeToRoll = 1;
-        Finished = 1;
-    }
-    //หมากแดงตัวที่ 4
-    if (xc >= 550 && xc <= 600 && yc >= 725 && yc <= 775 && P == 4 && !Finished) {
-        getstartM(xc, yc, red[3][0], red[3][1]);
-        xc = red[3][0], yc = red[3][1];
-        timeToRoll = 1;
-        Finished = 1;
-    }
-}
 
 //เป็นฟังก์ชั่นที่รีเทิร์นว่าที่ที่เราคลิกไปคือตำแหน่งจริงๆของหมากตรงไหน เนื่องจากค่าตำแหน่งต่างๆที่หมากอยู่จะเป็นมุมบนซ้าย จึงต้องใช้ฟังก์ชั่นนี้เพื่อหาตำแหน่งจริงๆของหมากที่คลิก
 //ใช้ & เพื่อเปลี่ยนค่า x y ที่คลิกไปที่มุมซ้ายบนของช่องที่คลิกลงไป ช่องขนาด50*50
-void return_position(int& x, int& y,bool start =0) {
+void return_position(int& x, int& y, bool start = 0) {
     if (start) {
         x = x - (x % 50);//ช่อง50*50
         y = y - ((y + 25) % 50);//%50เนื่องจากช่องมีขนาด50*50 +25เกิดจากบริเวณที่เริ่มดู x%50=25
@@ -207,7 +100,7 @@ void return_position(int& x, int& y,bool start =0) {
         x = x - ((x + 25) % 50); //%50เนื่องจากช่องมีขนาด50*50 +25เกิดจากบริเวณที่เริ่มดู x%50=25
         y = y - (y % 50); //ช่อง50*50
     }
-    
+
 }
 
 //เป็นฟังก์ชั่นพ็อตเตอร์เพราะต้องการค่าrefของตำแหน่งที่เก็บไว้ในarrayเพื่อใช้ในการเปลี่ยนค่าตำแหน่งให้ตำแหน่งหมากขยับ
