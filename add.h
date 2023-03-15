@@ -238,19 +238,22 @@ void chase_back(int* px, int* py) {//รับค่าเป็นaddressขอ
 }
 
 int move_red(int& x, int& y, int d) {
+    //เช็คเลนตรงเข้าเส้นชัยเพื่อให้เดินได้น้อยกว่าหรือเท่ากับหน้าที่ลูกเต๋าทอยได้
     if (x == 725 && y > 500 && y <= 800) {
         if (d <= (y - 500) / w) {
-            y -= (d * w);
+            y -= (d * w); //จะเดินน้อยกว่าหรือเท่ากับจำนวนหน้าที่ลูกเต๋าทอย
         }
-        if (x == 725 && y == 500) {
+        if (x == 725 && y == 500) { // เช็คเข้าเส้นชัย
             Finished = 1;
             timeToRoll = 1;
-            return 1;
+            return 1; // รีเทิร์น 1 เก็บค่าไว้ใน win
         }
 
     }
+    //เช็คเลนทั่วไป
     else for (int i = 0; i < d; i++) {
         if (x == 675 && y >= 600 && y <= 800) y -= w;
+        //จุดกระโดด 1
         else if (x == 675 && y == 550) {
             x = 625;
             y = 500;
@@ -258,6 +261,7 @@ int move_red(int& x, int& y, int d) {
         else if (y == 500 && x >= 425 && x <= 625) x -= w;
         else if (x == 375 && y >= 450 && y <= 500) y -= w;
         else if (y == 400 && x >= 375 && x <= 575) x += w;
+        //จุดกระโดด 2
         else if (x == 625 && y == 400) {
             x = 675;
             y = 350;
@@ -265,6 +269,7 @@ int move_red(int& x, int& y, int d) {
         else if (x == 675 && y >= 150 && y <= 350) y -= w;
         else if (y == 100 && x >= 675 && x <= 725) x += w;
         else if (x == 775 && y >= 100 && y <= 300) y += w;
+        ////จุดกระโดด 3
         else if (x == 775 && y == 350) {
             x = 825;
             y = 400;
@@ -272,6 +277,7 @@ int move_red(int& x, int& y, int d) {
         else if (y == 400 && x >= 825 && x <= 1025) x += w;
         else if (x == 1075 && y >= 400 && y <= 450) y += w;
         else if (y == 500 && x >= 875 && x <= 1075) x -= w;
+        //จุดกระโดด 4
         else if (x == 825 && y == 500) {
             x = 775;
             y = 550;
@@ -279,30 +285,30 @@ int move_red(int& x, int& y, int d) {
         else if (x == 775 && y >= 550 && y <= 750) y += w;
         else if (y == 800 && x == 775) x -= w;
         else if (y == 800 && x == 725) y -= w;
-        else if (x == 725 && y >= 500 && y <= 750) {
-            y -= w;
-
-        }
+        else if (x == 725 && y >= 500 && y <= 750)  y -= w;        
     }
     Finished = 1;
     timeToRoll = 1;
-    return 0;
+    return 0; //รีเทิร์น 0 เก็บค่าไว้ใน win
 }
 
 int move_yellow(int& x, int& y, int d) {
+    //เช็คเลนตรงเข้าเส้นชัยเพื่อให้เดินได้น้อยกว่าหรือเท่ากับหน้าที่ลูกเต๋าทอยได้
     if (x == 725 && y >= 100 && y < 400) {
         if (d <= (400 - y) / w) {
-            y += (d * w);
+            y += (d * w); //จะเดินน้อยกว่าหรือเท่ากับจำนวนหน้าที่ลูกเต๋าทอย
         }
-        if (x == 725 && y == 400) {
+        if (x == 725 && y == 400) { // เช็คเข้าเส้นชัย
             Finished = 1;
             timeToRoll = 1;
-            return 1;
+            return 1; // รีเทิร์น 1 เก็บค่าไว้ใน win
         }
 
     }
+     //เช็คเลนทั่วไป
     else for (int i = 0; i < d; i++) {
         if (x == 775 && y >= 100 && y <= 300) y += w;
+        //จุดกระโดด 1
         else if (x == 775 && y == 350) {
             x = 825;
             y = 400;
@@ -310,6 +316,7 @@ int move_yellow(int& x, int& y, int d) {
         else if (y == 400 && x >= 825 && x <= 1025) x += w;
         else if (x == 1075 && y >= 400 && y <= 450) y += w;
         else if (y == 500 && x >= 875 && x <= 1075) x -= w;
+        //จุดกระโดด 2
         else if (x == 825 && y == 500) {
             x = 775;
             y = 550;
@@ -317,6 +324,7 @@ int move_yellow(int& x, int& y, int d) {
         else if (x == 775 && y >= 550 && y <= 750) y += w;
         else if (y == 800 && x >= 725 && x <= 775) x -= w;
         else if (x == 675 && y >= 600 && y <= 800) y -= w;
+        //จุดกระโดด 3
         else if (x == 675 && y == 550) {
             x = 625;
             y = 500;
@@ -324,6 +332,7 @@ int move_yellow(int& x, int& y, int d) {
         else if (y == 500 && x >= 425 && x <= 625) x -= w;
         else if (x == 375 && y >= 450 && y <= 500) y -= w;
         else if (y == 400 && x >= 375 && x <= 575) x += w;
+        //จุดกระโดด 4
         else if (x == 625 && y == 400) {
             x = 675;
             y = 350;
@@ -331,14 +340,11 @@ int move_yellow(int& x, int& y, int d) {
         else if (x == 675 && y >= 150 && y <= 350) y -= w;
         else if (y == 100 && x == 675) x += w;
         else if (y == 100 && x == 725) y += w;
-        else if (x == 725 && y >= 150 && y <= 400) {
-            y += w;
-
-        }
+        else if (x == 725 && y >= 150 && y <= 400)  y += w;
     }
     Finished = 1;
     timeToRoll = 1;
-    return 0;
+    return 0; //รีเทิร์น 0 เก็บค่าไว้ใน win
 }
 
 int move_green(int& x, int& y, int dice) {
