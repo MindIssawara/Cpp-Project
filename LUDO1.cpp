@@ -75,7 +75,7 @@ int main()
             //หน้าฮาวทู
             if (page == 2) {
                 //ปุ่มกลับหน้าโฮม
-                if (pos.x >= 1200 && pos.x <= 1425 && pos.y >= 725 && pos.y <= 875) {
+                if (pos.x >= 1099 && pos.x <= 1467 && pos.y >= 758 && pos.y <= 888) {
                     page = 1; //ไปหน้าโฮม
                 }
             }
@@ -479,7 +479,7 @@ int main()
         //วาดหน้าฮาวทู
         if (page == 2) {
             window.draw(howtoP);
-            homebot1.setPosition(1200, 725);
+            homebot1.setPosition(1099, 758);
             window.draw(homebot1);
         }
         cursor.setPosition(pos.x, pos.y);//วาดcursorให้เปลี่ยนตำแหน่งตามเมาส์เคลื่อน
