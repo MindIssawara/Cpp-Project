@@ -203,9 +203,7 @@ int main()
                 wait = 0;
             }
             timeToRoll = 1;//ทอยลูกเต๋าต่อได้
-            if (six) {
-                Finished = 1;//จบturn
-            }
+            Finished = 1;//จบturn
             can = 1;
         }
         
