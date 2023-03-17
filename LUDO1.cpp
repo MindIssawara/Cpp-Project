@@ -9,7 +9,7 @@ int main()
     Texture bg, d, fd, winR, winB, winG, winY; //ฉากหลัง เต๋า กรอบเต๋า ภาพผู้ชนะ
     Texture g, r, y, b; //ตัวหมาก
     srand(time(0)); //ไว้random
-    RenderWindow window(VideoMode(1500, 900), "LUDO!!!"); //วาดหน้าต่างแสดงผลขนาด 1500*900
+    RenderWindow window(VideoMode(1500, 900), "LUDO!!!",Style::Titlebar); //วาดหน้าต่างแสดงผลขนาด 1500*900 แบบfixed size
     window.setMouseCursorVisible(false); //ปิดภาพcursorอันปกติ ไว้ใช้ภาพที่เตรียมไว้แทน
     window.setKeyRepeatEnabled(false); //กดซ้ำไม่ได้
     rb.loadFromFile("image/reset.png"); //ปุ่มรีเซ็ต
