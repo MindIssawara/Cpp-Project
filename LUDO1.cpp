@@ -202,8 +202,8 @@ int main()
                 sleep_for(nanoseconds(100000000));
                 wait = 0;
             }
+            if (!six) timeToRoll = 1;//ทอยลูกเต๋าต่อได้
             Finished = 1;//จบturn
-            timeToRoll = 1;//ทอยลูกเต๋าต่อได้
             can = 1;
         }
 
