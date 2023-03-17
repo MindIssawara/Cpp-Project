@@ -9,7 +9,7 @@ int main()
     Texture bg, d, fd, winR, winB, winG, winY; //ฉากหลัง เต๋า กรอบเต๋า ภาพผู้ชนะ
     Texture g, r, y, b; //ตัวหมาก
     srand(time(0)); //ไว้random
-    RenderWindow window(VideoMode(1500, 900), "LUDO!!!",Style::Titlebar); //วาดหน้าต่างแสดงผลขนาด 1500*900 แบบfixed size
+    RenderWindow window(VideoMode(1500, 900), "LUDO!!!", Style::Titlebar); //วาดหน้าต่างแสดงผลขนาด 1500*900 แบบfixed size
     window.setMouseCursorVisible(false); //ปิดภาพcursorอันปกติ ไว้ใช้ภาพที่เตรียมไว้แทน
     window.setKeyRepeatEnabled(false); //กดซ้ำไม่ได้
     rb.loadFromFile("image/reset.png"); //ปุ่มรีเซ็ต
@@ -203,17 +203,18 @@ int main()
                 wait = 0;
             }
             timeToRoll = 1;//ทอยลูกเต๋าต่อได้
-            Finished = 1;//จบturn
+            if (six) {
+                Finished = 1;//จบturn
+            }
             can = 1;
         }
-
+        
         if (Roll == 6) {//ถ้าทอยลูกเต๋าได้แต้มเป็น 6 จะสามารถทอยเพิ่มได้อีกครั้ง 
             six = 1;
         }
         else {
             six = 0;
         }
-
 
         if (event.key.code == Mouse::Left) {//เมื่อคลิกซ้ายที่เมาส์
             //เมื่อpositionของเมาส์อยู่ที่บริเวณฐานของหมากแต่ละสี
